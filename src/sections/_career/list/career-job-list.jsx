@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import PropTypes from 'prop-types';
 
 import Box from '@mui/material/Box';
@@ -11,9 +12,14 @@ import CareerJobItemSkeleton from './career-job-item-skeleton';
 // ----------------------------------------------------------------------
 
 export default function CareerJobList({ loading }) {
-  const { data } = useFetchPlants();
+  const [currentPage, setCurrentPage] = useState(1);
+  const { data } = useFetchPlants(currentPage);
 
-  console.log(data);
+  console.log('currentPage:', currentPage);
+
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+  };
 
   return (
     <>
@@ -43,8 +49,10 @@ export default function CareerJobList({ loading }) {
       </Box>
 
       <Pagination
-        count={10}
+        count={data ? data.last_page : 1}
+        page={currentPage}
         color="primary"
+        onChange={(event, page) => handlePageChange(page)}
         sx={{
           my: 10,
           [`& .${paginationClasses.ul}`]: {
@@ -55,7 +63,6 @@ export default function CareerJobList({ loading }) {
     </>
   );
 }
-
 
 CareerJobList.propTypes = {
   loading: PropTypes.bool,
