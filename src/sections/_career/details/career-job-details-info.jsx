@@ -4,15 +4,17 @@ import Card from '@mui/material/Card';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 
-import { fDate } from 'src/utils/format-time';
-import { fCurrency } from 'src/utils/format-number';
+// import { fDate } from 'src/utils/format-time';
+// import { fCurrency } from 'src/utils/format-number';
 
 import Iconify from 'src/components/iconify';
 
 // ----------------------------------------------------------------------
 
-export default function CareerJobDetailsInfo({ job }) {
-  const { createdAt, salary, experience, deadline, level, languages } = job;
+export default function CareerJobDetailsInfo({ data }) {
+  // const { createdAt, salary, experience, deadline, level, languages } = job;
+
+  console.log('data:', data)
 
   return (
     <Card sx={{ p: 3 }}>
@@ -20,9 +22,9 @@ export default function CareerJobDetailsInfo({ job }) {
         <Stack spacing={2} direction="row" alignItems="flex-start">
           <Iconify icon="carbon:calendar" width={24} />
           <Stack>
-            <Typography variant="subtitle2"> Date Posted </Typography>
+            <Typography variant="subtitle2"> Nom scientifique </Typography>
             <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-              {fDate(createdAt)}
+              {data.nscient}
             </Typography>
           </Stack>
         </Stack>
@@ -30,9 +32,9 @@ export default function CareerJobDetailsInfo({ job }) {
         <Stack spacing={2} direction="row" alignItems="flex-start">
           <Iconify icon="carbon:hourglass" width={24} />
           <Stack>
-            <Typography variant="subtitle2"> Expiration date </Typography>
+            <Typography variant="subtitle2"> Famille </Typography>
             <Typography variant="body2" sx={{ color: 'error.main' }}>
-              {fDate(deadline)}
+              {data.famille}
             </Typography>
           </Stack>
         </Stack>
@@ -40,14 +42,14 @@ export default function CareerJobDetailsInfo({ job }) {
         <Stack spacing={2} direction="row" alignItems="flex-start">
           <Iconify icon="carbon:money" width={24} />
           <Stack>
-            <Typography variant="subtitle2"> Offered Salary (month) </Typography>
+            <Typography variant="subtitle2"> Genre </Typography>
             <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-              {typeof salary === 'number' ? fCurrency(salary) : salary}
+              {data.genre}
             </Typography>
           </Stack>
         </Stack>
 
-        <Stack spacing={2} direction="row" alignItems="flex-start">
+        {/* <Stack spacing={2} direction="row" alignItems="flex-start">
           <Iconify icon="carbon:increase-level" width={24} />
           <Stack>
             <Typography variant="subtitle2"> Experience </Typography>
@@ -75,7 +77,7 @@ export default function CareerJobDetailsInfo({ job }) {
               {typeof languages === 'string' ? languages : languages.join(', ')}
             </Typography>
           </Stack>
-        </Stack>
+        </Stack> */}
       </Stack>
     </Card>
   );
@@ -90,4 +92,5 @@ CareerJobDetailsInfo.propTypes = {
     createdAt: PropTypes.instanceOf(Date),
     languages: PropTypes.arrayOf(PropTypes.string),
   }),
+  data: PropTypes.object,
 };

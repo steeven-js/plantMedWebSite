@@ -1,3 +1,5 @@
+// useFetchPlant.js
+
 import { useState, useEffect } from "react";
 
 const useFetchPlant = (plantId) => {
@@ -14,9 +16,9 @@ const useFetchPlant = (plantId) => {
       const response = await fetch(endpoint);
       const result = await response.json();
       setData(result);
-    } catch (error) {
-      setError(error);
-      console.error(error);
+    } catch (fetchError) {
+      setError(fetchError);
+      console.error(fetchError);
     } finally {
       setIsLoading(false);
     }
@@ -24,6 +26,7 @@ const useFetchPlant = (plantId) => {
 
   useEffect(() => {
     fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [plantId]);
 
   const refetch = () => {

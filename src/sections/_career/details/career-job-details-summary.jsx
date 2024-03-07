@@ -1,83 +1,76 @@
+import React from 'react';
 import PropTypes from 'prop-types';
 
-import Box from '@mui/material/Box';
-import Chip from '@mui/material/Chip';
 import Stack from '@mui/material/Stack';
-import Typography from '@mui/material/Typography';
 
-import ContactMap from 'src/components/map';
-import Iconify from 'src/components/iconify';
-import Markdown from 'src/components/markdown';
+function formatTextWithBr(text) {
+  return text.split('\n\n').map((paragraph, paragraphIndex) => (
+    <React.Fragment key={paragraphIndex}>
+      {paragraph.split('\n').map((line, lineIndex) => (
+        <React.Fragment key={lineIndex}>
+          {line}
+          {lineIndex < paragraph.split('\n').length - 1 && <br />}
+        </React.Fragment>
+      ))}
+      {paragraphIndex < text.split('\n\n').length - 1 && <br />}
+    </React.Fragment>
+  ));
+}
 
-// ----------------------------------------------------------------------
+export default function CareerJobDetailsSummary({ data }) {
+  const formattedDescription = formatTextWithBr(data.description);
+  const formattedHabitat = formatTextWithBr(data.habitat);
+  const formattedPrecaution = formatTextWithBr(data.precaution);
+  const formattedPropriete = formatTextWithBr(data.propriete);
+  const formattedUsageExterne = formatTextWithBr(data.usageExterne);
+  const formattedUsageInterne = formatTextWithBr(data.usageInterne);
 
-export default function CareerJobDetailsSummary({ job }) {
-  const { skills, benefits, locationMap, content } = job;
+  console.log('data:', data);
 
   return (
     <Stack spacing={5}>
-      <Markdown content={content} />
+      <div>
+        <h3>Description</h3>
+        <p>{formattedDescription}</p>
+      </div>
 
-      <Stack spacing={3}>
-        <Typography variant="h5">Job Skills</Typography>
+      <div>
+        <h3>Habitat</h3>
+        <p>{formattedHabitat}</p>
+      </div>
 
-        <Stack direction="row" flexWrap="wrap" spacing={1}>
-          {skills.map((skill) => (
-            <Chip key={skill} label={skill} size="small" variant="soft" onClick={() => {}} />
-          ))}
-        </Stack>
-      </Stack>
+      <div>
+        <h3>Precaution</h3>
+        <p>{formattedPrecaution}</p>
+      </div>
 
-      <Stack spacing={3}>
-        <Typography variant="h5">Other Benefits</Typography>
+      <div>
+        <h3>Propriété</h3>
+        <p>{formattedPropriete}</p>
+      </div>
 
-        <Box
-          sx={{
-            rowGap: 2,
-            columnGap: 3,
-            display: 'grid',
-            gridTemplateColumns: {
-              xs: 'repeat(1, 1fr)',
-              sm: 'repeat(2, 1fr)',
-              md: 'repeat(3, 1fr)',
-            },
-          }}
-        >
-          {benefits.map((benefit) => (
-            <Stack key={benefit} direction="row" alignItems="center" sx={{ typography: 'body2' }}>
-              <Iconify
-                icon={
-                  (benefit === 'Free parking' && 'carbon:car-front') ||
-                  (benefit === 'Bonus commission' && 'carbon:money') ||
-                  (benefit === 'Travel' && 'carbon:airport-01') ||
-                  (benefit === 'Training' && 'carbon:group-presentation') ||
-                  (benefit === 'Device support' && 'carbon:devices') ||
-                  (benefit === 'Health care' && 'carbon:person-favorite') ||
-                  'carbon:direct-link'
-                }
-                width={24}
-                sx={{ color: 'primary.main', mr: 1.5 }}
-              />
-              {benefit}
-            </Stack>
-          ))}
-        </Box>
-      </Stack>
+      <div>
+        <h3>Usage Externe</h3>
+        <p>{formattedUsageExterne}</p>
+      </div>
 
-      <Stack spacing={3}>
-        <Typography variant="h5">Location</Typography>
+      <div>
+        <h3>Usage Interne</h3>
+        <p>{formattedUsageInterne}</p>
+      </div>
 
-        <ContactMap offices={locationMap} sx={{ borderRadius: 2 }} />
-      </Stack>
+      {/* ... (other sections) */}
     </Stack>
   );
 }
 
 CareerJobDetailsSummary.propTypes = {
-  job: PropTypes.shape({
-    benefits: PropTypes.array,
-    content: PropTypes.string,
-    locationMap: PropTypes.array,
-    skills: PropTypes.array,
+  data: PropTypes.shape({
+    description: PropTypes.string,
+    habitat: PropTypes.string,
+    precaution: PropTypes.string,
+    propriete: PropTypes.string,
+    usageExterne: PropTypes.string,
+    usageInterne: PropTypes.string,
   }),
 };

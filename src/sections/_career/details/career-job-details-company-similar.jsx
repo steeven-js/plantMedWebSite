@@ -12,7 +12,8 @@ import { fDate } from 'src/utils/format-time';
 
 // ----------------------------------------------------------------------
 
-export default function CareerJobDetailsCompanySimilar({ jobs }) {
+export default function CareerJobDetailsCompanySimilar({ jobs, data }) {
+  console.log('data:', data);
   return (
     <Paper
       variant="outlined"
@@ -53,4 +54,5 @@ export default function CareerJobDetailsCompanySimilar({ jobs }) {
 
 CareerJobDetailsCompanySimilar.propTypes = {
   jobs: PropTypes.array,
+  data: PropTypes.object,
 };

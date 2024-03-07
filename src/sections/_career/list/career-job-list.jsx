@@ -15,7 +15,7 @@ export default function CareerJobList({ loading }) {
   const { data } = useFetchPlants();
   const [currentPage, setCurrentPage] = useState(1);
 
-  console.log('currentPage:', currentPage);
+  // console.log('currentPage:', currentPage);
 
   const handlePageChange = (page) => {
     setCurrentPage(page);

@@ -9,7 +9,8 @@ import Image from 'src/components/image';
 
 // ----------------------------------------------------------------------
 
-export default function CareerJobDetailsCompanyInfo({ job }) {
+export default function CareerJobDetailsCompanyInfo({ job, data }) {
+  console.log('data:', data);
   return (
     <Paper variant="outlined" sx={{ p: 3, borderRadius: 2, bgcolor: 'background.default' }}>
       <Stack spacing={2} direction="row" alignItems="center">
@@ -37,4 +38,5 @@ CareerJobDetailsCompanyInfo.propTypes = {
       name: PropTypes.string,
     }),
   }),
+  data: PropTypes.object,
 };
