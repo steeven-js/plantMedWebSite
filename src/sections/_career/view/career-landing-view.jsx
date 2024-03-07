@@ -11,7 +11,7 @@
 // import CareerNewsletter from '../career-newsletter';
 // import CareerOurClients from '../career-our-clients';
 import CareerDownloadApp from '../career-download-app';
-// import CareerLandingHero from '../landing/career-landing-hero';
+import CareerLandingHero from '../landing/career-landing-hero';
 // import CareerLandingStep from '../landing/career-landing-step';
 // import CareerTestimonial from '../testimonial/career-testimonial';
 // import CareerLatestPosts from '../../blog/career/career-latest-posts';
@@ -26,7 +26,7 @@ import CareerDownloadApp from '../career-download-app';
 export default function CareerLandingView() {
   return (
     <>
-      {/* <CareerLandingHero /> */}
+      <CareerLandingHero />
 
       {/* <CareerLandingStep /> */}
 

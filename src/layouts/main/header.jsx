@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 
 import Box from '@mui/material/Box';
-import Link from '@mui/material/Link';
+// import Link from '@mui/material/Link';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import AppBar from '@mui/material/AppBar';
@@ -43,23 +43,21 @@ export default function Header({ headerOnDark }) {
       <Box sx={{ lineHeight: 0, position: 'relative' }}>
         <Logo />
 
-        <Link href="https://zone-docs.vercel.app/changelog" target="_blank" rel="noopener">
-          <Label
-            color="info"
-            sx={{
-              ml: 0.5,
-              px: 0.5,
-              top: -14,
-              left: 60,
-              height: 20,
-              fontSize: 11,
-              cursor: 'pointer',
-              position: 'absolute',
-            }}
-          >
-            v1.0.6
-          </Label>
-        </Link>
+        <Label
+          color="info"
+          sx={{
+            ml: 0.5,
+            px: 0.5,
+            top: -14,
+            left: 60,
+            height: 20,
+            fontSize: 11,
+            cursor: 'pointer',
+            position: 'absolute',
+          }}
+        >
+          v1.0.8
+        </Label>
       </Box>
 
       <>

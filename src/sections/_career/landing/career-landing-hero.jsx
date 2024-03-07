@@ -9,21 +9,21 @@ import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import { inputClasses } from '@mui/material/Input';
 import { alpha, useTheme } from '@mui/material/styles';
-import { filledInputClasses } from '@mui/material/FilledInput';
+// import { filledInputClasses } from '@mui/material/FilledInput';
 
 import { useResponsive } from 'src/hooks/use-responsive';
 
-import { fShortenNumber } from 'src/utils/format-number';
+// import { fShortenNumber } from 'src/utils/format-number';
 
-import { _brands } from 'src/_mock';
+// import { _brands } from 'src/_mock';
 import { bgGradient } from 'src/theme/css';
 import CareerHeroIllustration from 'src/assets/illustrations/career-hero-illustration';
 
 import Iconify from 'src/components/iconify';
-import SvgColor from 'src/components/svg-color';
+// import SvgColor from 'src/components/svg-color';
 
 import FilterKeyword from '../filters/filter-keyword';
-import FilterLocation from '../filters/filter-location';
+// import FilterLocation from '../filters/filter-location';
 
 // ----------------------------------------------------------------------
 
@@ -47,15 +47,15 @@ export default function CareerLandingHero() {
     [filters]
   );
 
-  const handleChangeLocation = useCallback(
-    (newValue) => {
-      setFilters({
-        ...filters,
-        filterLocation: newValue,
-      });
-    },
-    [filters]
-  );
+  // const handleChangeLocation = useCallback(
+  //   (newValue) => {
+  //     setFilters({
+  //       ...filters,
+  //       filterLocation: newValue,
+  //     });
+  //   },
+  //   [filters]
+  // );
 
   const renderFilters = (
     <Stack
@@ -82,7 +82,7 @@ export default function CareerLandingHero() {
 
       {mdUp && <Divider orientation="vertical" sx={{ height: 24 }} />}
 
-      <FilterLocation
+      {/* <FilterLocation
         filterLocation={filters.filterLocation}
         onChangeLocation={handleChangeLocation}
         sx={{
@@ -90,7 +90,7 @@ export default function CareerLandingHero() {
             bgcolor: 'transparent',
           },
         }}
-      />
+      /> */}
 
       <Button
         size="large"
@@ -119,21 +119,21 @@ export default function CareerLandingHero() {
         divider={<Divider orientation="vertical" flexItem sx={{ borderStyle: 'dashed' }} />}
       >
         <Stack spacing={0.5} sx={{ color: 'common.white', width: { xs: 0.5, md: 'auto' } }}>
-          <Typography variant="h4">{fShortenNumber(2000000)}+</Typography>
+          <Typography variant="h4">140+</Typography>
           <Typography variant="body2" sx={{ opacity: 0.48 }}>
-            Jobs
+            Plantes médicinales
           </Typography>
         </Stack>
 
         <Stack spacing={0.5} sx={{ color: 'common.white', width: { xs: 0.5, md: 'auto' } }}>
-          <Typography variant="h4">{fShortenNumber(500000)}+</Typography>
+          <Typography variant="h4">90+</Typography>
           <Typography variant="body2" sx={{ opacity: 0.48 }}>
-            Successful Hiring
+            Symptômes
           </Typography>
         </Stack>
       </Stack>
 
-      <Stack
+      {/* <Stack
         spacing={{ md: 3 }}
         direction="row"
         divider={<Divider orientation="vertical" flexItem sx={{ borderStyle: 'dashed' }} />}
@@ -151,44 +151,44 @@ export default function CareerLandingHero() {
             Employee
           </Typography>
         </Stack>
-      </Stack>
+      </Stack> */}
     </Stack>
   );
 
-  const renderBrands = (
-    <Stack
-      flexWrap="wrap"
-      direction="row"
-      alignItems="center"
-      sx={{
-        mt: { md: 1 },
-      }}
-    >
-      {_brands.slice(0, 4).map((brand) => (
-        <Box
-          key={brand.id}
-          sx={{
-            lineHeight: 0,
-            my: { xs: 1.5, md: 0.5 },
-            mr: { md: 3 },
-            width: { xs: 0.5, md: 'auto' },
-            '&:last-of-type': {
-              mr: 0,
-            },
-          }}
-        >
-          <SvgColor
-            src={brand.image}
-            sx={{
-              width: 94,
-              height: 28,
-              color: 'text.disabled',
-            }}
-          />
-        </Box>
-      ))}
-    </Stack>
-  );
+  // const renderBrands = (
+  //   <Stack
+  //     flexWrap="wrap"
+  //     direction="row"
+  //     alignItems="center"
+  //     sx={{
+  //       mt: { md: 1 },
+  //     }}
+  //   >
+  //     {_brands.slice(0, 4).map((brand) => (
+  //       <Box
+  //         key={brand.id}
+  //         sx={{
+  //           lineHeight: 0,
+  //           my: { xs: 1.5, md: 0.5 },
+  //           mr: { md: 3 },
+  //           width: { xs: 0.5, md: 'auto' },
+  //           '&:last-of-type': {
+  //             mr: 0,
+  //           },
+  //         }}
+  //       >
+  //         <SvgColor
+  //           src={brand.image}
+  //           sx={{
+  //             width: 94,
+  //             height: 28,
+  //             color: 'text.disabled',
+  //           }}
+  //         />
+  //       </Box>
+  //     ))}
+  //   </Stack>
+  // );
 
   return (
     <Box
@@ -216,23 +216,22 @@ export default function CareerLandingHero() {
               }}
             >
               <Stack spacing={3}>
-                <Typography variant="h1" sx={{ color: 'common.white' }}>
-                  Get The
+                <Typography variant="h2" sx={{ color: 'common.white' }}>
+                  Encourager l{'\''}
                   <Box component="span" sx={{ color: 'primary.main' }}>
-                    {` Career `}
+                    {` adoption `}
                   </Box>
-                  You Deserve
+                  de remèdes naturels
                 </Typography>
 
                 <Typography sx={{ color: 'grey.500' }}>
-                  Etiam sollicitudin, ipsum eu pulvinar rutrum, tellus ipsum laoreet sapien, quis
-                  venenatis ante odio sit amet eros.
+                  Solutions naturelles et alternatives aux maux courants de la vie quotidienne
                 </Typography>
               </Stack>
 
               {renderFilters}
 
-              {renderBrands}
+              {/* {renderBrands} */}
 
               {renderSummary}
             </Stack>

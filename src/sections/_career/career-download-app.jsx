@@ -50,7 +50,7 @@ export default function CareerDownloadApp() {
             <Typography variant="h2"> Téléchargez maintenant </Typography>
 
             <Typography sx={{ mt: 3, mb: 5, color: 'grey.800' }}>
-              Le soin par les plantes!
+              Application mobile disponible!
             </Typography>
 
             <AppStoreButton />
