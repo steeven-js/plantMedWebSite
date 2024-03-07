@@ -13,6 +13,8 @@ import CareerJobItemSkeleton from './career-job-item-skeleton';
 export default function CareerJobList({ loading }) {
   const { data } = useFetchPlants();
 
+  console.log(data);
+
   return (
     <>
       <Box
@@ -28,13 +30,15 @@ export default function CareerJobList({ loading }) {
         }}
       >
         {loading ? (
-          Array.from({ length: 12 }).map((_, index) => (
-            <CareerJobItemSkeleton key={index} />
-          ))
+          <CareerJobItemSkeleton />
         ) : (
-          data?.slice(0, 12).map((item, index) => (
-            <CareerJobItem key={index} data={item} />
-          ))
+          Array.isArray(data?.data) && data?.data.length > 0 ? (
+            data.data.map((item, index) => (
+              <CareerJobItem key={index} data={item} />
+            ))
+          ) : (
+            <p>No data available</p>
+          )
         )}
       </Box>
 
@@ -51,6 +55,7 @@ export default function CareerJobList({ loading }) {
     </>
   );
 }
+
 
 CareerJobList.propTypes = {
   loading: PropTypes.bool,

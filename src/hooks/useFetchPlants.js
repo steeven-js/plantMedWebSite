@@ -5,7 +5,7 @@ const useFetchPlants = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const endpoint = `https://apimonremede.jsprod.fr/api/plants`;
+  const endpoint = `https://apimonremede.jsprod.fr/api/plantsWebSite?page=1`;
 
   const fetchData = async () => {
     setIsLoading(true);
@@ -14,9 +14,9 @@ const useFetchPlants = () => {
       const response = await fetch(endpoint);
       const result = await response.json();
       setData(result);
-    } catch (error) {
-      setError(error);
-      console.error(error);
+    } catch (fetchError) {
+      setError(fetchError);
+      console.error(fetchError);
     } finally {
       setIsLoading(false);
     }
