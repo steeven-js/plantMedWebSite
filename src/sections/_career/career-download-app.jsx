@@ -47,10 +47,10 @@ export default function CareerDownloadApp() {
               textAlign: { xs: 'center', md: 'unset' },
             }}
           >
-            <Typography variant="h2"> Download App </Typography>
+            <Typography variant="h2"> Téléchargez maintenant </Typography>
 
             <Typography sx={{ mt: 3, mb: 5, color: 'grey.800' }}>
-              Now finding the new job just got even easier with our new app!
+              Le soin par les plantes!
             </Typography>
 
             <AppStoreButton />
@@ -59,7 +59,7 @@ export default function CareerDownloadApp() {
           <Image
             disabledEffect
             alt="mobile app"
-            src="/assets/images/career/career_download_app.png"
+            src="/assets/images/career/download_app.png"
             sx={{
               maxWidth: 480,
             }}
@@ -73,12 +73,14 @@ export default function CareerDownloadApp() {
 // ----------------------------------------------------------------------
 
 function AppStoreButton({ ...other }) {
+  const googlePlayLink = 'https://play.google.com/store/apps/details?id=com.monremede&pcampaignid=web_share';
+
   return (
     <Stack direction="row" flexWrap="wrap" spacing={2} {...other}>
       <StyledButton startIcon={<Iconify icon="ri:apple-fill" width={28} />}>
         <Stack alignItems="flex-start">
           <Typography variant="caption" sx={{ opacity: 0.72 }}>
-            Download on the
+            Bientôt
           </Typography>
 
           <Typography variant="h6" sx={{ mt: -0.5 }}>
@@ -87,10 +89,15 @@ function AppStoreButton({ ...other }) {
         </Stack>
       </StyledButton>
 
-      <StyledButton startIcon={<Iconify icon="logos:google-play-icon" width={28} />}>
+      <StyledButton
+        startIcon={<Iconify icon="logos:google-play-icon" width={28} />}
+        href={googlePlayLink}
+        target="_blank" // Open the link in a new tab/window
+        rel="noopener noreferrer" // Add security attributes for external links
+      >
         <Stack alignItems="flex-start">
           <Typography variant="caption" sx={{ opacity: 0.72 }}>
-            Download from
+            Disponible
           </Typography>
 
           <Typography variant="h6" sx={{ mt: -0.5 }}>

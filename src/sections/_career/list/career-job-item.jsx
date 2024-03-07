@@ -41,7 +41,7 @@ export default function CareerJobItem({ data = {} }) {
         </Stack>
 
         <Stack spacing={0.5} sx={{ mt: 3, mb: 2 }}>
-          <Link component={RouterLink} to={`/career/job/${id}`} color="inherit">
+          <Link component={RouterLink} to={`/plantmed/plante/${id}`} color="inherit">
             <TextMaxLine variant="h6" line={1}>
               {name && <div>{name}</div>}
             </TextMaxLine>

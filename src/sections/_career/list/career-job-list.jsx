@@ -12,8 +12,8 @@ import CareerJobItemSkeleton from './career-job-item-skeleton';
 // ----------------------------------------------------------------------
 
 export default function CareerJobList({ loading }) {
-  const { data } = useFetchPlants();
   const [currentPage, setCurrentPage] = useState(1);
+  const { data } = useFetchPlants(currentPage);
 
   // console.log('currentPage:', currentPage);
 
