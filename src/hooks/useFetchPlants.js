@@ -24,7 +24,8 @@ const useFetchPlants = (page) => {
 
   useEffect(() => {
     fetchData();
-  }, [page]); // Mettez à jour les données lorsque la page change
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [page]);
 
   const refetch = () => {
     fetchData();
