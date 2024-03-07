@@ -12,14 +12,26 @@ import CareerJobItemSkeleton from './career-job-item-skeleton';
 // ----------------------------------------------------------------------
 
 export default function CareerJobList({ loading }) {
+  const { data } = useFetchPlants();
   const [currentPage, setCurrentPage] = useState(1);
-  const { data } = useFetchPlants(currentPage);
 
   console.log('currentPage:', currentPage);
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
   };
+
+  let content;
+
+  if (loading) {
+    content = <CareerJobItemSkeleton />;
+  } else if (Array.isArray(data?.data) && data?.data.length > 0) {
+    content = data.data.map((item, index) => (
+      <CareerJobItem key={index} data={item} />
+    ));
+  } else {
+    content = <p>No data available</p>;
+  }
 
   return (
     <>
@@ -35,17 +47,7 @@ export default function CareerJobList({ loading }) {
           },
         }}
       >
-        {loading ? (
-          <CareerJobItemSkeleton />
-        ) : (
-          Array.isArray(data?.data) && data?.data.length > 0 ? (
-            data.data.map((item, index) => (
-              <CareerJobItem key={index} data={item} />
-            ))
-          ) : (
-            <p>No data available</p>
-          )
-        )}
+        {content}
       </Box>
 
       <Pagination
@@ -63,6 +65,7 @@ export default function CareerJobList({ loading }) {
     </>
   );
 }
+
 
 CareerJobList.propTypes = {
   loading: PropTypes.bool,
