@@ -28,6 +28,7 @@
     "@mui/material": "^5.14.20",
     "@mui/system": "^5.14.20",
     "@mui/x-date-pickers": "^6.18.4",
+    "axios": "^1.6.7",
     "date-fns": "^2.30.0",
     "framer-motion": "^10.16.16",
     "google-map-react": "^2.2.1",

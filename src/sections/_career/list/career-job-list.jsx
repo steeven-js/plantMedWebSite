@@ -3,12 +3,16 @@ import PropTypes from 'prop-types';
 import Box from '@mui/material/Box';
 import Pagination, { paginationClasses } from '@mui/material/Pagination';
 
+import useFetchPlants from 'src/hooks/useFetchPlants';
+
 import CareerJobItem from './career-job-item';
 import CareerJobItemSkeleton from './career-job-item-skeleton';
 
 // ----------------------------------------------------------------------
 
-export default function CareerJobList({ jobs, loading }) {
+export default function CareerJobList({ loading }) {
+  const { data } = useFetchPlants();
+
   return (
     <>
       <Box
@@ -23,8 +27,14 @@ export default function CareerJobList({ jobs, loading }) {
           },
         }}
       >
-        {(loading ? [...Array(9)] : jobs).map((job, index) =>
-          job ? <CareerJobItem key={job.id} job={job} /> : <CareerJobItemSkeleton key={index} />
+        {loading ? (
+          Array.from({ length: 12 }).map((_, index) => (
+            <CareerJobItemSkeleton key={index} />
+          ))
+        ) : (
+          data?.slice(0, 12).map((item, index) => (
+            <CareerJobItem key={index} data={item} />
+          ))
         )}
       </Box>
 
@@ -43,6 +53,12 @@ export default function CareerJobList({ jobs, loading }) {
 }
 
 CareerJobList.propTypes = {
-  jobs: PropTypes.array,
   loading: PropTypes.bool,
+};
+
+CareerJobItem.propTypes = {
+  data: PropTypes.shape({
+    name: PropTypes.string,
+    // Add other properties based on your data structure
+  }),
 };

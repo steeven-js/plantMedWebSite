@@ -4,7 +4,7 @@ import Container from '@mui/material/Container';
 
 import { useBoolean } from 'src/hooks/use-boolean';
 
-import { _jobs } from 'src/_mock';
+// import { _jobs } from 'src/_mock';
 
 import CareerJobList from '../list/career-job-list';
 import CareerNewsletter from '../career-newsletter';
@@ -28,7 +28,7 @@ export default function CareerJobsView() {
       <Container>
         <CareerFilters />
 
-        <CareerJobList jobs={_jobs} loading={loading.value} />
+        <CareerJobList loading={loading.value} />
       </Container>
 
       <CareerNewsletter />
