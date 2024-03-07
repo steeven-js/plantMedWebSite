@@ -66,10 +66,10 @@ function CareerHeroIllustration({ sx, ...other }) {
         >
           <m.div style={{ y: offsetY(-50) }}>
             <Label
-              text="Accounting"
+              text="Santé"
               icon={
                 <Image
-                  alt="accounting"
+                  alt="santé"
                   src="/assets/icons/ic_accounting.svg"
                   sx={{ width: 48, height: 48 }}
                 />
@@ -89,10 +89,10 @@ function CareerHeroIllustration({ sx, ...other }) {
       >
         <m.div style={{ x: offsetX(80), y: offsetY(80) }}>
           <Label
-            text="Banking"
+            text="Naturel"
             icon={
               <Image
-                alt="banking"
+                alt="naturel"
                 src="/assets/icons/ic_banking_currency.svg"
                 sx={{ width: 48, height: 48 }}
               />
@@ -110,10 +110,10 @@ function CareerHeroIllustration({ sx, ...other }) {
       >
         <m.div style={{ y: offsetY(80) }}>
           <Label
-            text="Health Care"
+            text="Bien-être"
             icon={
               <Image
-                alt="health care"
+                alt="bien-être"
                 src="/assets/icons/ic_health_care.svg"
                 sx={{ width: 48, height: 48 }}
               />
@@ -133,10 +133,10 @@ function CareerHeroIllustration({ sx, ...other }) {
       >
         <m.div style={{ y: offsetY(-60) }}>
           <Label
-            text="Software"
+            text="Herboristerie"
             icon={
               <Image
-                alt="software development"
+                alt="herboristerie"
                 src="/assets/icons/ic_software_development.svg"
                 sx={{ width: 48, height: 48 }}
               />
