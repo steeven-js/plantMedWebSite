@@ -8,7 +8,7 @@ export default function HomePage() {
   return (
     <>
       <Helmet>
-        <title> The starting point for your next project</title>
+        <title> PlantMed: Solution par les plantes</title>
       </Helmet>
 
       <CareerLandingView />

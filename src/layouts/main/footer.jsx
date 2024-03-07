@@ -1,31 +1,31 @@
 import PropTypes from 'prop-types';
 
 import Link from '@mui/material/Link';
-import Masonry from '@mui/lab/Masonry';
+// import Masonry from '@mui/lab/Masonry';
 import Stack from '@mui/material/Stack';
 import Divider from '@mui/material/Divider';
 import Collapse from '@mui/material/Collapse';
-import TextField from '@mui/material/TextField';
+// import TextField from '@mui/material/TextField';
 import Grid from '@mui/material/Unstable_Grid2';
 import Container from '@mui/material/Container';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import { alpha, styled } from '@mui/material/styles';
-import InputAdornment from '@mui/material/InputAdornment';
+// import InputAdornment from '@mui/material/InputAdornment';
 import Button, { buttonClasses } from '@mui/material/Button';
 
 import { usePathname } from 'src/routes/hooks';
 import { RouterLink } from 'src/routes/components';
 
 import { useBoolean } from 'src/hooks/use-boolean';
-import { useResponsive } from 'src/hooks/use-responsive';
+// import { useResponsive } from 'src/hooks/use-responsive';
 
 import { _socials } from 'src/_mock';
 
 import Logo from 'src/components/logo';
 import Iconify from 'src/components/iconify';
 
-import { pageLinks, navConfig } from './config-navigation';
+// import { pageLinks, navConfig } from './config-navigation';
 
 // ----------------------------------------------------------------------
 
@@ -43,15 +43,15 @@ const StyledAppStoreButton = styled(Button)(({ theme }) => ({
 // ----------------------------------------------------------------------
 
 export default function Footer() {
-  const mdUp = useResponsive('up', 'md');
+  // const mdUp = useResponsive('up', 'md');
 
   const pathname = usePathname();
 
-  const mobileList = navConfig.find((i) => i.title === 'Pages')?.children || [];
+  // const mobileList = navConfig.find((i) => i.title === 'Pages')?.children || [];
 
-  const desktopList = pageLinks.sort((listA, listB) => Number(listA.order) - Number(listB.order));
+  // const desktopList = pageLinks.sort((listA, listB) => Number(listA.order) - Number(listB.order));
 
-  const renderLists = mdUp ? desktopList : mobileList;
+  // const renderLists = mdUp ? desktopList : mobileList;
 
   const isHome = pathname === '/';
 
@@ -82,27 +82,26 @@ export default function Footer() {
                 <Logo />
 
                 <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-                  The starting point for your next project based on easy-to-customize Material-UI ©
-                  helps you build apps faster and better.
+                  L&apos;objectif principal de PlantMed est de sensibiliser et d&apos;encourager l&apos;utilisation de plantes médicinales pour le traitement de divers symptômes et affections
                 </Typography>
               </Stack>
 
               <Stack spacing={1} alignItems="flex-start">
-                <Typography variant="h6">Community</Typography>
+                <Typography variant="h6">Informations</Typography>
                 <Link variant="body2" sx={{ color: 'text.primary' }}>
-                  Documentation
+                  CGU
                 </Link>
 
                 <Link variant="body2" sx={{ color: 'text.primary' }}>
-                  Changelog
+                  Politiques de confidentialités
                 </Link>
 
                 <Link variant="body2" sx={{ color: 'text.primary' }}>
-                  Contributing
+                  Sources
                 </Link>
               </Stack>
 
-              <Stack spacing={2}>
+              {/* <Stack spacing={2}>
                 <Stack spacing={1}>
                   <Typography variant="h6">Let’s stay in touch</Typography>
                   <Typography variant="caption" sx={{ color: 'text.secondary' }}>
@@ -124,7 +123,7 @@ export default function Footer() {
                     ),
                   }}
                 />
-              </Stack>
+              </Stack> */}
 
               <Stack spacing={2}>
                 <Typography variant="h6">Social</Typography>
@@ -144,7 +143,7 @@ export default function Footer() {
             </Stack>
           </Grid>
 
-          <Grid xs={12} md={6}>
+          {/* <Grid xs={12} md={6}>
             {mdUp ? (
               <Masonry columns={4} spacing={2} defaultColumns={4} defaultSpacing={2}>
                 {renderLists.map((list) => (
@@ -158,7 +157,7 @@ export default function Footer() {
                 ))}
               </Stack>
             )}
-          </Grid>
+          </Grid> */}
         </Grid>
       </Container>
 
@@ -177,11 +176,11 @@ export default function Footer() {
 
           <Stack direction="row" spacing={3} justifyContent="center">
             <Link variant="caption" sx={{ color: 'text.secondary' }}>
-              Help Center
+              CGU
             </Link>
 
             <Link variant="caption" sx={{ color: 'text.secondary' }}>
-              Terms of Service
+              Politiques de confidentialités
             </Link>
           </Stack>
         </Stack>
@@ -300,6 +299,8 @@ ListMobile.propTypes = {
 // ----------------------------------------------------------------------
 
 function AppStoreButton({ ...other }) {
+  const googlePlayLink = 'https://play.google.com/store/apps/details?id=com.monremede&pcampaignid=web_share';
+
   return (
     <Stack direction="row" flexWrap="wrap" spacing={2} {...other}>
       <StyledAppStoreButton startIcon={<Iconify icon="ri:apple-fill" width={28} />}>
@@ -314,7 +315,12 @@ function AppStoreButton({ ...other }) {
         </Stack>
       </StyledAppStoreButton>
 
-      <StyledAppStoreButton startIcon={<Iconify icon="logos:google-play-icon" width={28} />}>
+      <StyledAppStoreButton
+        startIcon={<Iconify icon="logos:google-play-icon" width={28} />}
+        href={googlePlayLink}
+        target="_blank" // Open the link in a new tab/window
+        rel="noopener noreferrer" // Add security attributes for external links
+      >
         <Stack alignItems="flex-start">
           <Typography variant="caption" sx={{ opacity: 0.72 }}>
             Download from

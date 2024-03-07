@@ -7,7 +7,7 @@ import { useBoolean } from 'src/hooks/use-boolean';
 // import { _jobs } from 'src/_mock';
 
 import CareerJobList from '../list/career-job-list';
-import CareerNewsletter from '../career-newsletter';
+// import CareerNewsletter from '../career-newsletter';
 import CareerFilters from '../filters/career-filters';
 
 // ----------------------------------------------------------------------
@@ -31,7 +31,7 @@ export default function CareerJobsView() {
         <CareerJobList loading={loading.value} />
       </Container>
 
-      <CareerNewsletter />
+      {/* <CareerNewsletter /> */}
     </>
   );
 }
