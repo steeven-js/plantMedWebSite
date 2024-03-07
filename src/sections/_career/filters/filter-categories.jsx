@@ -22,7 +22,7 @@ export default function FilterCategories({ filterCategories, onChangeCategory })
         <TextField
           {...params}
           hiddenLabel
-          placeholder="Categories"
+          placeholder="Symptômes"
           InputProps={{
             ...params.InputProps,
             autoComplete: 'search',

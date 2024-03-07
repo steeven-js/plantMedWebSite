@@ -22,7 +22,7 @@ export default function FilterKeyword({ filterKeyword, onChangeKeyword, sx }) {
         <TextField
           {...params}
           hiddenLabel
-          placeholder="Job title, keywords..."
+          placeholder="Plantes médicinales"
           InputProps={{
             ...params.InputProps,
             autoComplete: 'search',

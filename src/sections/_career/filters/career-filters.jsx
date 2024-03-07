@@ -10,12 +10,12 @@ import { useResponsive } from 'src/hooks/use-responsive';
 
 import Iconify from 'src/components/iconify';
 
-import FilterType from './filter-type';
-import FilterLevel from './filter-level';
-import FilterSalary from './filter-salary';
+// import FilterType from './filter-type';
+// import FilterLevel from './filter-level';
+// import FilterSalary from './filter-salary';
 import FilterKeyword from './filter-keyword';
-import FilterBenefits from './filter-benefits';
-import FilterLocation from './filter-location';
+// import FilterBenefits from './filter-benefits';
+// import FilterLocation from './filter-location';
 import FilterCategories from './filter-categories';
 
 // ----------------------------------------------------------------------
@@ -57,65 +57,65 @@ export default function CareerFilters() {
     [filters]
   );
 
-  const handleChangeLocation = useCallback(
-    (newValue) => {
-      setFilters({
-        ...filters,
-        filterLocation: newValue,
-      });
-    },
-    [filters]
-  );
+  // const handleChangeLocation = useCallback(
+  //   (newValue) => {
+  //     setFilters({
+  //       ...filters,
+  //       filterLocation: newValue,
+  //     });
+  //   },
+  //   [filters]
+  // );
 
-  const handleChangeJobType = useCallback(
-    (event) => {
-      const {
-        target: { value },
-      } = event;
+  // const handleChangeJobType = useCallback(
+  //   (event) => {
+  //     const {
+  //       target: { value },
+  //     } = event;
 
-      setFilters({
-        ...filters,
-        filterType: typeof value === 'string' ? value.split(',') : value,
-      });
-    },
-    [filters]
-  );
+  //     setFilters({
+  //       ...filters,
+  //       filterType: typeof value === 'string' ? value.split(',') : value,
+  //     });
+  //   },
+  //   [filters]
+  // );
 
-  const handleChangeJobLevel = useCallback(
-    (event) => {
-      const {
-        target: { value },
-      } = event;
-      setFilters({
-        ...filters,
-        filterLevel: typeof value === 'string' ? value.split(',') : value,
-      });
-    },
-    [filters]
-  );
+  // const handleChangeJobLevel = useCallback(
+  //   (event) => {
+  //     const {
+  //       target: { value },
+  //     } = event;
+  //     setFilters({
+  //       ...filters,
+  //       filterLevel: typeof value === 'string' ? value.split(',') : value,
+  //     });
+  //   },
+  //   [filters]
+  // );
 
-  const handleChangeJobBenefits = useCallback(
-    (event) => {
-      const {
-        target: { value },
-      } = event;
-      setFilters({
-        ...filters,
-        filterBenefits: typeof value === 'string' ? value.split(',') : value,
-      });
-    },
-    [filters]
-  );
+  // const handleChangeJobBenefits = useCallback(
+  //   (event) => {
+  //     const {
+  //       target: { value },
+  //     } = event;
+  //     setFilters({
+  //       ...filters,
+  //       filterBenefits: typeof value === 'string' ? value.split(',') : value,
+  //     });
+  //   },
+  //   [filters]
+  // );
 
-  const handleChangeSalary = useCallback(
-    (event, newValue) => {
-      setFilters({
-        ...filters,
-        filterSalary: newValue,
-      });
-    },
-    [filters]
-  );
+  // const handleChangeSalary = useCallback(
+  //   (event, newValue) => {
+  //     setFilters({
+  //       ...filters,
+  //       filterSalary: newValue,
+  //     });
+  //   },
+  //   [filters]
+  // );
 
   const onReset = useCallback(() => {
     setFilters(defaultValues);
@@ -140,10 +140,10 @@ export default function CareerFilters() {
           onChangeCategory={handleChangeCategory}
         />
 
-        <FilterLocation
+        {/* <FilterLocation
           filterLocation={filters.filterLocation}
           onChangeLocation={handleChangeLocation}
-        />
+        /> */}
 
         {mdUp && (
           <Button
@@ -158,7 +158,7 @@ export default function CareerFilters() {
         )}
       </Stack>
 
-      <Stack direction={{ xs: 'column', md: 'row' }} spacing={{ xs: 2.5, md: 1 }} sx={{ mt: 2.5 }}>
+      {/* <Stack direction={{ xs: 'column', md: 'row' }} spacing={{ xs: 2.5, md: 1 }} sx={{ mt: 2.5 }}>
         <FilterType filterType={filters.filterType} onChangeJobType={handleChangeJobType} />
 
         <FilterLevel filterLevel={filters.filterLevel} onChangeJobType={handleChangeJobLevel} />
@@ -169,7 +169,7 @@ export default function CareerFilters() {
           filterBenefits={filters.filterBenefits}
           onChangeJobBenefits={handleChangeJobBenefits}
         />
-      </Stack>
+      </Stack> */}
 
       {!mdUp && (
         <Button
