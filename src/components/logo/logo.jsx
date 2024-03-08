@@ -60,7 +60,6 @@ function Logo({ single = false, sx }) {
           lineHeight: 0,
           cursor: 'pointer',
           display: 'inline-flex',
-          color: 'common.white',
           ...sx,
         }}
       >

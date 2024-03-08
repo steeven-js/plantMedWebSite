@@ -24,7 +24,7 @@ export default function SettingsButton({ sx }) {
           top: 8,
           right: 8,
         },
-        color: 'common.white',
+        // color: 'common.white',
         ...sx,
       }}
     >

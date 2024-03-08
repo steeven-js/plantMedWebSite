@@ -9,6 +9,8 @@ import Toolbar from '@mui/material/Toolbar';
 import Container from '@mui/material/Container';
 import { useTheme } from '@mui/material/styles';
 
+import { usePathname } from 'src/routes/hooks';
+
 // import { paths } from 'src/routes/paths';
 
 import { useOffSetTop } from 'src/hooks/use-off-set-top';
@@ -33,6 +35,10 @@ import SettingsButton from '../common/settings-button';
 
 export default function Header({ headerOnDark }) {
   const theme = useTheme();
+
+  const pathname = usePathname();
+
+  const isHome = pathname === '/';
 
   const offset = useOffSetTop();
 
@@ -67,7 +73,6 @@ export default function Header({ headerOnDark }) {
           sx={{
             // height: 1,
             display: { xs: 'none', md: 'flex' },
-            color: 'common.white',
           }}
         >
 
@@ -139,7 +144,7 @@ export default function Header({ headerOnDark }) {
         <NavMobile
           data={[
             {
-              title: 'Home',
+              title: 'Accueil',
               icon: <Iconify icon="solar:home-2-bold-duotone" />,
               path: '/',
             },
@@ -183,6 +188,7 @@ export default function Header({ headerOnDark }) {
             xs: HEADER.H_MOBILE,
             md: HEADER.H_DESKTOP,
           },
+          color: isHome ? 'common.white' : '',
           transition: theme.transitions.create(['height', 'background-color'], {
             easing: theme.transitions.easing.easeInOut,
             duration: theme.transitions.duration.shorter,
