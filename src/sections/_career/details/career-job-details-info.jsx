@@ -23,7 +23,7 @@ export default function CareerJobDetailsInfo({ data }) {
           <Iconify icon="carbon:calendar" width={24} />
           <Stack>
             <Typography variant="subtitle2"> Nom scientifique </Typography>
-            <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+            <Typography variant="body2" sx={{ color: 'error.main' }}>
               {data.nscient}
             </Typography>
           </Stack>
@@ -33,7 +33,7 @@ export default function CareerJobDetailsInfo({ data }) {
           <Iconify icon="carbon:hourglass" width={24} />
           <Stack>
             <Typography variant="subtitle2"> Famille </Typography>
-            <Typography variant="body2" sx={{ color: 'error.main' }}>
+            <Typography variant="body2" sx={{ color: 'text.secondary' }}>
               {data.famille}
             </Typography>
           </Stack>

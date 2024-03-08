@@ -15,23 +15,23 @@ export default function CareerJobList({ loading }) {
   const [currentPage, setCurrentPage] = useState(1);
   const { data } = useFetchPlants(currentPage);
 
-  // console.log('currentPage:', currentPage);
-
   const handlePageChange = (page) => {
     setCurrentPage(page);
   };
 
-  let content;
+  const renderContent = () => {
+    if (loading) {
+      return <CareerJobItemSkeleton />;
+    }
 
-  if (loading) {
-    content = <CareerJobItemSkeleton />;
-  } else if (Array.isArray(data?.data) && data?.data.length > 0) {
-    content = data.data.map((item, index) => (
-      <CareerJobItem key={index} data={item} />
-    ));
-  } else {
-    content = <p>No data available</p>;
-  }
+    if (Array.isArray(data?.data) && data?.data.length > 0) {
+      return data.data.map((item, index) => (
+        <CareerJobItem key={index} data={item} />
+      ));
+    }
+
+    return <p>No data available</p>;
+  };
 
   return (
     <>
@@ -47,7 +47,7 @@ export default function CareerJobList({ loading }) {
           },
         }}
       >
-        {content}
+        {renderContent()}
       </Box>
 
       <Pagination
@@ -65,7 +65,6 @@ export default function CareerJobList({ loading }) {
     </>
   );
 }
-
 
 CareerJobList.propTypes = {
   loading: PropTypes.bool,

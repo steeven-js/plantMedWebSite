@@ -4,15 +4,16 @@ import PropTypes from 'prop-types';
 import Stack from '@mui/material/Stack';
 
 function formatTextWithBr(text) {
-  return text.split('\n\n').map((paragraph, paragraphIndex) => (
+  return text.split('\n\n').map((paragraph, paragraphIndex, paragraphs) => (
     <React.Fragment key={paragraphIndex}>
-      {paragraph.split('\n').map((line, lineIndex) => (
+      {paragraph.split('\n').map((line, lineIndex, lines) => (
         <React.Fragment key={lineIndex}>
           {line}
-          {lineIndex < paragraph.split('\n').length - 1 && <br />}
+          {lineIndex < lines.length - 1 && <br />}
         </React.Fragment>
       ))}
-      {paragraphIndex < text.split('\n\n').length - 1 && <br />}
+      {paragraphIndex < paragraphs.length - 1 && <br />}
+      {paragraphIndex < paragraphs.length - 1 && <br />}
     </React.Fragment>
   ));
 }
