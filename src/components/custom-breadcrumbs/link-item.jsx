@@ -15,10 +15,10 @@ export default function BreadcrumbsLink({ link, activeLast, disabled }) {
     display: 'inline-flex',
     ...(disabled &&
       !activeLast && {
-        cursor: 'default',
-        pointerEvents: 'none',
-        color: 'text.disabled',
-      }),
+      cursor: 'default',
+      pointerEvents: 'none',
+      color: 'primary.main',
+    }),
   };
 
   const renderContent = (
