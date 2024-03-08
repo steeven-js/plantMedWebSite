@@ -63,8 +63,8 @@ export default function CareerJobDetailsHero({ job, data }) {
           direction={{ xs: 'column', md: 'row' }}
           justifyContent={{ md: 'space-between' }}
         >
-          <Stack spacing={{ xs: 3, md: 2 }} sx={{ color: 'common.white' }}>
-            <Typography variant="h3" component="h1">
+          <Stack spacing={{ xs: 3, md: 2 }} sx={{ color: 'common.white', textShadow: '8px 8px 12px rgba(0, 0, 0, 1)' }}>
+            <Typography variant="h2" component="h1">
               {data.name}
             </Typography>
 
