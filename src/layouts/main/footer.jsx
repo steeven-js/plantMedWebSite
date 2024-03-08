@@ -185,11 +185,21 @@ export default function Footer() {
           </Typography>
 
           <Stack direction="row" spacing={3} justifyContent="center">
-            <Link variant="caption" sx={{ color: 'text.secondary' }}>
+            <Link
+              variant="caption"
+              sx={{ color: 'text.secondary' }}
+              component={RouterLink}
+              to="/plantmed/legal/cgu"
+            >
               CGU
             </Link>
 
-            <Link variant="caption" sx={{ color: 'text.secondary' }}>
+            <Link
+              variant="caption"
+              sx={{ color: 'text.secondary' }}
+              component={RouterLink}
+              to="/plantmed/legal/confidentialite"
+            >
               Politiques de confidentialités
             </Link>
           </Stack>
