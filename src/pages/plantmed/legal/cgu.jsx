@@ -4,7 +4,7 @@ import CguView from 'src/sections/_career/view/cgu-view';
 
 // ----------------------------------------------------------------------
 
-export default function CareerPostPage() {
+export default function CguPage() {
   return (
     <>
       <Helmet>

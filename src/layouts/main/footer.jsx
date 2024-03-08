@@ -97,7 +97,12 @@ export default function Footer() {
                   CGU
                 </Link>
 
-                <Link variant="body2" sx={{ color: 'text.primary' }}>
+                <Link
+                  variant="body2"
+                  sx={{ color: 'text.primary' }}
+                  component={RouterLink}
+                  to="/plantmed/legal/confidentialite"
+                >
                   Politiques de confidentialités
                 </Link>
 

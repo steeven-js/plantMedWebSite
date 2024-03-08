@@ -12,6 +12,7 @@ const JobPage = lazy(() => import('src/pages/plantmed/job/[id]')); // Utilisatio
 const JobsPage = lazy(() => import('src/pages/plantmed/plantes'));
 const LandingPage = lazy(() => import('src/pages/plantmed/landing'));
 const CguPage = lazy(() => import('src/pages/plantmed/legal/cgu'));
+const ConfidentialitePage = lazy(() => import('src/pages/plantmed/legal/confidentialite'));
 
 // ----------------------------------------------------------------------
 
@@ -39,6 +40,7 @@ export const careerRoutes = [
           { path: 'plante/:id', element: <JobPage /> },
           // { path: 'posts', element: <BlogPage /> },
           { path: 'legal/cgu', element: <CguPage /> },
+          { path: 'legal/confidentialite', element: <ConfidentialitePage /> },
           // { path: 'post', element: <PostPage /> },
           // { path: 'about', element: <AboutPage /> },
           // { path: 'contact', element: <ContactPage /> },
