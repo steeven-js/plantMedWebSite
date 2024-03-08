@@ -34,21 +34,17 @@ const _mockJob = _jobs[0];
 export default function CareerJobView() {
   const mdUp = useResponsive('up', 'md');
   const loading = useBoolean(true);
-
-  // Use useParams to get the id from the URL
   const { id } = useParams();
-
   const { data } = useFetchPlant(id);
-
-  // console.log('data:', data, 'id:', id);
 
   useEffect(() => {
     const fakeLoading = async () => {
+      // console.log('Received data:', data);
       await new Promise((resolve) => setTimeout(resolve, 500));
       loading.onFalse();
     };
     fakeLoading();
-  }, [loading]);
+  }, [loading, id, data]);
 
   if (loading.value) {
     return <SplashScreen />;

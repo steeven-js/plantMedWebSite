@@ -1,5 +1,5 @@
-import { useState } from 'react';
 import PropTypes from 'prop-types';
+import { useState, useEffect } from 'react';
 
 import Box from '@mui/material/Box';
 import Pagination, { paginationClasses } from '@mui/material/Pagination';
@@ -9,11 +9,13 @@ import useFetchPlants from 'src/hooks/useFetchPlants';
 import CareerJobItem from './career-job-item';
 import CareerJobItemSkeleton from './career-job-item-skeleton';
 
-// ----------------------------------------------------------------------
-
 export default function CareerJobList({ loading }) {
   const [currentPage, setCurrentPage] = useState(1);
   const { data } = useFetchPlants(currentPage);
+
+  useEffect(() => {
+    console.log('Received data in CareerJobList:', data); // Log the received data
+  }, [data]);
 
   const handlePageChange = (page) => {
     setCurrentPage(page);

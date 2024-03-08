@@ -1,5 +1,5 @@
-import React from 'react';
 import PropTypes from 'prop-types';
+import React, { useState, useEffect } from 'react';
 
 import Stack from '@mui/material/Stack';
 
@@ -19,48 +19,58 @@ function formatTextWithBr(text) {
 }
 
 export default function CareerJobDetailsSummary({ data }) {
-  const formattedDescription = formatTextWithBr(data.description);
-  const formattedHabitat = formatTextWithBr(data.habitat);
-  const formattedPrecaution = formatTextWithBr(data.precaution);
-  const formattedPropriete = formatTextWithBr(data.propriete);
-  const formattedUsageExterne = formatTextWithBr(data.usageExterne);
-  const formattedUsageInterne = formatTextWithBr(data.usageInterne);
+  const [isLoading, setIsLoading] = useState(true);
 
-  console.log('data:', data);
+  useEffect(() => {
+    if (data) {
+      setIsLoading(false);
+    }
+  }, [data]);
+
+  const formattedDescription = formatTextWithBr(data?.description || '');
+  const formattedHabitat = formatTextWithBr(data?.habitat || '');
+  const formattedPrecaution = formatTextWithBr(data?.precaution || '');
+  const formattedPropriete = formatTextWithBr(data?.propriete || '');
+  const formattedUsageExterne = formatTextWithBr(data?.usageExterne || '');
+  const formattedUsageInterne = formatTextWithBr(data?.usageInterne || '');
 
   return (
     <Stack spacing={5}>
-      <div>
-        <h3>Description</h3>
-        <p>{formattedDescription}</p>
-      </div>
+      {isLoading ? (
+        <div>Loading...</div>
+      ) : (
+        <>
+          <div>
+            <h3>Description</h3>
+            <p>{formattedDescription}</p>
+          </div>
 
-      <div>
-        <h3>Habitat</h3>
-        <p>{formattedHabitat}</p>
-      </div>
+          <div>
+            <h3>Habitat</h3>
+            <p>{formattedHabitat}</p>
+          </div>
 
-      <div>
-        <h3>Precaution</h3>
-        <p>{formattedPrecaution}</p>
-      </div>
+          <div>
+            <h3>Precaution</h3>
+            <p>{formattedPrecaution}</p>
+          </div>
 
-      <div>
-        <h3>Propriété</h3>
-        <p>{formattedPropriete}</p>
-      </div>
+          <div>
+            <h3>Propriété</h3>
+            <p>{formattedPropriete}</p>
+          </div>
 
-      <div>
-        <h3>Usage Externe</h3>
-        <p>{formattedUsageExterne}</p>
-      </div>
+          <div>
+            <h3>Usage Externe</h3>
+            <p>{formattedUsageExterne}</p>
+          </div>
 
-      <div>
-        <h3>Usage Interne</h3>
-        <p>{formattedUsageInterne}</p>
-      </div>
-
-      {/* ... (other sections) */}
+          <div>
+            <h3>Usage Interne</h3>
+            <p>{formattedUsageInterne}</p>
+          </div>
+        </>
+      )}
     </Stack>
   );
 }

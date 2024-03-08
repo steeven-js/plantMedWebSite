@@ -1,96 +1,62 @@
 import PropTypes from 'prop-types';
+import React, { useState, useEffect } from 'react';
 
 import Card from '@mui/material/Card';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 
-// import { fDate } from 'src/utils/format-time';
-// import { fCurrency } from 'src/utils/format-number';
-
 import Iconify from 'src/components/iconify';
 
-// ----------------------------------------------------------------------
-
 export default function CareerJobDetailsInfo({ data }) {
-  // const { createdAt, salary, experience, deadline, level, languages } = job;
+  const [isLoading, setIsLoading] = useState(true);
 
-  console.log('data:', data)
+  useEffect(() => {
+    if (data) {
+      setIsLoading(false);
+    }
+  }, [data]);
 
   return (
     <Card sx={{ p: 3 }}>
-      <Stack spacing={2}>
-        <Stack spacing={2} direction="row" alignItems="flex-start">
-          <Iconify icon="carbon:calendar" width={24} />
-          <Stack>
-            <Typography variant="subtitle2"> Nom scientifique </Typography>
-            <Typography variant="body2" sx={{ color: 'error.main' }}>
-              {data.nscient}
-            </Typography>
+      {isLoading ? (
+        <div>Loading...</div>
+      ) : (
+        <Stack spacing={2}>
+          <Stack spacing={2} direction="row" alignItems="flex-start">
+            <Iconify icon="carbon:calendar" width={24} />
+            <Stack>
+              <Typography variant="subtitle2"> Nom scientifique </Typography>
+              <Typography variant="body2" sx={{ color: 'error.main' }}>
+                {data.nscient}
+              </Typography>
+            </Stack>
+          </Stack>
+
+          <Stack spacing={2} direction="row" alignItems="flex-start">
+            <Iconify icon="carbon:hourglass" width={24} />
+            <Stack>
+              <Typography variant="subtitle2"> Famille </Typography>
+              <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+                {data.famille}
+              </Typography>
+            </Stack>
+          </Stack>
+
+          <Stack spacing={2} direction="row" alignItems="flex-start">
+            <Iconify icon="carbon:money" width={24} />
+            <Stack>
+              <Typography variant="subtitle2"> Genre </Typography>
+              <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+                {data.genre}
+              </Typography>
+            </Stack>
           </Stack>
         </Stack>
-
-        <Stack spacing={2} direction="row" alignItems="flex-start">
-          <Iconify icon="carbon:hourglass" width={24} />
-          <Stack>
-            <Typography variant="subtitle2"> Famille </Typography>
-            <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-              {data.famille}
-            </Typography>
-          </Stack>
-        </Stack>
-
-        <Stack spacing={2} direction="row" alignItems="flex-start">
-          <Iconify icon="carbon:money" width={24} />
-          <Stack>
-            <Typography variant="subtitle2"> Genre </Typography>
-            <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-              {data.genre}
-            </Typography>
-          </Stack>
-        </Stack>
-
-        {/* <Stack spacing={2} direction="row" alignItems="flex-start">
-          <Iconify icon="carbon:increase-level" width={24} />
-          <Stack>
-            <Typography variant="subtitle2"> Experience </Typography>
-            <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-              {`${experience} year exp`}
-            </Typography>
-          </Stack>
-        </Stack>
-
-        <Stack spacing={2} direction="row" alignItems="flex-start">
-          <Iconify icon="carbon:user" width={24} />
-          <Stack>
-            <Typography variant="subtitle2"> Level </Typography>
-            <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-              {level}
-            </Typography>
-          </Stack>
-        </Stack>
-
-        <Stack spacing={2} direction="row" alignItems="flex-start">
-          <Iconify icon="carbon:translate" width={24} />
-          <Stack>
-            <Typography variant="subtitle2"> Language </Typography>
-            <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-              {typeof languages === 'string' ? languages : languages.join(', ')}
-            </Typography>
-          </Stack>
-        </Stack> */}
-      </Stack>
+      )}
     </Card>
   );
 }
 
 CareerJobDetailsInfo.propTypes = {
-  job: PropTypes.shape({
-    level: PropTypes.string,
-    salary: PropTypes.string,
-    experience: PropTypes.number,
-    deadline: PropTypes.instanceOf(Date),
-    createdAt: PropTypes.instanceOf(Date),
-    languages: PropTypes.arrayOf(PropTypes.string),
-  }),
   data: PropTypes.object,
 };

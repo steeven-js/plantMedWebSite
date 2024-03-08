@@ -13,7 +13,7 @@ import { fDate } from 'src/utils/format-time';
 // ----------------------------------------------------------------------
 
 export default function CareerJobDetailsCompanySimilar({ jobs, data }) {
-  console.log('data:', data);
+  // console.log('data:', data);
   return (
     <Paper
       variant="outlined"
