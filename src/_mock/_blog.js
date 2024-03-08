@@ -4,55 +4,68 @@ import { _tags } from './assets';
 // ----------------------------------------------------------------------
 
 const content = (name) => `
-<p>Pellentesque posuere. Phasellus a est. Suspendisse pulvinar, augue ac venenatis condimentum, sem libero volutpat nibh, nec pellentesque velit pede quis nunc.</p>
-<br/>
+<div className="container">
 
-<p>Pellentesque posuere. Phasellus a est. Suspendisse pulvinar, augue ac venenatis condimentum, sem libero volutpat nibh, nec pellentesque velit pede quis nunc. Phasellus viverra nulla ut metus varius laoreet. Praesent egestas tristique nibh. Donec posuere vulputate arcu. Quisque rutrum.</p>
-<br/>
-
-<p>Donec posuere vulputate arcu. Quisque rutrum. Curabitur vestibulum aliquam leo. Nam commodo suscipit quam. Vestibulum ullamcorper mauris at ligula.</p>
-<br/>
-
-<p>Pellentesque posuere. Phasellus a est. Suspendisse pulvinar, augue ac venenatis condimentum, sem libero volutpat nibh, nec pellentesque velit pede quis nunc. Phasellus viverra nulla ut metus varius laoreet. Praesent egestas tristique nibh.</p>
-
-<br/>
-<br/>
-<br/>
-<p><img alt="alt marketing" src="/assets/images/${name}/${name}_post_01.jpg" /></p>
-<br/>
-<br/>
-<br/>
-
-<h4>Curabitur suscipit suscipit tellus</h4>
-<br/>
-
-<p>Donec posuere vulputate arcu. Quisque rutrum. Curabitur vestibulum aliquam leo. Nam commodo suscipit quam. Vestibulum ullamcorper mauris at ligula.</p>
-<br/>
-
-<h4>Nullam accumsan lorem in</h4>
-<br/>
-
-<p>Donec posuere vulputate arcu. Quisque rutrum. Curabitur vestibulum aliquam leo. Nam commodo suscipit quam. Vestibulum ullamcorper mauris at ligula.</p>
-<br/>
-
-<p>Donec posuere vulputate arcu. Quisque rutrum. Curabitur vestibulum aliquam leo.</p>
-
-<br/>
-<br/>
-<br/>
 <p><img alt="alt marketing" src="/assets/images/${name}/${name}_post_02.jpg" /></p>
 <br/>
-<br/>
-<br/>
 
-<p>Donec posuere vulputate arcu. Quisque rutrum. Curabitur vestibulum aliquam leo. Nam commodo suscipit quam. Vestibulum ullamcorper mauris at ligula.</p>
+<p>Date d'entrée en vigueur : 05 Février 2024</p>
 <br/>
-
-<p>Pellentesque posuere. Phasellus a est. Suspendisse pulvinar, augue ac venenatis condimentum, sem libero volutpat nibh, nec pellentesque velit pede quis nunc. Phasellus viverra nulla ut metus varius laoreet. Praesent egestas tristique nibh.</p>
+<p>Bienvenue sur notre application mobile dédiée aux plantes médicinales. Nous accordons une grande importance à la confidentialité de vos données. Cette politique de confidentialité vise à vous informer sur la manière dont nous collectons, utilisons, partageons et protégeons vos informations lorsque vous utilisez notre application.</p>
 <br/>
-
-<p>Donec posuere vulputate arcu. Quisque rutrum. Curabitur vestibulum aliquam leo. Nam commodo suscipit quam. Vestibulum ullamcorper mauris at ligula.</p>
-`;
+<h2>
+    1. Collecte des Informations
+</h2>
+<br/>
+<p>Lors de la création d'un compte et de l'utilisation de l'application, nous pouvons collecter les informations suivantes : Informations d'inscription : nom, adresse e-mail, mot de passe. Données de profil : photo de profil (optionnelle) et autres informations que vous choisissez de fournir. Données sur les plantes ajoutées aux favoris et autres interactions avec l'application.</p>
+<br/>
+<h2>
+    2. Utilisation des Informations
+</h2>
+<br/>
+<p>Nous utilisons les informations collectées pour : Fournir, personnaliser et améliorer notre application. Permettre aux utilisateurs de se connecter, d'ajouter des plantes aux favoris et d'utiliser d'autres fonctionnalités de l'application. Communiquer avec les utilisateurs par le biais de notifications relatives à l'application.</p>
+<br/>
+<h2>
+    3. Partage des Informations
+</h2>
+<br/>
+<p>Nous ne partageons pas vos informations personnelles avec des tiers, sauf dans les cas suivants : Avec votre consentement explicite. Pour se conformer à des obligations légales. Pour protéger nos droits, notre confidentialité et notre sécurité, ainsi que ceux de nos utilisateurs.</p>
+<br/>
+<h2>
+    4. Sécurité des Informations
+</h2>
+<br/>
+<p>Nous mettons en place des mesures de sécurité pour protéger vos informations contre tout accès non autorisé, altération, divulgation ou destruction.
+</p>
+<br/>
+<h2>
+    5. Accès et Contrôle de vos Informations
+</h2>
+<br/>
+<p>Vous avez le droit d'accéder, de mettre à jour ou de supprimer vos informations personnelles depuis les paramètres de votre compte. Pour toute assistance, veuillez nous contacter à [contact.jsprod972@gmail.com].
+</p>
+<br/>
+<h2>
+    6. Cookies et Technologies Similaires
+</h2>
+<br/>
+<p>Nous pouvons utiliser des cookies et des technologies similaires pour améliorer l'expérience utilisateur et analyser les tendances d'utilisation.
+</p>
+<br/>
+<h2>
+    7. Modifications de la Politique de Confidentialité
+</h2>
+<br/>
+<p>Nous nous réservons le droit de mettre à jour cette politique de confidentialité à tout moment. Les modifications seront publiées sur cette page avec indication de la date de la dernière mise à jour.
+</p>
+<br/>
+<p>En utilisant notre application, vous consentez à cette politique de confidentialité. Si vous n'acceptez pas ces termes, veuillez ne pas utiliser l'application.
+</p>
+<br/>
+<p>Pour toute question concernant cette politique, veuillez nous contacter à [contact.jsprod972@gmail.com].
+</p>
+<br/>
+</div>`;
 
 const base = (index) => ({
   id: _mock.id(index),
@@ -64,12 +77,12 @@ const base = (index) => ({
   duration: '8 minutes read',
   tags: _tags.slice(index + 1, index + 2),
   author: {
-    name: _mock.fullName(index),
-    role: _mock.role(index),
+    name: 'Jacques Steeven',
+    role: 'CEO',
     avatarUrl: _mock.image.avatar(index),
-    quotes: 'Member since Mar 15, 2021',
+    quotes: 'Membre depuis le 08 novembre 2023',
     about:
-      'Integer tincidunt. Nullam dictum felis eu pede mollis pretium. Maecenas ullamcorper, dui et placerat feugiat, eros pede varius nisi, condimentum viverra felis nunc et lorem.',
+      'Concepteur développeur d\'application depuis 2022, je suis passionné par le développement d\'applications mobiles et web. Je suis également le créateur de PlantMed.',
   },
 });
 
