@@ -106,7 +106,7 @@ export function palette(mode) {
     ...base,
     mode: 'light',
     text: {
-      primary: grey[600],
+      primary: grey[800],
       secondary: grey[600],
       disabled: grey[500],
     },

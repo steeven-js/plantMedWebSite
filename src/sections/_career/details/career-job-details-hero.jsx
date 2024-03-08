@@ -10,7 +10,7 @@ import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import { alpha, useTheme } from '@mui/material/styles';
 
-import { paths } from 'src/routes/paths';
+// import { paths } from 'src/routes/paths';
 
 // import { fDate } from 'src/utils/format-time';
 
@@ -46,8 +46,8 @@ export default function CareerJobDetailsHero({ job, data }) {
       <Container>
         <CustomBreadcrumbs
           links={[
-            { name: 'Home', href: '/' },
-            { name: 'Jobs', href: paths.career.jobs },
+            { name: 'Accueil', href: '/' },
+            { name: 'Plantes', href: '/plantmed/plantes' },
             { name: data.name },
           ]}
           sx={{

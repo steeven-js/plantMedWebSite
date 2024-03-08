@@ -13,12 +13,12 @@ import { useBoolean } from 'src/hooks/use-boolean';
 import useFetchPlant from 'src/hooks/useFetchPlant';
 import { useResponsive } from 'src/hooks/use-responsive';
 
-import { _jobs, _mock, _socials } from 'src/_mock';
+import { _jobs, _socials } from 'src/_mock';
 
 import Iconify from 'src/components/iconify';
 import { SplashScreen } from 'src/components/loading-screen';
 
-import Advertisement from '../../advertisement';
+// import Advertisement from '../../advertisement';
 // import CareerNewsletter from '../career-newsletter';
 // import CareerJobListSimilar from '../list/career-job-list-similar';
 import CareerJobDetailsInfo from '../details/career-job-details-info';
@@ -38,7 +38,7 @@ export default function CareerJobView() {
   // Use useParams to get the id from the URL
   const { id } = useParams();
 
-  const { data } = useFetchPlant(id); // Pass the id to useFetchPlant
+  const { data } = useFetchPlant(id);
 
   // console.log('data:', data, 'id:', id);
 
@@ -115,14 +115,14 @@ export default function CareerJobView() {
 
               {/* <CareerJobDetailsCompanySimilar jobs={_jobs.slice(-3)} data={data} /> */}
 
-              <Advertisement
+              {/* <Advertisement
                 advertisement={{
                   title: 'Advertisement',
                   description: 'Duis leo. Donec orci lectus, aliquam ut, faucibus non',
                   imageUrl: _mock.image.career(2),
                   path: '',
                 }}
-              />
+              /> */}
             </Stack>
           </Grid>
         </Grid>
