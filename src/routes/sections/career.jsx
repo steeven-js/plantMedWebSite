@@ -13,6 +13,7 @@ const JobsPage = lazy(() => import('src/pages/plantmed/plantes'));
 const LandingPage = lazy(() => import('src/pages/plantmed/landing'));
 const CguPage = lazy(() => import('src/pages/plantmed/legal/cgu'));
 const ConfidentialitePage = lazy(() => import('src/pages/plantmed/legal/confidentialite'));
+const SourcePage = lazy(() => import('src/pages/plantmed/legal/source'));
 
 // ----------------------------------------------------------------------
 
@@ -36,11 +37,11 @@ export const careerRoutes = [
         ),
         children: [
           { path: 'plantes', element: <JobsPage /> },
-          // Utilisez :id pour spécifier le paramètre d'URL
-          { path: 'plante/:id', element: <JobPage /> },
-          // { path: 'posts', element: <BlogPage /> },
+          { path: 'plante/:id', element: <JobPage /> }, // Utilisez :id pour spécifier le paramètre d'URL
           { path: 'legal/cgu', element: <CguPage /> },
           { path: 'legal/confidentialite', element: <ConfidentialitePage /> },
+          { path: 'legal/source', element: <SourcePage /> },
+          // { path: 'posts', element: <BlogPage /> },
           // { path: 'post', element: <PostPage /> },
           // { path: 'about', element: <AboutPage /> },
           // { path: 'contact', element: <ContactPage /> },

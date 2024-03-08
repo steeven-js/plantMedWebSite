@@ -106,7 +106,12 @@ export default function Footer() {
                   Politiques de confidentialités
                 </Link>
 
-                <Link variant="body2" sx={{ color: 'text.primary' }}>
+                <Link
+                  variant="body2"
+                  sx={{ color: 'text.primary' }}
+                  component={RouterLink}
+                  to="/plantmed/legal/source"
+                >
                   Sources
                 </Link>
               </Stack>
