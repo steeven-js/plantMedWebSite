@@ -24,7 +24,11 @@ export default function CustomBreadcrumbs({
   return (
     <Box sx={{ ...sx }}>
       <Stack direction="row" alignItems="center">
-        <Box sx={{ flexGrow: 1 }}>
+        <Box sx={{
+          // flexGrow: 1,
+          padding: 1,
+          backgroundColor: 'rgba(0, 0, 0, 0.7)'
+        }}>
           {/* HEADING */}
           {heading && (
             <Typography variant="h4" gutterBottom>

@@ -11,7 +11,7 @@ export default function BreadcrumbsLink({ link, activeLast, disabled }) {
   const styles = {
     typography: 'body2',
     alignItems: 'center',
-    color: 'text.primary',
+    color: 'rimary.main',
     display: 'inline-flex',
     ...(disabled &&
       !activeLast && {
