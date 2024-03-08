@@ -204,6 +204,7 @@ export default function Header({ headerOnDark }) {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
+            color: 'common.white',
           }}
         >
           {renderContent}
