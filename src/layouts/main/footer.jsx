@@ -88,7 +88,12 @@ export default function Footer() {
 
               <Stack spacing={1} alignItems="flex-start">
                 <Typography variant="h6">Informations</Typography>
-                <Link variant="body2" sx={{ color: 'text.primary' }}>
+                <Link
+                  variant="body2"
+                  sx={{ color: 'text.primary' }}
+                  component={RouterLink}
+                  to="/plantmed/legal/cgu"
+                >
                   CGU
                 </Link>
 

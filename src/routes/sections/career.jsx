@@ -11,7 +11,7 @@ import MainLayout from 'src/layouts/main';
 const JobPage = lazy(() => import('src/pages/plantmed/job/[id]')); // Utilisation de [id] pour le paramètre dynamique
 const JobsPage = lazy(() => import('src/pages/plantmed/plantes'));
 const LandingPage = lazy(() => import('src/pages/plantmed/landing'));
-// const PostPage = lazy(() => import('src/pages/career/post'));
+const CguPage = lazy(() => import('src/pages/plantmed/legal/cgu'));
 
 // ----------------------------------------------------------------------
 
@@ -38,6 +38,7 @@ export const careerRoutes = [
           // Utilisez :id pour spécifier le paramètre d'URL
           { path: 'plante/:id', element: <JobPage /> },
           // { path: 'posts', element: <BlogPage /> },
+          { path: 'legal/cgu', element: <CguPage /> },
           // { path: 'post', element: <PostPage /> },
           // { path: 'about', element: <AboutPage /> },
           // { path: 'contact', element: <ContactPage /> },
