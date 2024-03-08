@@ -14,7 +14,7 @@ export default function CareerJobList({ loading }) {
   const { data } = useFetchPlants(currentPage);
 
   useEffect(() => {
-    console.log('Received data in CareerJobList:', data); // Log the received data
+    // console.log('Received data in CareerJobList:', data);
   }, [data]);
 
   const handlePageChange = (page) => {
