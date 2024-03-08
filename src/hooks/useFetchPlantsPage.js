@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
 
-const useFetchPlants = (page) => {
+const useFetchPlantsPage = (page) => {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const endpoint = `https://apimonremede.jsprod.fr/api/plants`;
+  const endpoint = `https://apimonremede.jsprod.fr/api/plantsWebSite?page=${page}`;
 
   const fetchData = async () => {
     setIsLoading(true);
@@ -34,4 +34,4 @@ const useFetchPlants = (page) => {
   return { data, isLoading, error, refetch };
 };
 
-export default useFetchPlants;
+export default useFetchPlantsPage;

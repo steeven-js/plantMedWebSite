@@ -1,4 +1,5 @@
-import { useState, useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useState, useEffect, useCallback } from 'react';
 
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
@@ -9,53 +10,67 @@ import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import { inputClasses } from '@mui/material/Input';
 import { alpha, useTheme } from '@mui/material/styles';
-// import { filledInputClasses } from '@mui/material/FilledInput';
 
+import useFetchPlants from 'src/hooks/useFetchPlants';
 import { useResponsive } from 'src/hooks/use-responsive';
 
-// import { fShortenNumber } from 'src/utils/format-number';
-
-// import { _brands } from 'src/_mock';
 import { bgGradient } from 'src/theme/css';
 import CareerHeroIllustration from 'src/assets/illustrations/career-hero-illustration';
 
 import Iconify from 'src/components/iconify';
-// import SvgColor from 'src/components/svg-color';
 
-import FilterKeyword from '../filters/filter-keyword';
-// import FilterLocation from '../filters/filter-location';
+import FilterPlantes from '../filters/filter-plantes';
 
 // ----------------------------------------------------------------------
 
 export default function CareerLandingHero() {
+  const navigate = useNavigate();
   const theme = useTheme();
+
+  const { data } = useFetchPlants();
 
   const mdUp = useResponsive('up', 'md');
 
   const [filters, setFilters] = useState({
-    filterKeyword: null,
-    filterLocation: null,
+    FilterPlantes: null,
   });
 
-  const handleChangeKeyword = useCallback(
+  const [plantId, setPlantId] = useState(null);
+
+  const handleChangePlantes = useCallback(
     (newValue) => {
       setFilters({
         ...filters,
-        filterKeyword: newValue,
+        FilterPlantes: newValue,
       });
     },
     [filters]
   );
 
-  // const handleChangeLocation = useCallback(
-  //   (newValue) => {
-  //     setFilters({
-  //       ...filters,
-  //       filterLocation: newValue,
-  //     });
-  //   },
-  //   [filters]
-  // );
+  useEffect(() => {
+    // Assuming data is fetched asynchronously
+    if (data && filters.FilterPlantes) {
+      const selectedPlant = data.find((plant) => plant.name === filters.FilterPlantes);
+
+      if (selectedPlant) {
+        setPlantId(selectedPlant.id);
+      } else {
+        // Handle the case when the selected plant is not found
+        console.error(`Plant with name ${filters.FilterPlantes} not found.`);
+      }
+    }
+  }, [data, filters.FilterPlantes]);
+
+  // console.log('plantId', plantId);
+
+  const handleRequest = () => {
+    // Url avec l'id de la plante sélectionnée
+    if (plantId) {
+      navigate(`/plantmed/plante/${plantId}`);
+    } else {
+      console.error('Plant ID not available.');
+    }
+  }
 
   const renderFilters = (
     <Stack
@@ -69,9 +84,9 @@ export default function CareerLandingHero() {
         justifyContent: { md: 'center' },
       }}
     >
-      <FilterKeyword
-        filterKeyword={filters.filterKeyword}
-        onChangeKeyword={handleChangeKeyword}
+      <FilterPlantes
+        FilterPlantes={filters.FilterPlantes}
+        onChangePlantes={handleChangePlantes}
         sx={{
           bgcolor: 'transparent',
           [`&:hover, &.${inputClasses.focused}`]: {
@@ -82,17 +97,8 @@ export default function CareerLandingHero() {
 
       {mdUp && <Divider orientation="vertical" sx={{ height: 24 }} />}
 
-      {/* <FilterLocation
-        filterLocation={filters.filterLocation}
-        onChangeLocation={handleChangeLocation}
-        sx={{
-          [`& .${filledInputClasses.root}`]: {
-            bgcolor: 'transparent',
-          },
-        }}
-      /> */}
-
       <Button
+        onClick={handleRequest}
         size="large"
         variant="contained"
         color="primary"
@@ -133,62 +139,8 @@ export default function CareerLandingHero() {
         </Stack>
       </Stack>
 
-      {/* <Stack
-        spacing={{ md: 3 }}
-        direction="row"
-        divider={<Divider orientation="vertical" flexItem sx={{ borderStyle: 'dashed' }} />}
-      >
-        <Stack spacing={0.5} sx={{ color: 'common.white', width: { xs: 0.5, md: 'auto' } }}>
-          <Typography variant="h4">{fShortenNumber(250000)}+</Typography>
-          <Typography variant="body2" sx={{ opacity: 0.48 }}>
-            Partners
-          </Typography>
-        </Stack>
-
-        <Stack spacing={0.5} sx={{ color: 'common.white', width: { xs: 0.5, md: 'auto' } }}>
-          <Typography variant="h4">{fShortenNumber(156000)}+</Typography>
-          <Typography variant="body2" sx={{ opacity: 0.48 }}>
-            Employee
-          </Typography>
-        </Stack>
-      </Stack> */}
     </Stack>
   );
-
-  // const renderBrands = (
-  //   <Stack
-  //     flexWrap="wrap"
-  //     direction="row"
-  //     alignItems="center"
-  //     sx={{
-  //       mt: { md: 1 },
-  //     }}
-  //   >
-  //     {_brands.slice(0, 4).map((brand) => (
-  //       <Box
-  //         key={brand.id}
-  //         sx={{
-  //           lineHeight: 0,
-  //           my: { xs: 1.5, md: 0.5 },
-  //           mr: { md: 3 },
-  //           width: { xs: 0.5, md: 'auto' },
-  //           '&:last-of-type': {
-  //             mr: 0,
-  //           },
-  //         }}
-  //       >
-  //         <SvgColor
-  //           src={brand.image}
-  //           sx={{
-  //             width: 94,
-  //             height: 28,
-  //             color: 'text.disabled',
-  //           }}
-  //         />
-  //       </Box>
-  //     ))}
-  //   </Stack>
-  // );
 
   return (
     <Box
@@ -230,8 +182,6 @@ export default function CareerLandingHero() {
               </Stack>
 
               {renderFilters}
-
-              {/* {renderBrands} */}
 
               {renderSummary}
             </Stack>
