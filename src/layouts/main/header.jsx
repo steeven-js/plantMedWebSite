@@ -67,6 +67,7 @@ export default function Header({ headerOnDark }) {
           sx={{
             // height: 1,
             display: { xs: 'none', md: 'flex' },
+            color: 'common.white',
           }}
         >
 
@@ -204,7 +205,6 @@ export default function Header({ headerOnDark }) {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            color: 'common.white',
           }}
         >
           {renderContent}
