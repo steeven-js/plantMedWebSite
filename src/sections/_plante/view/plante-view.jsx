@@ -65,81 +65,73 @@ export default function PlanteView() {
 
   return (
     <>
-      <PlanteDetailsHero job={_mockJob} data={data} />
+      {data ? (
+        <>
+          <PlanteDetailsHero job={_mockJob} data={data} />
 
-      <Container
-        sx={{
-          overflow: 'hidden',
-          pt: { xs: 5, md: 10 },
-          pb: 10,
-        }}
-      >
-        <Grid container spacing={{ xs: 5, md: 8 }}>
-          {!mdUp && (
-            <Grid xs={12} md={5} lg={4}>
-              <PlanteDetailsInfo job={_mockJob} data={data} />
+          <Container
+            sx={{
+              overflow: 'hidden',
+              pt: { xs: 5, md: 10 },
+              pb: 10,
+            }}
+          >
+            <Grid container spacing={{ xs: 5, md: 8 }}>
+              {!mdUp && (
+                <Grid xs={12} md={5} lg={4}>
+                  <PlanteDetailsInfo job={_mockJob} data={data} />
+                </Grid>
+              )}
+
+              <Grid xs={12} md={7} lg={8}>
+                <PlanteDetailsSummary job={_mockJob} data={data} />
+
+                <Divider sx={{ my: 5 }} />
+
+                <Stack direction="row" flexWrap="wrap" sx={{ mt: 5 }}>
+                  <Typography variant="subtitle2" sx={{ mt: 0.75, mr: 1.5 }}>
+                    Partager:
+                  </Typography>
+
+                  <Stack direction="row" alignItems="center" flexWrap="wrap">
+                    {_socials.map((social) => (
+                      <Button
+                        key={social.value}
+                        size="small"
+                        variant="outlined"
+                        startIcon={<Iconify icon={social.icon} />}
+                        sx={{
+                          m: 0.5,
+                          flexShrink: 0,
+                          color: social.color,
+                          borderColor: social.color,
+                          '&:hover': {
+                            borderColor: social.color,
+                            bgcolor: alpha(social.color, 0.08),
+                          },
+                        }}
+                      >
+                        {social.label}
+                      </Button>
+                    ))}
+                  </Stack>
+                </Stack>
+              </Grid>
+
+              <Grid xs={12} md={5} lg={4}>
+                <Stack spacing={5}>
+                  {mdUp && <PlanteDetailsInfo job={_mockJob} data={data} />}
+                </Stack>
+              </Grid>
             </Grid>
-          )}
+          </Container>
 
-          <Grid xs={12} md={7} lg={8}>
-            <PlanteDetailsSummary job={_mockJob} data={data} />
+          {/* Additional components go here */}
 
-            <Divider sx={{ my: 5 }} />
-
-            <Stack direction="row" flexWrap="wrap" sx={{ mt: 5 }}>
-              <Typography variant="subtitle2" sx={{ mt: 0.75, mr: 1.5 }}>
-                Partager:
-              </Typography>
-
-              <Stack direction="row" alignItems="center" flexWrap="wrap">
-                {_socials.map((social) => (
-                  <Button
-                    key={social.value}
-                    size="small"
-                    variant="outlined"
-                    startIcon={<Iconify icon={social.icon} />}
-                    sx={{
-                      m: 0.5,
-                      flexShrink: 0,
-                      color: social.color,
-                      borderColor: social.color,
-                      '&:hover': {
-                        borderColor: social.color,
-                        bgcolor: alpha(social.color, 0.08),
-                      },
-                    }}
-                  >
-                    {social.label}
-                  </Button>
-                ))}
-              </Stack>
-            </Stack>
-          </Grid>
-
-          <Grid xs={12} md={5} lg={4}>
-            <Stack spacing={5}>
-              {mdUp && <PlanteDetailsInfo job={_mockJob} data={data} />}
-
-              {/* <PlanteDetailsCompanyInfo job={_mockJob} data={data} /> */}
-
-              {/* <PlanteDetailsCompanySimilar jobs={_jobs.slice(-3)} data={data} /> */}
-
-              {/* <Advertisement
-                advertisement={{
-                  title: 'Advertisement',
-                  description: 'Duis leo. Donec orci lectus, aliquam ut, faucibus non',
-                  imageUrl: _mock.image.career(2),
-                  path: '',
-                }}
-              /> */}
-            </Stack>
-          </Grid>
-        </Grid>
-      </Container>
-
-      {/* <PlanteListSimilar jobs={_jobs.slice(-3)} data={data} /> */}
-
-      {/* <CareerNewsletter /> */}
+        </>
+      ) : (
+        <SplashScreen /> // Show loading screen or handle the case when there is no data
+      )}
     </>
   );
 }
