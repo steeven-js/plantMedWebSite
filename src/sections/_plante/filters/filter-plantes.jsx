@@ -39,7 +39,7 @@ export default function FilterPlantes({ filterPlantes, onChangePlantes, sx }) {
                 <Iconify width={24} icon="carbon:search" sx={{ color: 'text.disabled', mr: 1 }} />
               </InputAdornment>
             ),
-            sx: { pb: 1, ...sx },
+            sx: { pb: 1, color: 'primary.main', ...sx },
           }}
         />
       )}

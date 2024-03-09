@@ -23,7 +23,7 @@ const StyledButton = styled(Button)(({ theme }) => ({
 
 // ----------------------------------------------------------------------
 
-export default function CareerDownloadApp() {
+export default function PlanteDownloadApp() {
   return (
     <Box
       sx={{

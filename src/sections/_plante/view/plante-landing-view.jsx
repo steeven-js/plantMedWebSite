@@ -10,8 +10,8 @@
 
 // import CareerNewsletter from '../plante-newsletter';
 // import CareerOurClients from '../plante-our-clients';
-import CareerDownloadApp from '../plante-download-app';
-import CareerLandingHero from '../landing/plante-landing-hero';
+import PlanteDownloadApp from '../plante-download-app';
+import PlanteLandingHero from '../landing/plante-landing-hero';
 // import CareerLandingStep from '../landing/plante-landing-step';
 // import CareerTestimonial from '../testimonial/plante-testimonial';
 // import PlanteLatestPosts from '../../blog/plante/plante-latest-posts';
@@ -26,7 +26,7 @@ import CareerLandingHero from '../landing/plante-landing-hero';
 export default function PlanteLandingView() {
   return (
     <>
-      <CareerLandingHero />
+      <PlanteLandingHero />
 
       {/* <CareerLandingStep /> */}
 
@@ -46,7 +46,7 @@ export default function PlanteLandingView() {
 
       {/* <PlanteLatestPosts posts={_plantePosts.slice(0, 5)} /> */}
 
-      <CareerDownloadApp />
+      <PlanteDownloadApp />
 
       {/* <CareerNewsletter /> */}
     </>

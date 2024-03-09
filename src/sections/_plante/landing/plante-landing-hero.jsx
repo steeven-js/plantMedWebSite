@@ -24,7 +24,7 @@ import FilterPlantes from '../filters/filter-plantes';
 
 // ----------------------------------------------------------------------
 
-export default function CareerLandingHero() {
+export default function PlanteLandingHero() {
 
   const { data } = useFetchPlants();
 
