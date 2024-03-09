@@ -7,7 +7,7 @@ import Typography from '@mui/material/Typography';
 
 import Iconify from 'src/components/iconify';
 
-export default function CareerJobDetailsInfo({ data }) {
+export default function PlanteDetailsInfo({ data }) {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -57,6 +57,6 @@ export default function CareerJobDetailsInfo({ data }) {
   );
 }
 
-CareerJobDetailsInfo.propTypes = {
+PlanteDetailsInfo.propTypes = {
   data: PropTypes.object,
 };

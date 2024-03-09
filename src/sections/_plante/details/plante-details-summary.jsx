@@ -18,7 +18,7 @@ function formatTextWithBr(text) {
   ));
 }
 
-export default function CareerJobDetailsSummary({ data }) {
+export default function PlanteDetailsSummary({ data }) {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -75,7 +75,7 @@ export default function CareerJobDetailsSummary({ data }) {
   );
 }
 
-CareerJobDetailsSummary.propTypes = {
+PlanteDetailsSummary.propTypes = {
   data: PropTypes.shape({
     description: PropTypes.string,
     habitat: PropTypes.string,

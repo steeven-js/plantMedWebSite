@@ -9,7 +9,7 @@ import Image from 'src/components/image';
 
 // ----------------------------------------------------------------------
 
-export default function CareerJobDetailsCompanyInfo({ job, data }) {
+export default function PlanteDetailsCompanyInfo({ job, data }) {
   // console.log('data:', data);
   return (
     <Paper variant="outlined" sx={{ p: 3, borderRadius: 2, bgcolor: 'background.default' }}>
@@ -31,7 +31,7 @@ export default function CareerJobDetailsCompanyInfo({ job, data }) {
   );
 }
 
-CareerJobDetailsCompanyInfo.propTypes = {
+PlanteDetailsCompanyInfo.propTypes = {
   job: PropTypes.shape({
     company: PropTypes.shape({
       logo: PropTypes.string,

@@ -22,7 +22,7 @@ import CustomBreadcrumbs from 'src/components/custom-breadcrumbs';
 
 // ----------------------------------------------------------------------
 
-export default function CareerJobDetailsHero({ job, data }) {
+export default function PlanteDetailsHero({ job, data }) {
   const theme = useTheme();
   const [favorite, setFavorite] = useState(job.favorited);
   const handleChangeFavorite = useCallback((event) => {
@@ -121,7 +121,7 @@ export default function CareerJobDetailsHero({ job, data }) {
   );
 }
 
-CareerJobDetailsHero.propTypes = {
+PlanteDetailsHero.propTypes = {
   job: PropTypes.shape({
     slug: PropTypes.string,
     favorited: PropTypes.bool,

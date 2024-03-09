@@ -21,11 +21,11 @@ import { SplashScreen } from 'src/components/loading-screen';
 // import Advertisement from '../../advertisement';
 // import CareerNewsletter from '../plante-newsletter';
 // import CareerJobListSimilar from '../list/plante-job-list-similar';
-import CareerJobDetailsInfo from '../details/plante-job-details-info';
-import CareerJobDetailsHero from '../details/plante-job-details-hero';
-import CareerJobDetailsSummary from '../details/plante-job-details-summary';
-// import CareerJobDetailsCompanyInfo from '../details/plante-job-details-company-info';
-// import CareerJobDetailsCompanySimilar from '../details/plante-job-details-company-similar';
+import PlanteDetailsHero from '../details/plante-details-hero';
+import PlanteDetailsInfo from '../details/plante-details-info';
+import PlanteDetailsSummary from '../details/plante-details-summary';
+// import PlanteDetailsCompanyInfo from '../details/plante-job-details-company-info';
+// import PlanteDetailsCompanySimilar from '../details/plante-job-details-company-similar';
 
 // ----------------------------------------------------------------------
 
@@ -52,7 +52,7 @@ export default function CareerJobView() {
 
   return (
     <>
-      <CareerJobDetailsHero job={_mockJob} data={data} />
+      <PlanteDetailsHero job={_mockJob} data={data} />
 
       <Container
         sx={{
@@ -64,12 +64,12 @@ export default function CareerJobView() {
         <Grid container spacing={{ xs: 5, md: 8 }}>
           {!mdUp && (
             <Grid xs={12} md={5} lg={4}>
-              <CareerJobDetailsInfo job={_mockJob} data={data} />
+              <PlanteDetailsInfo job={_mockJob} data={data} />
             </Grid>
           )}
 
           <Grid xs={12} md={7} lg={8}>
-            <CareerJobDetailsSummary job={_mockJob} data={data} />
+            <PlanteDetailsSummary job={_mockJob} data={data} />
 
             <Divider sx={{ my: 5 }} />
 
@@ -105,11 +105,11 @@ export default function CareerJobView() {
 
           <Grid xs={12} md={5} lg={4}>
             <Stack spacing={5}>
-              {mdUp && <CareerJobDetailsInfo job={_mockJob} data={data} />}
+              {mdUp && <PlanteDetailsInfo job={_mockJob} data={data} />}
 
-              {/* <CareerJobDetailsCompanyInfo job={_mockJob} data={data} /> */}
+              {/* <PlanteDetailsCompanyInfo job={_mockJob} data={data} /> */}
 
-              {/* <CareerJobDetailsCompanySimilar jobs={_jobs.slice(-3)} data={data} /> */}
+              {/* <PlanteDetailsCompanySimilar jobs={_jobs.slice(-3)} data={data} /> */}
 
               {/* <Advertisement
                 advertisement={{
