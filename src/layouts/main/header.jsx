@@ -89,29 +89,6 @@ export default function Header({ headerOnDark }) {
                 path: '/',
               },
               { title: 'Plantes', path: '/plantmed/plantes/' },
-              // {
-              //   title: 'Pages1',
-              //   path: '/pages1',
-              //   icon: <Iconify icon="solar:file-bold-duotone" />,
-              //   children: [
-              //     { title: 'FAQs', path: '/pagespages/faqs' },
-              //     { title: 'Pricing', path: '/pagespages/pricing' },
-              //   ],
-              // },
-              // {
-              //   title: 'Pages2',
-              //   path: '/pages2',
-              //   icon: <Iconify icon="solar:file-bold-duotone" />,
-              //   children: [
-              //     { title: 'Payment', path: '/pagespages/payment' },
-              //     { title: 'Maintenance', path: '/pages/maintenance' },
-              //   ],
-              // },
-              // {
-              //   title: 'Docs',
-              //   icon: <Iconify icon="solar:notebook-bold-duotone" />,
-              //   path: paths.docs,
-              // },
             ]}
           />
         </Stack>
@@ -149,29 +126,6 @@ export default function Header({ headerOnDark }) {
               path: '/',
             },
             { title: 'Plantes', path: '/plantmed/plantes/' },
-            // {
-            //   title: 'Pages1',
-            //   path: '/pages1',
-            //   icon: <Iconify icon="solar:file-bold-duotone" />,
-            //   children: [
-            //     { title: 'FAQs', path: '/pagespages/faqs' },
-            //     { title: 'Pricing', path: '/pagespages/pricing' },
-            //   ],
-            // },
-            // {
-            //   title: 'Pages2',
-            //   path: '/pages2',
-            //   icon: <Iconify icon="solar:file-bold-duotone" />,
-            //   children: [
-            //     { title: 'Payment', path: '/pagespages/payment' },
-            //     { title: 'Maintenance', path: '/pages/maintenance' },
-            //   ],
-            // },
-            // {
-            //   title: 'Docs',
-            //   icon: <Iconify icon="solar:notebook-bold-duotone" />,
-            //   path: paths.docs,
-            // },
           ]}
         />
       }

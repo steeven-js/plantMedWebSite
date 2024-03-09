@@ -16,7 +16,12 @@ export default function NavList({ data, depth, slotProps }) {
 
   const pathname = usePathname();
 
-  const active = useActiveLink(data.path, !!data.children);
+  const isPlante = pathname.startsWith('/plantmed/plante/');
+
+  // Update the condition to check for both "isPlante" and the specific title condition
+  const active = useActiveLink(data.path, !!data.children) || (isPlante && data.title === 'Plantes');
+
+  // console.log('data.title:', data.title);
 
   const [openMenu, setOpenMenu] = useState(false);
 
