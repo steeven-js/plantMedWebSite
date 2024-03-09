@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
@@ -10,7 +10,6 @@ import Grid from '@mui/material/Unstable_Grid2';
 import Typography from '@mui/material/Typography';
 
 import { useBoolean } from 'src/hooks/use-boolean';
-import useFetchPlant from 'src/hooks/useFetchPlant';
 import { useResponsive } from 'src/hooks/use-responsive';
 
 import { _jobs, _socials } from 'src/_mock';
@@ -18,24 +17,19 @@ import { _jobs, _socials } from 'src/_mock';
 import Iconify from 'src/components/iconify';
 import { SplashScreen } from 'src/components/loading-screen';
 
-// import Advertisement from '../../advertisement';
-// import CareerNewsletter from '../plante-newsletter';
-// import PlanteListSimilar from '../list/plante-job-list-similar';
 import PlanteDetailsHero from '../details/plante-details-hero';
 import PlanteDetailsInfo from '../details/plante-details-info';
 import PlanteDetailsSummary from '../details/plante-details-summary';
-// import PlanteDetailsCompanyInfo from '../details/plante-job-details-company-info';
-// import PlanteDetailsCompanySimilar from '../details/plante-job-details-company-similar';
 
 // ----------------------------------------------------------------------
 
 const _mockJob = _jobs[0];
 
-export default function PlanteView() {
+export default function PlanteView({ id, data }) {
   const mdUp = useResponsive('up', 'md');
   const loading = useBoolean(true);
-  const { id } = useParams();
-  const { data } = useFetchPlant(id);
+
+  // console.log('id:', id, 'data:', data);
 
   useEffect(() => {
     const fakeLoading = async () => {
@@ -43,21 +37,8 @@ export default function PlanteView() {
       await new Promise((resolve) => setTimeout(resolve, 500));
       loading.onFalse();
     };
-
-    console.log('data:', data);
-
-    const refresh = async () => {
-      window.location.reload();
-    };
-
-    if (!data) {
-      console.log('No data received, refreshing...');
-      refresh();
-    } else {
-      fakeLoading();
-    }
-  }, [loading, id, data]);
-
+    fakeLoading();
+  }, [loading]);
 
   if (loading.value) {
     return <SplashScreen />;
@@ -135,3 +116,8 @@ export default function PlanteView() {
     </>
   );
 }
+
+PlanteView.propTypes = {
+  id: PropTypes.string,
+  data: PropTypes.object
+};

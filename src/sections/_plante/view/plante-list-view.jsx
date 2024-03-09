@@ -12,7 +12,7 @@ import PlanteFilters from '../filters/filter-plantes';
 
 // ----------------------------------------------------------------------
 
-export default function PlanteJobsView() {
+export default function PlanteListView() {
   const loading = useBoolean(true);
   const [filter, setFilter] = useState({ filterPlantes: null, filterCategories: null });
 
