@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 import Container from '@mui/material/Container';
 
@@ -14,6 +14,9 @@ import CareerFilters from '../filters/career-filters';
 
 export default function CareerJobsView() {
   const loading = useBoolean(true);
+  const [filter, setFilter] = useState({ filterPlantes: null, filterCategories: null });
+
+  // console.log('filter:', filter);
 
   useEffect(() => {
     const fakeLoading = async () => {
@@ -24,14 +27,9 @@ export default function CareerJobsView() {
   }, [loading]);
 
   return (
-    <>
-      <Container>
-        <CareerFilters />
-
-        <CareerJobList loading={loading.value} />
-      </Container>
-
-      {/* <CareerNewsletter /> */}
-    </>
+    <Container>
+      <CareerFilters setFilter={setFilter} />
+      <CareerJobList loading={loading.value} filter={filter} />
+    </Container>
   );
 }

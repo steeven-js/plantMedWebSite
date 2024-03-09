@@ -11,11 +11,11 @@ import CareerJobItemSkeleton from './career-job-item-skeleton';
 
 export default function CareerJobList({ loading }) {
   const [currentPage, setCurrentPage] = useState(1);
-  const { data } = useFetchPlantsPage(currentPage);
+  const { dataPage } = useFetchPlantsPage(currentPage);
 
   useEffect(() => {
     // console.log('Received data in CareerJobList:', data);
-  }, [data]);
+  }, [dataPage]);
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
@@ -26,8 +26,8 @@ export default function CareerJobList({ loading }) {
       return <CareerJobItemSkeleton />;
     }
 
-    if (Array.isArray(data?.data) && data?.data.length > 0) {
-      return data.data.map((item, index) => (
+    if (Array.isArray(dataPage?.data) && dataPage?.data.length > 0) {
+      return dataPage.data.map((item, index) => (
         <CareerJobItem key={index} data={item} />
       ));
     }
@@ -53,7 +53,7 @@ export default function CareerJobList({ loading }) {
       </Box>
 
       <Pagination
-        count={data ? data.last_page : 1}
+        count={dataPage ? dataPage.last_page : 1}
         page={currentPage}
         color="primary"
         onChange={(event, page) => handlePageChange(page)}
@@ -73,7 +73,7 @@ CareerJobList.propTypes = {
 };
 
 CareerJobItem.propTypes = {
-  data: PropTypes.shape({
+  dataPage: PropTypes.shape({
     name: PropTypes.string,
     // Add other properties based on your data structure
   }),

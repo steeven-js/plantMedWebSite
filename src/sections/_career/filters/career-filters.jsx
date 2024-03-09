@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { useState, useCallback } from 'react';
 
 import Box from '@mui/material/Box';
@@ -13,38 +14,36 @@ import Iconify from 'src/components/iconify';
 import FilterPlantes from './filter-plantes';
 import FilterCategories from './filter-categories';
 
-// ----------------------------------------------------------------------
-
 const defaultValues = {
   filterPlantes: null,
   filterCategories: null,
 };
 
-export default function CareerFilters() {
+export default function CareerFilters({ setFilter }) {
   const mdUp = useResponsive('up', 'md');
-
   const mobileOpen = useBoolean();
-
   const [filters, setFilters] = useState(defaultValues);
 
   const handleChangePlantes = useCallback(
     (newValue) => {
-      setFilters({
-        ...filters,
+      setFilters((prevFilters) => ({
+        ...prevFilters,
         filterPlantes: newValue,
-      });
+      }));
+      setFilter((prevFilter) => ({ ...prevFilter, filterPlantes: newValue }));
     },
-    [filters]
+    [setFilter]
   );
 
   const handleChangeCategory = useCallback(
     (newValue) => {
-      setFilters({
-        ...filters,
+      setFilters((prevFilters) => ({
+        ...prevFilters,
         filterCategories: newValue,
-      });
+      }));
+      setFilter((prevFilter) => ({ ...prevFilter, filterCategories: newValue }));
     },
-    [filters]
+    [setFilter]
   );
 
   const onReset = useCallback(() => {
@@ -127,3 +126,7 @@ export default function CareerFilters() {
     </>
   );
 }
+
+CareerFilters.propTypes = {
+  setFilter: PropTypes.func.isRequired,
+};

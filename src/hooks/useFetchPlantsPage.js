@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 
 const useFetchPlantsPage = (page) => {
-  const [data, setData] = useState([]);
+  const [dataPage, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
@@ -31,7 +31,7 @@ const useFetchPlantsPage = (page) => {
     fetchData();
   };
 
-  return { data, isLoading, error, refetch };
+  return { dataPage, isLoading, error, refetch };
 };
 
 export default useFetchPlantsPage;
