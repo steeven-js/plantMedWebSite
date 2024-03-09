@@ -6,15 +6,15 @@ import Pagination, { paginationClasses } from '@mui/material/Pagination';
 
 import useFetchPlantsPage from 'src/hooks/useFetchPlantsPage';
 
-import CareerJobItem from './plante-job-item';
-import CareerJobItemSkeleton from './plante-job-item-skeleton';
+import PlanteItem from './plante-item';
+import PlanteItemSkeleton from './plante-item-skeleton';
 
-export default function CareerJobList({ loading }) {
+export default function PlanteList({ loading }) {
   const [currentPage, setCurrentPage] = useState(1);
   const { dataPage } = useFetchPlantsPage(currentPage);
 
   useEffect(() => {
-    // console.log('Received data in CareerJobList:', data);
+    // console.log('Received data in PlanteList:', data);
   }, [dataPage]);
 
   const handlePageChange = (page) => {
@@ -23,12 +23,12 @@ export default function CareerJobList({ loading }) {
 
   const renderContent = () => {
     if (loading) {
-      return <CareerJobItemSkeleton />;
+      return <PlanteItemSkeleton />;
     }
 
     if (Array.isArray(dataPage?.data) && dataPage?.data.length > 0) {
       return dataPage.data.map((item, index) => (
-        <CareerJobItem key={index} data={item} />
+        <PlanteItem key={index} data={item} />
       ));
     }
 
@@ -68,11 +68,11 @@ export default function CareerJobList({ loading }) {
   );
 }
 
-CareerJobList.propTypes = {
+PlanteList.propTypes = {
   loading: PropTypes.bool,
 };
 
-CareerJobItem.propTypes = {
+PlanteItem.propTypes = {
   dataPage: PropTypes.shape({
     name: PropTypes.string,
     // Add other properties based on your data structure

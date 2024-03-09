@@ -20,7 +20,7 @@ import Image from 'src/components/image';
 // import Iconify from 'src/components/iconify';
 import TextMaxLine from 'src/components/text-max-line';
 
-export default function CareerJobItem({ data = {} }) {
+export default function PlanteItem({ data = {} }) {
   const { name, id, media } = data;
 
   return (
@@ -52,7 +52,7 @@ export default function CareerJobItem({ data = {} }) {
   );
 }
 
-CareerJobItem.propTypes = {
+PlanteItem.propTypes = {
   data: PropTypes.shape({
     name: PropTypes.string,
     id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,

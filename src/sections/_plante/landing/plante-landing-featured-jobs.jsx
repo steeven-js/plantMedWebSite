@@ -12,7 +12,7 @@ import { RouterLink } from 'src/routes/components';
 
 import Iconify from 'src/components/iconify';
 
-import CareerJobItem from '../list/plante-job-item';
+import PlanteItem from '../list/plante-item';
 
 // ----------------------------------------------------------------------
 
@@ -59,7 +59,7 @@ export default function CareerLandingFeaturedJobs({ jobs }) {
         }}
       >
         {jobs.map((job) => (
-          <CareerJobItem key={job.id} job={job} />
+          <PlanteItem key={job.id} job={job} />
         ))}
       </Box>
 

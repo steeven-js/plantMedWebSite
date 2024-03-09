@@ -20,7 +20,7 @@ import { SplashScreen } from 'src/components/loading-screen';
 
 // import Advertisement from '../../advertisement';
 // import CareerNewsletter from '../plante-newsletter';
-// import CareerJobListSimilar from '../list/plante-job-list-similar';
+// import PlanteListSimilar from '../list/plante-job-list-similar';
 import PlanteDetailsHero from '../details/plante-details-hero';
 import PlanteDetailsInfo from '../details/plante-details-info';
 import PlanteDetailsSummary from '../details/plante-details-summary';
@@ -124,7 +124,7 @@ export default function PlanteView() {
         </Grid>
       </Container>
 
-      {/* <CareerJobListSimilar jobs={_jobs.slice(-3)} data={data} /> */}
+      {/* <PlanteListSimilar jobs={_jobs.slice(-3)} data={data} /> */}
 
       {/* <CareerNewsletter /> */}
     </>

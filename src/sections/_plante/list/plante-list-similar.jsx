@@ -13,11 +13,11 @@ import { useResponsive } from 'src/hooks/use-responsive';
 
 import Iconify from 'src/components/iconify';
 
-import CareerJobItem from './plante-job-item';
+import PlanteItem from './plante-item';
 
 // ----------------------------------------------------------------------
 
-export default function CareerJobListSimilar({ jobs }) {
+export default function PlanteListSimilar({ jobs }) {
   const mdUp = useResponsive('up', 'md');
 
   const viewAllBtn = (
@@ -59,7 +59,7 @@ export default function CareerJobListSimilar({ jobs }) {
           }}
         >
           {jobs.map((job) => (
-            <CareerJobItem key={job.id} job={job} />
+            <PlanteItem key={job.id} job={job} />
           ))}
         </Box>
 
@@ -73,6 +73,6 @@ export default function CareerJobListSimilar({ jobs }) {
   );
 }
 
-CareerJobListSimilar.propTypes = {
+PlanteListSimilar.propTypes = {
   jobs: PropTypes.array,
 };

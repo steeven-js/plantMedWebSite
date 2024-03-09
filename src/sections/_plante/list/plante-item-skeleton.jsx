@@ -6,7 +6,7 @@ import Skeleton from '@mui/material/Skeleton';
 
 // ----------------------------------------------------------------------
 
-export default function CareerJobItemSkeleton({ ...other }) {
+export default function PlanteItemSkeleton({ ...other }) {
   return (
     <Card {...other}>
       <Stack spacing={2} sx={{ p: 3 }}>

@@ -6,7 +6,7 @@ import { useBoolean } from 'src/hooks/use-boolean';
 
 // import { _jobs } from 'src/_mock';
 
-import CareerJobList from '../list/plante-job-list';
+import PlanteList from '../list/plante-list';
 // import CareerNewsletter from '../plante-newsletter';
 import PlanteFilters from '../filters/filter-plantes';
 
@@ -29,7 +29,7 @@ export default function PlanteJobsView() {
   return (
     <Container>
       <PlanteFilters setFilter={setFilter} />
-      <CareerJobList loading={loading.value} filter={filter} />
+      <PlanteList loading={loading.value} filter={filter} />
     </Container>
   );
 }
