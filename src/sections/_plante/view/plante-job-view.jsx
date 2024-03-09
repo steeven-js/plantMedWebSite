@@ -31,7 +31,7 @@ import PlanteDetailsSummary from '../details/plante-details-summary';
 
 const _mockJob = _jobs[0];
 
-export default function CareerJobView() {
+export default function PlanteView() {
   const mdUp = useResponsive('up', 'md');
   const loading = useBoolean(true);
   const { id } = useParams();

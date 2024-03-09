@@ -17,7 +17,7 @@ import { useOffSetTop } from 'src/hooks/use-off-set-top';
 import { useResponsive } from 'src/hooks/use-responsive';
 
 import { bgBlur } from 'src/theme/css';
-// import CareerJobPage from 'src/pages/plante/job';
+// import PlantePage from 'src/pages/plante/job';
 
 import Logo from 'src/components/logo';
 import Label from 'src/components/label';

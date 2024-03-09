@@ -6,6 +6,8 @@ import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import Breadcrumbs from '@mui/material/Breadcrumbs';
 
+import { usePathname } from 'src/routes/hooks';
+
 import LinkItem from './link-item';
 
 // ----------------------------------------------------------------------
@@ -21,14 +23,21 @@ export default function CustomBreadcrumbs({
 }) {
   const lastLink = links[links.length - 1].name;
 
+  const pathname = usePathname();
+
+  const isPlante = pathname.startsWith('/plantmed/plante/');
+
   return (
     <Box sx={{ ...sx }}>
       <Stack direction="row" alignItems="center">
-        <Box sx={{
-          // flexGrow: 1,
-          padding: 1,
-          backgroundColor: 'rgba(0, 0, 0, 0.7)'
-        }}>
+        <Box
+          sx={{
+            padding: 1,
+            ...(isPlante && {
+              backgroundColor: 'rgba(0, 0, 0, 0.7)',
+            }),
+          }}
+        >
           {/* HEADING */}
           {heading && (
             <Typography variant="h4" gutterBottom>
@@ -51,7 +60,7 @@ export default function CustomBreadcrumbs({
           )}
         </Box>
 
-        {action && <Box sx={{ flexShrink: 0 }}> {action} </Box>}
+        {action && <Box sx={{ flexShrink: 0 }}>{action}</Box>}
       </Stack>
 
       {/* MORE LINK */}
