@@ -43,8 +43,21 @@ export default function PlanteView() {
       await new Promise((resolve) => setTimeout(resolve, 500));
       loading.onFalse();
     };
-    fakeLoading();
+
+    console.log('data:', data);
+
+    const refresh = async () => {
+      window.location.reload();
+    };
+
+    if (!data) {
+      console.log('No data received, refreshing...');
+      refresh();
+    } else {
+      fakeLoading();
+    }
   }, [loading, id, data]);
+
 
   if (loading.value) {
     return <SplashScreen />;
