@@ -1,6 +1,6 @@
 import { Helmet } from 'react-helmet-async';
 
-import CareerJobView from 'src/sections/_career/view/career-job-view';
+import CareerJobView from 'src/sections/_plante/view/plante-job-view';
 
 // ----------------------------------------------------------------------
 

@@ -1,6 +1,6 @@
 import { Helmet } from 'react-helmet-async';
 
-import CguView from 'src/sections/_career/view/cgu-view';
+import CguView from 'src/sections/_plante/view/plante-cgu-view';
 
 // ----------------------------------------------------------------------
 

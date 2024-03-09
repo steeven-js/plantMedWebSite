@@ -1,6 +1,6 @@
 import { Helmet } from 'react-helmet-async';
 
-import CareerLandingView from 'src/sections/_career/view/career-landing-view';
+import PlanteLandingView from 'src/sections/_plante/view/plante-landing-view';
 
 // ----------------------------------------------------------------------
 
@@ -11,7 +11,7 @@ export default function HomePage() {
         <title> PlantMed: Solution par les plantes</title>
       </Helmet>
 
-      <CareerLandingView />
+      <PlanteLandingView />
     </>
   );
 }

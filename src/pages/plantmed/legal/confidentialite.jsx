@@ -1,6 +1,6 @@
 import { Helmet } from 'react-helmet-async';
 
-import ConfidentialiteView from 'src/sections/_career/view/confidentialite-view';
+import ConfidentialiteView from 'src/sections/_plante/view/plante-confidentialite-view';
 
 // ----------------------------------------------------------------------
 

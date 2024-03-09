@@ -26,13 +26,13 @@ export const paths = {
   },
   // Career
   career: {
-    root: '/career',
-    jobs: '/career/jobs',
-    job: `/career/job`,
-    posts: '/career/posts',
-    post: `/career/post`,
-    about: '/career/about',
-    contact: '/career/contact',
+    root: '/plante',
+    jobs: '/plante/jobs',
+    job: `/plante/job`,
+    posts: '/plante/posts',
+    post: `/plante/post`,
+    about: '/plante/about',
+    contact: '/plante/contact',
   },
   // E-learning
   eLearning: {

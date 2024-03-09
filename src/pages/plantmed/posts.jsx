@@ -1,17 +1,17 @@
 import { Helmet } from 'react-helmet-async';
 
-import CareerPostsView from 'src/sections/_career/view/career-posts-view';
+import PlantePostsView from 'src/sections/_plante/view/plante-posts-view';
 
 // ----------------------------------------------------------------------
 
-export default function CareerPostsPage() {
+export default function PlantePostsPage() {
   return (
     <>
       <Helmet>
         <title> Career: Blog</title>
       </Helmet>
 
-      <CareerPostsView />
+      <PlantePostsView />
     </>
   );
 }

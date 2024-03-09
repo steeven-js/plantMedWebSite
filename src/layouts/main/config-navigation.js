@@ -37,7 +37,7 @@ export const pageLinks = [
   {
     order: '2',
     subheader: 'Career',
-    cover: '/assets/images/menu/menu_career.jpg',
+    cover: '/assets/images/menu/menu_plante.jpg',
     items: [
       { title: 'Landing', path: paths.career.root },
       { title: 'Jobs', path: paths.career.jobs },
