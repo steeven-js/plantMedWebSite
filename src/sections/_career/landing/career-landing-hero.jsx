@@ -21,13 +21,17 @@ import Iconify from 'src/components/iconify';
 
 import FilterPlantes from '../filters/filter-plantes';
 
+
 // ----------------------------------------------------------------------
 
 export default function CareerLandingHero() {
+
+  const { data } = useFetchPlants();
+
   const navigate = useNavigate();
   const theme = useTheme();
 
-  const { data } = useFetchPlants();
+  // console.log('data', data)
 
   const mdUp = useResponsive('up', 'md');
 
