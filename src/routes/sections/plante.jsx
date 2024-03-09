@@ -8,7 +8,7 @@ import MainLayout from 'src/layouts/main';
 // const AboutPage = lazy(() => import('src/pages/plante/about'));
 // const BlogPage = lazy(() => import('src/pages/plante/posts'));
 // const ContactPage = lazy(() => import('src/pages/plante/contact'));
-const JobPage = lazy(() => import('src/pages/plantmed/job/[id]')); // Utilisation de [id] pour le paramètre dynamique
+const JobPage = lazy(() => import('src/pages/plantmed/plante/[id]')); // Utilisation de [id] pour le paramètre dynamique
 const JobsPage = lazy(() => import('src/pages/plantmed/plantes'));
 const LandingPage = lazy(() => import('src/pages/plantmed/landing'));
 const CguPage = lazy(() => import('src/pages/plantmed/legal/cgu'));
