@@ -1,17 +1,17 @@
 import PropTypes from 'prop-types';
 
 import Box from '@mui/material/Box';
-// import Link from '@mui/material/Link';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Container from '@mui/material/Container';
 import { useTheme } from '@mui/material/styles';
+import IconButton from '@mui/material/IconButton';
 
+import { paths } from 'src/routes/paths';
 import { usePathname } from 'src/routes/hooks';
-
-// import { paths } from 'src/routes/paths';
+import { RouterLink } from 'src/routes/components';
 
 import { useOffSetTop } from 'src/hooks/use-off-set-top';
 import { useResponsive } from 'src/hooks/use-responsive';
@@ -100,6 +100,16 @@ export default function Header({ headerOnDark }) {
       <Stack spacing={2} direction="row" alignItems="center" justifyContent="flex-end">
         <Stack spacing={1} direction="row" alignItems="center">
           {/* <Searchbar /> */}
+
+          <IconButton
+            component={RouterLink}
+            href={paths.eCommerce.account.personal}
+            size="small"
+            color="inherit"
+            sx={{ p: 0 }}
+          >
+            <Iconify icon="carbon:user" width={24} />
+          </IconButton>
 
           <SettingsButton />
         </Stack>
