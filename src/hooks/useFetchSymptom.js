@@ -1,36 +1,37 @@
 import { useState, useEffect } from "react";
 
 const useFetchSymptom = (symptomId) => {
-    const [data, setData] = useState([]);
-    const [isLoading, setIsLoading] = useState(false);
-    const [error, setError] = useState(null);
+  const [symptom, setSymptom] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
 
-    const endpoint = `https://apimonremede.jsprod.fr/api/symptomes/${symptomId}`;
+  const endpoint = `https://apimonremede.jsprod.fr/api/symptomes/${symptomId}`;
 
-    const fetchData = async () => {
-        setIsLoading(true);
+  const fetchData = async () => {
+    setIsLoading(true);
 
-        try {
-            const response = await fetch(endpoint);
-            const result = await response.json();
-            setData(result);
-        } catch (error) {
-            setError(error);
-            console.error(error);
-        } finally {
-            setIsLoading(false);
-        }
-    };
+    try {
+      const response = await fetch(endpoint);
+      const result = await response.json();
+      setSymptom(result);
+    } catch (fetchSymptomError) {
+      setError(fetchSymptomError);
+      console.error(fetchSymptomError);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
-    useEffect(() => {
-        fetchData();
-    }, [symptomId]);
+  useEffect(() => {
+    fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [symptomId]);
 
-    const refetch = () => {
-        fetchData();
-    };
+  const refetch = () => {
+    fetchData();
+  };
 
-    return { data, isLoading, error, refetch };
+  return { symptom, isLoading, error, refetch };
 };
 
 export default useFetchSymptom;

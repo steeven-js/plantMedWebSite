@@ -12,13 +12,11 @@ import { useResponsive } from 'src/hooks/use-responsive';
 import Iconify from 'src/components/iconify';
 
 import FilterKeyword from './filter-keyword';
-import FilterCategories from './filter-categories';
 
 // ----------------------------------------------------------------------
 
 const defaultValues = {
   filterKeyword: null,
-  filterCategories: null,
 };
 
 export default function PlantesFilters({ onFiltersChange }) {
@@ -41,28 +39,15 @@ export default function PlantesFilters({ onFiltersChange }) {
     [filters, onFiltersChange]
   );
 
-  const handleChangeCategory = useCallback(
-    (newValue) => {
-      setFilters({
-        ...filters,
-        filterCategories: newValue,
-      });
+  // const onReset = useCallback(() => {
+  //   setFilters(defaultValues);
+  // }, []);
 
-      // Call the callback function with the updated filters
-      onFiltersChange({ ...filters, filterCategories: newValue });
-    },
-    [filters, onFiltersChange]
-  );
-
-  const onReset = useCallback(() => {
-    setFilters(defaultValues);
-  }, []);
-
-  const onSubmit = async () => {
-    await new Promise((resolve) => setTimeout(resolve, 500));
-    alert(JSON.stringify(filters, null, 2));
-    onReset();
-  };
+  // const onSubmit = async () => {
+  //   await new Promise((resolve) => setTimeout(resolve, 500));
+  //   alert(JSON.stringify(filters, null, 2));
+  //   onReset();
+  // };
 
   const renderFilters = (
     <>
@@ -72,12 +57,7 @@ export default function PlantesFilters({ onFiltersChange }) {
           onChangeKeyword={handleChangeKeyword}
         />
 
-        <FilterCategories
-          filterCategories={filters.filterCategories}
-          onChangeCategory={handleChangeCategory}
-        />
-
-        {mdUp && (
+        {/* {mdUp && (
           <Button
             size="large"
             variant="contained"
@@ -87,10 +67,10 @@ export default function PlantesFilters({ onFiltersChange }) {
           >
             <Iconify icon="carbon:search" width={24} />
           </Button>
-        )}
+        )} */}
       </Stack>
 
-      {!mdUp && (
+      {/* {!mdUp && (
         <Button
           size="large"
           variant="contained"
@@ -100,7 +80,7 @@ export default function PlantesFilters({ onFiltersChange }) {
         >
           Search
         </Button>
-      )}
+      )} */}
     </>
   );
 

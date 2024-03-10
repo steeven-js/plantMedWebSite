@@ -9,7 +9,7 @@ import useFetchPlantsPage from 'src/hooks/useFetchPlantsPage';
 import PlanteItem from './plante-item';
 import PlanteItemSkeleton from './plante-item-skeleton';
 
-export default function PlanteList({ loading, filter, plantId, matchingPlant }) {
+export default function PlanteList({ loading, filter, plantId, matchingPlant, matchingPlantSymptom }) {
   const [currentPage, setCurrentPage] = useState(1);
   const { dataPage } = useFetchPlantsPage(currentPage);
 
@@ -30,6 +30,11 @@ export default function PlanteList({ loading, filter, plantId, matchingPlant }) 
     if (filter.filterKeyword && filter.filterKeyword !== null) {
       // Key avec l'id de la plante et data avec la plante correspondante
       return <PlanteItem key={plantId} data={matchingPlant} />;
+    }
+
+    // Avec le tableau de symptômes boucler sur chaque plante
+    if (filter.filterCategories && filter.filterCategories !== null) {
+      return matchingPlantSymptom.map((item, index) => <PlanteItem key={index} data={item} />);
     }
 
     if (Array.isArray(dataPage?.data) && dataPage?.data.length > 0) {
@@ -79,6 +84,7 @@ PlanteList.propTypes = {
   filter: PropTypes.object,
   plantId: PropTypes.number,
   matchingPlant: PropTypes.object,
+  matchingPlantSymptom: PropTypes.array,
 };
 
 PlanteItem.propTypes = {

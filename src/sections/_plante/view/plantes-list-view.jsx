@@ -13,7 +13,7 @@ import PlantesFilters from '../filters/plantes-filters';
 
 export default function PlantesListView() {
   const loading = useBoolean(true);
-  const [filter, setFilter] = useState({ filterKeyword: null, filterCategories: null });
+  const [filter, setFilter] = useState({ filterKeyword: null });
   const [plantId, setPlantId] = useState(null);
   const [matchingPlant, setMatchingPlant] = useState(null);
   const { data } = useFetchPlants();

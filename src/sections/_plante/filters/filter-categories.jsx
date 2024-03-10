@@ -11,12 +11,12 @@ import Iconify from 'src/components/iconify';
 // ----------------------------------------------------------------------
 
 export default function FilterCategories({ filterCategories, onChangeCategory }) {
-  const { data } = useFetchSymptoms();
+  const { symptoms } = useFetchSymptoms();
 
   return (
     <Autocomplete
       sx={{ width: 1 }}
-      options={data.map((item) => item.name)}
+      options={symptoms.map((item) => item.name)}
       getOptionLabel={(option) => option}
       value={filterCategories}
       onChange={(event, value) => onChangeCategory(value)}
