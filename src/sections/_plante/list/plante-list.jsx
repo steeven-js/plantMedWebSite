@@ -13,6 +13,7 @@ export default function PlanteList({ loading, filter, plantId, matchingPlant }) 
   const [currentPage, setCurrentPage] = useState(1);
   const { dataPage } = useFetchPlantsPage(currentPage);
 
+  // useEffect va se déclencher à chaque fois que dataPage change
   useEffect(() => {
     // console.log('Received data in PlanteList:', data);
   }, [dataPage]);
@@ -27,7 +28,7 @@ export default function PlanteList({ loading, filter, plantId, matchingPlant }) 
     }
 
     if (filter.filterKeyword && filter.filterKeyword !== null) {
-      // Return a single PlanteItem if filter.filterKeyword is present
+      // Key avec l'id de la plante et data avec la plante correspondante
       return <PlanteItem key={plantId} data={matchingPlant} />;
     }
 

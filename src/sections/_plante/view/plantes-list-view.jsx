@@ -16,7 +16,6 @@ export default function PlantesListView() {
   const [filter, setFilter] = useState({ filterKeyword: null, filterCategories: null });
   const [plantId, setPlantId] = useState(null);
   const [matchingPlant, setMatchingPlant] = useState(null);
-
   const { data } = useFetchPlants();
 
   // console.log('plantId:', plantId);
@@ -30,12 +29,15 @@ export default function PlantesListView() {
   }, [loading]);
 
   useEffect(() => {
-    // Retrieve the id based on the filterKeyword
+    // Je récupère la plante correspondante au filtre avec find
     const findFilterPlant = data.find((plant) => plant.name === filter.filterKeyword);
 
-    // Update the plantId state
+    // Je récupère l'id de la plante et je le set dans le state
     setPlantId(findFilterPlant ? findFilterPlant.id : null);
+
+    // Je set la plante correspondante dans le state
     setMatchingPlant(findFilterPlant);
+
   }, [data, filter.filterKeyword, matchingPlant]);
 
   return (
