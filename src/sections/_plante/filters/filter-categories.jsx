@@ -4,17 +4,19 @@ import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import InputAdornment from '@mui/material/InputAdornment';
 
-import { _tags } from 'src/_mock';
+import useFetchSymptoms from 'src/hooks/useFetchSymptoms';
 
 import Iconify from 'src/components/iconify';
 
 // ----------------------------------------------------------------------
 
 export default function FilterCategories({ filterCategories, onChangeCategory }) {
+  const { data } = useFetchSymptoms();
+
   return (
     <Autocomplete
       sx={{ width: 1 }}
-      options={_tags}
+      options={data.map((item) => item.name)}
       getOptionLabel={(option) => option}
       value={filterCategories}
       onChange={(event, value) => onChangeCategory(value)}
