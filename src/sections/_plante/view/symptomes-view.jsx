@@ -6,13 +6,13 @@ import { useBoolean } from 'src/hooks/use-boolean';
 
 import { _jobs } from 'src/_mock';
 
-import CareerJobList from './list/career-job-list';
-import CareerFilters from './filters/career-filters';
+import SymptomeList from '../list/symptome-list';
+import SymptomesFilters from '../filters/symptomes-filters';
 
 
 // ----------------------------------------------------------------------
 
-export default function CareerJobsView() {
+export default function SymptomesView() {
   const loading = useBoolean(true);
 
   useEffect(() => {
@@ -26,9 +26,9 @@ export default function CareerJobsView() {
   return (
     <>
       <Container>
-        <CareerFilters />
+        <SymptomesFilters />
 
-        <CareerJobList jobs={_jobs} loading={loading.value} />
+        <SymptomeList jobs={_jobs} loading={loading.value} />
       </Container>
     </>
   );
