@@ -1,6 +1,6 @@
 import { Helmet } from 'react-helmet-async';
 
-import SymptomesListView from 'src/sections/_plante/view/symptomes-list-view';
+import CareerJobsView from 'src/sections/_plante/career-jobs-view';
 
 // ----------------------------------------------------------------------
 
@@ -8,10 +8,11 @@ export default function SymptomesPage() {
   return (
     <>
       <Helmet>
-        <title> PlantMed: Plantes</title>
+        <title> PlantMed: Symptomes</title>
       </Helmet>
 
-      <SymptomesListView />
+      {/* <SymptomesListView /> */}
+      <CareerJobsView />
     </>
   );
 }
