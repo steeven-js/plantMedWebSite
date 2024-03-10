@@ -6,13 +6,13 @@ import { useBoolean } from 'src/hooks/use-boolean';
 
 // import { _jobs } from 'src/_mock';
 
-import PlanteList from '../list/plante-list';
-// import CareerNewsletter from '../plante-newsletter';
-import PlanteFilters from '../filters/filter-plantes';
+import PlantesList from '../list/plante-list';
+import PlantesFilters from '../filters/plantes-filters';
+
 
 // ----------------------------------------------------------------------
 
-export default function PlanteListView() {
+export default function PlantesListView() {
   const loading = useBoolean(true);
   const [filter, setFilter] = useState({ filterPlantes: null, filterCategories: null });
 
@@ -28,8 +28,8 @@ export default function PlanteListView() {
 
   return (
     <Container>
-      <PlanteFilters setFilter={setFilter} />
-      <PlanteList loading={loading.value} filter={filter} />
+      <PlantesFilters setFilter={setFilter} />
+      <PlantesList loading={loading.value} filter={filter} />
     </Container>
   );
 }

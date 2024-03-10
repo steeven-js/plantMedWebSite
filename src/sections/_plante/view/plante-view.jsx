@@ -119,5 +119,8 @@ export default function PlanteView({ id, data }) {
 
 PlanteView.propTypes = {
   id: PropTypes.string,
-  data: PropTypes.object
+  data: PropTypes.oneOfType([
+    PropTypes.object,
+    PropTypes.array
+  ])
 };

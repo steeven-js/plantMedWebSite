@@ -7,6 +7,7 @@ import { SplashScreen } from 'src/components/loading-screen';
 
 import PlanteView from 'src/sections/_plante/view/plante-view';
 
+
 // ----------------------------------------------------------------------
 
 export default function PlantePage() {
