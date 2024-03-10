@@ -108,7 +108,7 @@ export default function SymptomeView({ id, data }) {
             </Grid>
           </Container>
 
-          <CareerJobListSimilar jobs={_jobs.slice(-3)} />
+          <CareerJobListSimilar jobs={_jobs.slice(-3)} data={data} />
 
         </>
       ) : (

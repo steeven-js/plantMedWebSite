@@ -22,15 +22,13 @@ import TextMaxLine from 'src/components/text-max-line';
 
 // ----------------------------------------------------------------------
 
-export default function CareerJobItem({ job }) {
-  const { slug, type, level, salary, location, urgent, createdAt, favorited, experience, company } =
-    job;
+export default function CareerJobItem({ data, plantMediaUrl }) {
 
-  const [favorite, setFavorite] = useState(favorited);
+  // const [favorite, setFavorite] = useState(favorited);
 
-  const handleChangeFavorite = useCallback((event) => {
-    setFavorite(event.target.checked);
-  }, []);
+  // const handleChangeFavorite = useCallback((event) => {
+  //   setFavorite(event.target.checked);
+  // }, []);
 
   return (
     <Card
@@ -40,55 +38,57 @@ export default function CareerJobItem({ job }) {
         },
       }}
     >
-      <Checkbox
+      {/* <Checkbox
         color="error"
         checked={favorite}
         onChange={handleChangeFavorite}
         icon={<Iconify icon="carbon:favorite" />}
         checkedIcon={<Iconify icon="carbon:favorite-filled" />}
         sx={{ position: 'absolute', right: 16, top: 16 }}
-      />
+      /> */}
 
       <Stack sx={{ p: 3, pb: 0 }}>
         <Stack direction="row" alignItems="center" spacing={2.5}>
-          <Image
-            alt={company.name}
-            src={company.logo}
-            sx={{ width: 48, height: 48, borderRadius: 1 }}
-          />
+          {plantMediaUrl && (
+            <Image
+              alt={data.name}
+              src={plantMediaUrl}
+              sx={{ width: 48, height: 48, borderRadius: 1 }}
+            />
+          )}
 
-          {urgent && <Label color="error">Urgent</Label>}
+          {/* {urgent && <Label color="error">Urgent</Label>} */}
         </Stack>
 
         <Stack spacing={0.5} sx={{ mt: 3, mb: 2 }}>
           <Link component={RouterLink} href={paths.career.job} color="inherit">
             <TextMaxLine variant="h6" line={1}>
-              {slug}
+              {data.name}
             </TextMaxLine>
           </Link>
 
-          <Typography variant="body2" sx={{ color: 'info.main' }}>
+          {/* <Typography variant="body2" sx={{ color: 'info.main' }}>
             {company.name}
-          </Typography>
+          </Typography> */}
 
-          <Stack
+          {/* <Stack
             direction="row"
             alignItems="center"
             sx={{ typography: 'body2', color: 'text.secondary' }}
           >
             <Iconify icon="carbon:location" width={18} sx={{ mr: 0.5 }} />
             {location}
-          </Stack>
+          </Stack> */}
         </Stack>
 
-        <Typography variant="caption" sx={{ color: 'text.disabled' }}>
+        {/* <Typography variant="caption" sx={{ color: 'text.disabled' }}>
           Posted day: {fDate(createdAt)}
-        </Typography>
+        </Typography> */}
       </Stack>
 
       <Divider sx={{ borderStyle: 'dashed', my: 2 }} />
 
-      <Grid
+      {/* <Grid
         container
         spacing={1.5}
         sx={{
@@ -126,7 +126,7 @@ export default function CareerJobItem({ job }) {
             {level}
           </Stack>
         </Grid>
-      </Grid>
+      </Grid> */}
     </Card>
   );
 }
@@ -147,4 +147,6 @@ CareerJobItem.propTypes = {
       name: PropTypes.string,
     }),
   }),
+  data: PropTypes.object,
+  plantMediaUrl: PropTypes.array,
 };

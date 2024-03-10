@@ -11,14 +11,10 @@ import SymptomeView from 'src/sections/_plante/view/symptome-view';
 // ----------------------------------------------------------------------
 
 export default function SymptomePage() {
-
   const { id } = useParams();
-
-  // console.log('id:', id);
-
   const { symptom, isLoading } = useFetchSymptom(id);
 
-  // console.log('symptom:', symptom);
+  // console.log('symptom:', symptom.plants);
 
   return (
     <>

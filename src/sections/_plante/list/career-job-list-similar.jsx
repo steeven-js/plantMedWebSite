@@ -17,8 +17,13 @@ import CareerJobItem from './career-job-item';
 
 // ----------------------------------------------------------------------
 
-export default function CareerJobListSimilar({ jobs }) {
+export default function CareerJobListSimilar({ jobs, data }) {
   const mdUp = useResponsive('up', 'md');
+
+  // Boucler pour obtenir l'url des plantes avec la relation media
+  const plantMediaUrls = data?.plants?.map((plant) => plant.media[0]?.original_url);
+
+  console.log('plantMediaUrls:', plantMediaUrls);
 
   const viewAllBtn = (
     <Button
@@ -58,8 +63,8 @@ export default function CareerJobListSimilar({ jobs }) {
             },
           }}
         >
-          {jobs.map((job) => (
-            <CareerJobItem key={job.id} job={job} />
+          {data.plants.map((plant, index) => (
+            <CareerJobItem key={plant.id} data={plant} plantMediaUrl={plantMediaUrls[index]} job={jobs[index]} />
           ))}
         </Box>
 
@@ -75,4 +80,5 @@ export default function CareerJobListSimilar({ jobs }) {
 
 CareerJobListSimilar.propTypes = {
   jobs: PropTypes.array,
+  data: PropTypes.object,
 };
