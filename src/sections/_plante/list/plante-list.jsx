@@ -9,7 +9,7 @@ import useFetchPlantsPage from 'src/hooks/useFetchPlantsPage';
 import PlanteItem from './plante-item';
 import PlanteItemSkeleton from './plante-item-skeleton';
 
-export default function PlanteList({ loading }) {
+export default function PlanteList({ loading, filter, plantId, matchingPlant }) {
   const [currentPage, setCurrentPage] = useState(1);
   const { dataPage } = useFetchPlantsPage(currentPage);
 
@@ -24,6 +24,11 @@ export default function PlanteList({ loading }) {
   const renderContent = () => {
     if (loading) {
       return <PlanteItemSkeleton />;
+    }
+
+    if (filter.filterKeyword && filter.filterKeyword !== null) {
+      // Return a single PlanteItem if filter.filterKeyword is present
+      return <PlanteItem key={plantId} data={matchingPlant} />;
     }
 
     if (Array.isArray(dataPage?.data) && dataPage?.data.length > 0) {
@@ -70,6 +75,9 @@ export default function PlanteList({ loading }) {
 
 PlanteList.propTypes = {
   loading: PropTypes.bool,
+  filter: PropTypes.object,
+  plantId: PropTypes.number,
+  matchingPlant: PropTypes.object,
 };
 
 PlanteItem.propTypes = {
