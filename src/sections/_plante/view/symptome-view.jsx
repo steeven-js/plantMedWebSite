@@ -10,7 +10,7 @@ import Grid from '@mui/material/Unstable_Grid2';
 import Typography from '@mui/material/Typography';
 
 import { useBoolean } from 'src/hooks/use-boolean';
-import { useResponsive } from 'src/hooks/use-responsive';
+// import { useResponsive } from 'src/hooks/use-responsive';
 
 import { _jobs, _socials } from 'src/_mock';
 
@@ -19,7 +19,7 @@ import { SplashScreen } from 'src/components/loading-screen';
 
 import SymptomeDetailsHero from '../details/symptome-details-hero';
 import CareerJobListSimilar from '../list/career-job-list-similar';
-import SymptomeDetailsInfo from '../details/symptome-details-info';
+// import SymptomeDetailsInfo from '../details/symptome-details-info';
 import SymptomeDetailsSummary from '../details/symptome-details-summary';
 
 // ----------------------------------------------------------------------
@@ -27,7 +27,7 @@ import SymptomeDetailsSummary from '../details/symptome-details-summary';
 const _mockJob = _jobs[0];
 
 export default function SymptomeView({ id, data }) {
-  const mdUp = useResponsive('up', 'md');
+  // const mdUp = useResponsive('up', 'md');
   const loading = useBoolean(true);
 
   // console.log('id:', id, 'data:', data);
@@ -59,11 +59,11 @@ export default function SymptomeView({ id, data }) {
             }}
           >
             <Grid container spacing={{ xs: 5, md: 8 }}>
-              {!mdUp && (
+              {/* {!mdUp && (
                 <Grid xs={12} md={5} lg={4}>
                   <SymptomeDetailsInfo job={_mockJob} data={data} />
                 </Grid>
-              )}
+              )} */}
 
               <Grid xs={12} md={7} lg={8}>
                 <SymptomeDetailsSummary job={_mockJob} data={data} />
@@ -100,11 +100,11 @@ export default function SymptomeView({ id, data }) {
                 </Stack>
               </Grid>
 
-              <Grid xs={12} md={5} lg={4}>
+              {/* <Grid xs={12} md={5} lg={4}>
                 <Stack spacing={5}>
                   {mdUp && <SymptomeDetailsInfo job={_mockJob} data={data} />}
                 </Stack>
-              </Grid>
+              </Grid> */}
             </Grid>
           </Container>
 

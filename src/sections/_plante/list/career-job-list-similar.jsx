@@ -17,13 +17,13 @@ import CareerJobItem from './career-job-item';
 
 // ----------------------------------------------------------------------
 
-export default function CareerJobListSimilar({ jobs, data }) {
+export default function CareerJobListSimilar({ data }) {
   const mdUp = useResponsive('up', 'md');
 
   // Boucler pour obtenir l'url des plantes avec la relation media
   const plantMediaUrls = data?.plants?.map((plant) => plant.media[0]?.original_url);
 
-  console.log('plantMediaUrls:', plantMediaUrls);
+  // console.log('plantMediaUrls:', plantMediaUrls);
 
   const viewAllBtn = (
     <Button
@@ -32,7 +32,7 @@ export default function CareerJobListSimilar({ jobs, data }) {
       color="inherit"
       endIcon={<Iconify icon="carbon:chevron-right" />}
     >
-      View All Jobs
+      Toutes les plantes
     </Button>
   );
 
@@ -47,7 +47,7 @@ export default function CareerJobListSimilar({ jobs, data }) {
             mb: { xs: 8, md: 10 },
           }}
         >
-          <Typography variant="h3">Similar Jobs</Typography>
+          <Typography variant="h3">Plantes médicinales associées</Typography>
 
           {mdUp && viewAllBtn}
         </Stack>
@@ -64,7 +64,7 @@ export default function CareerJobListSimilar({ jobs, data }) {
           }}
         >
           {data.plants.map((plant, index) => (
-            <CareerJobItem key={plant.id} data={plant} plantMediaUrl={plantMediaUrls[index]} job={jobs[index]} />
+            <CareerJobItem key={plant.id} data={plant} plantMediaUrl={plantMediaUrls[index]} />
           ))}
         </Box>
 
@@ -79,6 +79,5 @@ export default function CareerJobListSimilar({ jobs, data }) {
 }
 
 CareerJobListSimilar.propTypes = {
-  jobs: PropTypes.array,
   data: PropTypes.object,
 };
