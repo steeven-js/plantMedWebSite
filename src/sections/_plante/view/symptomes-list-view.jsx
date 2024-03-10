@@ -1,8 +1,9 @@
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 import Container from '@mui/material/Container';
 
 import { useBoolean } from 'src/hooks/use-boolean';
+import useFetchSymptoms from 'src/hooks/useFetchSymptoms';
 
 import { _jobs } from 'src/_mock';
 
@@ -14,6 +15,8 @@ import SymptomesFilters from '../filters/symptomes-filters';
 
 export default function SymptomesView() {
   const loading = useBoolean(true);
+  const [filter, setFilter] = useState({ filterCategories: null });
+  const { symptoms } = useFetchSymptoms();
 
   useEffect(() => {
     const fakeLoading = async () => {
@@ -23,10 +26,14 @@ export default function SymptomesView() {
     fakeLoading();
   }, [loading]);
 
+  useEffect(() => {
+
+  }, [symptoms]);
+
   return (
     <>
       <Container>
-        <SymptomesFilters />
+        <SymptomesFilters onFiltersChange={setFilter} />
 
         <SymptomeList jobs={_jobs} loading={loading.value} />
       </Container>

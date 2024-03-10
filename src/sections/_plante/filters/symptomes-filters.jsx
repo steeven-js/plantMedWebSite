@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { useState, useCallback } from 'react';
 
 import Box from '@mui/material/Box';
@@ -18,7 +19,7 @@ const defaultValues = {
   filterCategories: null,
 };
 
-export default function SymptomesFilters() {
+export default function SymptomesFilters({ onFiltersChange }) {
   const mdUp = useResponsive('up', 'md');
 
   const mobileOpen = useBoolean();
@@ -31,8 +32,11 @@ export default function SymptomesFilters() {
         ...filters,
         filterCategories: newValue,
       });
+
+      // Call the callback function with the updated filters
+      onFiltersChange({ ...filters, filterCategories: newValue });
     },
-    [filters]
+    [filters, onFiltersChange]
   );
 
   const renderFilters = (
@@ -78,3 +82,7 @@ export default function SymptomesFilters() {
     </>
   );
 }
+
+SymptomesFilters.propTypes = {
+  onFiltersChange: PropTypes.func,
+};

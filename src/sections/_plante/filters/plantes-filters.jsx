@@ -39,16 +39,6 @@ export default function PlantesFilters({ onFiltersChange }) {
     [filters, onFiltersChange]
   );
 
-  // const onReset = useCallback(() => {
-  //   setFilters(defaultValues);
-  // }, []);
-
-  // const onSubmit = async () => {
-  //   await new Promise((resolve) => setTimeout(resolve, 500));
-  //   alert(JSON.stringify(filters, null, 2));
-  //   onReset();
-  // };
-
   const renderFilters = (
     <>
       <Stack spacing={2.5} direction={{ xs: 'column', md: 'row' }} alignItems="center">
@@ -56,31 +46,7 @@ export default function PlantesFilters({ onFiltersChange }) {
           filterKeyword={filters.filterKeyword}
           onChangeKeyword={handleChangeKeyword}
         />
-
-        {/* {mdUp && (
-          <Button
-            size="large"
-            variant="contained"
-            color="primary"
-            onClick={onSubmit}
-            sx={{ px: 0, minWidth: { md: 48 } }}
-          >
-            <Iconify icon="carbon:search" width={24} />
-          </Button>
-        )} */}
       </Stack>
-
-      {/* {!mdUp && (
-        <Button
-          size="large"
-          variant="contained"
-          color="primary"
-          startIcon={<Iconify icon="carbon:search" />}
-          sx={{ mt: 2.5 }}
-        >
-          Search
-        </Button>
-      )} */}
     </>
   );
 

@@ -1,6 +1,6 @@
 import { Helmet } from 'react-helmet-async';
 
-import SymptomesView from 'src/sections/_plante/view/symptomes-view';
+import SymptomesView from 'src/sections/_plante/view/symptomes-list-view';
 
 // ----------------------------------------------------------------------
 
