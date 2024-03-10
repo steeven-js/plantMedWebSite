@@ -40,16 +40,14 @@ export default function SymptomesFilters({ onFiltersChange }) {
   );
 
   const renderFilters = (
-    <>
-      <Stack spacing={2.5} direction={{ xs: 'column', md: 'row' }} alignItems="center">
+    <Stack spacing={2.5} direction={{ xs: 'column', md: 'row' }} alignItems="center">
 
-        <FilterCategories
-          filterCategories={filters.filterCategories}
-          onChangeCategory={handleChangeCategory}
-        />
+      <FilterCategories
+        filterCategories={filters.filterCategories}
+        onChangeCategory={handleChangeCategory}
+      />
 
-      </Stack>
-    </>
+    </Stack>
   );
 
   if (mdUp) {

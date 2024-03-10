@@ -9,14 +9,10 @@ import useFetchSymptomsPage from 'src/hooks/useFetchSymptomsPage';
 import SymptomeItem from './symptome-item';
 import PlanteItemSkeleton from './plante-item-skeleton';
 
-
-// ----------------------------------------------------------------------
-
-export default function SymptomeList({ loading, jobs }) {
+export default function SymptomeList({ loading, filter, symptomId, matchingSymptom }) {
   const [currentPage, setCurrentPage] = useState(1);
   const { dataSymptomsPage } = useFetchSymptomsPage(currentPage);
 
-  // useEffect va se déclencher à chaque fois que dataPage change
   useEffect(() => {
     // console.log('Received data in SymptomList:', dataSymptomsPage);
   }, [dataSymptomsPage]);
@@ -28,6 +24,10 @@ export default function SymptomeList({ loading, jobs }) {
   const renderContent = () => {
     if (loading) {
       return <PlanteItemSkeleton />;
+    }
+
+    if (filter.filterCategories && filter.filterCategories !== null) {
+      return <SymptomeItem key={symptomId} data={matchingSymptom} />;
     }
 
     if (Array.isArray(dataSymptomsPage?.data) && dataSymptomsPage?.data.length > 0) {
@@ -56,23 +56,33 @@ export default function SymptomeList({ loading, jobs }) {
         {renderContent()}
       </Box>
 
-      <Pagination
-        count={dataSymptomsPage ? dataSymptomsPage.last_page : 1}
-        page={currentPage}
-        color="primary"
-        onChange={(event, page) => handlePageChange(page)}
-        sx={{
-          my: 10,
-          [`& .${paginationClasses.ul}`]: {
-            justifyContent: 'center',
-          },
-        }}
-      />
+      {!filter.filterCategories && filter.filterCategories === null && (
+        <Pagination
+          count={dataSymptomsPage ? dataSymptomsPage.last_page : 1}
+          page={currentPage}
+          color="primary"
+          onChange={(event, page) => handlePageChange(page)}
+          sx={{
+            my: 10,
+            [`& .${paginationClasses.ul}`]: {
+              justifyContent: 'center',
+            },
+          }}
+        />
+      )}
     </>
   );
 }
 
 SymptomeList.propTypes = {
-  jobs: PropTypes.array,
   loading: PropTypes.bool,
+  filter: PropTypes.object,
+  symptomId: PropTypes.number,
+  matchingSymptom: PropTypes.object,
+};
+
+SymptomeItem.propTypes = {
+  dataSymptomsPage: PropTypes.shape({
+    name: PropTypes.string,
+  }),
 };

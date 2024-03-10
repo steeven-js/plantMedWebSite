@@ -40,14 +40,12 @@ export default function PlantesFilters({ onFiltersChange }) {
   );
 
   const renderFilters = (
-    <>
-      <Stack spacing={2.5} direction={{ xs: 'column', md: 'row' }} alignItems="center">
-        <FilterKeyword
-          filterKeyword={filters.filterKeyword}
-          onChangeKeyword={handleChangeKeyword}
-        />
-      </Stack>
-    </>
+    <Stack spacing={2.5} direction={{ xs: 'column', md: 'row' }} alignItems="center">
+      <FilterKeyword
+        filterKeyword={filters.filterKeyword}
+        onChangeKeyword={handleChangeKeyword}
+      />
+    </Stack>
   );
 
   if (mdUp) {

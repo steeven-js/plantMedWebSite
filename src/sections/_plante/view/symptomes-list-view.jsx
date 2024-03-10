@@ -5,8 +5,6 @@ import Container from '@mui/material/Container';
 import { useBoolean } from 'src/hooks/use-boolean';
 import useFetchSymptoms from 'src/hooks/useFetchSymptoms';
 
-import { _jobs } from 'src/_mock';
-
 import SymptomeList from '../list/symptome-list';
 import SymptomesFilters from '../filters/symptomes-filters';
 
@@ -16,6 +14,8 @@ import SymptomesFilters from '../filters/symptomes-filters';
 export default function SymptomesView() {
   const loading = useBoolean(true);
   const [filter, setFilter] = useState({ filterCategories: null });
+  const [symptomId, setSymptomId] = useState(null);
+  const [matchingSymptom, setMatchingSymptom] = useState(null);
   const { symptoms } = useFetchSymptoms();
 
   useEffect(() => {
@@ -28,15 +28,19 @@ export default function SymptomesView() {
 
   useEffect(() => {
 
-  }, [symptoms]);
+    const findFilterSymptom = symptoms.find((symptom) => symptom.name === filter.filterCategories);
+
+    setSymptomId(findFilterSymptom ? findFilterSymptom.id : null);
+
+    setMatchingSymptom(findFilterSymptom);
+
+  }, [symptoms, filter.filterCategories, matchingSymptom]);
 
   return (
-    <>
-      <Container>
-        <SymptomesFilters onFiltersChange={setFilter} />
+    <Container>
+      <SymptomesFilters onFiltersChange={setFilter} />
 
-        <SymptomeList jobs={_jobs} loading={loading.value} />
-      </Container>
-    </>
+      <SymptomeList loading={loading.value} filter={filter} symptomId={symptomId} matchingSymptom={matchingSymptom} />
+    </Container>
   );
 }
