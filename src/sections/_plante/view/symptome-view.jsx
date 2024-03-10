@@ -18,6 +18,7 @@ import Iconify from 'src/components/iconify';
 import { SplashScreen } from 'src/components/loading-screen';
 
 import SymptomeDetailsHero from '../details/symptome-details-hero';
+import CareerJobListSimilar from '../list/career-job-list-similar';
 import SymptomeDetailsInfo from '../details/symptome-details-info';
 import SymptomeDetailsSummary from '../details/symptome-details-summary';
 
@@ -107,7 +108,7 @@ export default function SymptomeView({ id, data }) {
             </Grid>
           </Container>
 
-          {/* Additional components go here */}
+          <CareerJobListSimilar jobs={_jobs.slice(-3)} />
 
         </>
       ) : (
