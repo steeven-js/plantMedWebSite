@@ -1,0 +1,78 @@
+import PropTypes from 'prop-types';
+import { useState, useCallback } from 'react';
+
+import Box from '@mui/material/Box';
+import Stack from '@mui/material/Stack';
+import Drawer from '@mui/material/Drawer';
+import Button from '@mui/material/Button';
+
+import { useBoolean } from 'src/hooks/use-boolean';
+import { useResponsive } from 'src/hooks/use-responsive';
+
+import Iconify from 'src/components/iconify';
+
+// import FilterKeyword from './filter-keyword';
+
+// ----------------------------------------------------------------------
+
+// const defaultValues = {
+//   filterKeyword: null,
+// };
+
+export default function SymptomesFilters() {
+  const mdUp = useResponsive('up', 'md');
+
+  const mobileOpen = useBoolean();
+
+  // const [filters, setFilters] = useState(defaultValues);
+
+  // const handleChangeKeyword = useCallback(
+  //   (newValue) => {
+  //     setFilters({
+  //       ...filters,
+  //       filterKeyword: newValue,
+  //     });
+  //   },
+  // );
+
+  const renderFilters = (
+    <>
+      <Stack spacing={2.5} direction={{ xs: 'column', md: 'row' }} alignItems="center">
+        {/* <FilterKeyword
+          filterKeyword={filters.filterKeyword}
+          onChangeKeyword={handleChangeKeyword}
+        /> */}
+      </Stack>
+    </>
+  );
+
+  if (mdUp) {
+    return <Box sx={{ py: 5 }}>{renderFilters}</Box>;
+  }
+
+  return (
+    <>
+      <Stack alignItems="flex-end" sx={{ py: 3 }}>
+        <Button
+          color="inherit"
+          variant="contained"
+          startIcon={<Iconify icon="carbon:filter" width={18} />}
+          onClick={mobileOpen.onTrue}
+        >
+          Filters
+        </Button>
+      </Stack>
+
+      <Drawer
+        anchor="right"
+        open={mobileOpen.value}
+        onClose={mobileOpen.onFalse}
+        PaperProps={{
+          sx: { pt: 5, px: 3, width: 280 },
+        }}
+      >
+        {renderFilters}
+      </Drawer>
+    </>
+  );
+}

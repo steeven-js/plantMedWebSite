@@ -8,7 +8,7 @@ import { SplashScreen } from 'src/components/loading-screen';
 import { authRoutes } from './auth';
 import { errorRoutes } from './error';
 import { commonRoutes } from './common';
-import { planteRoutes } from './plante';
+import { planteMedRoutes } from './planteMed';
 import { componentsRoutes } from './components';
 
 // ----------------------------------------------------------------------
@@ -45,7 +45,7 @@ export default function Router() {
           ),
         },
 
-        ...planteRoutes,
+        ...planteMedRoutes,
 
         ...componentsRoutes,
 
