@@ -6,7 +6,7 @@ import { _tags } from './assets';
 const content = (name) => `
 <div>
 
-<p><img alt="alt marketing" src="/assets/images/${name}/${name}_post_02.jpg" /></p>
+<p><img alt="alt marketing" src="/assets/images/${name}/${name}_post_01.jpg" /></p>
 <br/>
 
 <p>Date d'entrée en vigueur : 05 Février 2024</p>
@@ -68,22 +68,22 @@ const content = (name) => `
 </div>`;
 
 const base = (index) => ({
-    id: _mock.id(index),
-    title: _mock.postTitle(index),
-    description: _mock.description(index),
-    category: 'Marketing',
-    favorited: _mock.boolean(index),
-    createdAt: _mock.time(index),
-    duration: '8 minutes read',
-    tags: _tags.slice(index + 1, index + 2),
-    author: {
-        name: 'Jacques Steeven',
-        role: 'CEO',
-        avatarUrl: _mock.image.avatar(index),
-        quotes: 'Membre depuis le 08 novembre 2023',
-        about:
-            'Concepteur développeur d\'application depuis 2022, je suis passionné par le développement d\'applications mobiles et web. Je suis également le créateur de PlantMed.',
-    },
+  id: _mock.id(index),
+  title: _mock.postTitle(index),
+  description: _mock.description(index),
+  category: 'Marketing',
+  favorited: _mock.boolean(index),
+  createdAt: _mock.time(index),
+  duration: '8 minutes read',
+  tags: _tags.slice(index + 1, index + 2),
+  author: {
+    name: 'Jacques Steeven',
+    role: 'CEO',
+    avatarUrl: _mock.image.avatar(index),
+    quotes: 'Membre depuis le 08 novembre 2023',
+    about:
+      'Concepteur développeur d\'application depuis 2022, je suis passionné par le développement d\'applications mobiles et web. Je suis également le créateur de PlantMed.',
+  },
 });
 
 const content2 = (name) => `
@@ -333,57 +333,57 @@ const content2 = (name) => `
 </div>`;
 
 const base2 = (index) => ({
-    id: _mock.id(index),
-    title: _mock.postTitle(index),
-    description: _mock.description(index),
-    category: 'Marketing',
-    favorited: _mock.boolean(index),
-    createdAt: _mock.time(index),
-    duration: '8 minutes read',
-    tags: _tags.slice(index + 1, index + 2),
-    author: {
-        name: 'Jacques Steeven',
-        role: 'CEO',
-        avatarUrl: _mock.image.avatar(index),
-        quotes: 'Membre depuis le 08 novembre 2023',
-        about:
-            'Concepteur développeur d\'application depuis 2022, je suis passionné par le développement d\'applications mobiles et web. Je suis également le créateur de PlantMed.',
-    },
+  id: _mock.id(index),
+  title: _mock.postTitle(index),
+  description: _mock.description(index),
+  category: 'Marketing',
+  favorited: _mock.boolean(index),
+  createdAt: _mock.time(index),
+  duration: '8 minutes read',
+  tags: _tags.slice(index + 1, index + 2),
+  author: {
+    name: 'Jacques Steeven',
+    role: 'CEO',
+    avatarUrl: _mock.image.avatar(index),
+    quotes: 'Membre depuis le 08 novembre 2023',
+    about:
+      'Concepteur développeur d\'application depuis 2022, je suis passionné par le développement d\'applications mobiles et web. Je suis également le créateur de PlantMed.',
+  },
 });
 
 // ----------------------------------------------------------------------
 
 export const _marketingPosts = [...Array(12)].map((_, index) => ({
-    ...base(index),
-    content: content('marketing'),
-    coverUrl: _mock.image.marketing(index),
-    heroUrl: `/assets/images/marketing/marketing_post_hero.jpg`,
+  ...base(index),
+  content: content('marketing'),
+  coverUrl: _mock.image.marketing(index),
+  heroUrl: `/assets/images/marketing/marketing_post_hero.jpg`,
 }));
 
 export const _travelPosts = [...Array(12)].map((_, index) => ({
-    ...base(index),
-    content: content('travel'),
-    coverUrl: _mock.image.travel(index),
-    heroUrl: `/assets/images/travel/travel_post_hero.jpg`,
+  ...base(index),
+  content: content('travel'),
+  coverUrl: _mock.image.travel(index),
+  heroUrl: `/assets/images/travel/travel_post_hero.jpg`,
 }));
 
 export const _plantePosts = [...Array(12)].map((_, index) => ({
-    ...base(index),
-    content: content('career'),
-    coverUrl: _mock.image.career(index),
-    heroUrl: `/assets/images/plante/plante_post_hero.jpg`,
+  ...base(index),
+  content: content('planteMed'),
+  coverUrl: _mock.image.planteMed(index),
+  heroUrl: `/assets/images/planteMed/planteMed_post_01.jpg`,
 }));
 
 export const _plantePosts2 = [...Array(12)].map((_, index) => ({
-    ...base2(index),
-    content2: content2('career'),
-    coverUrl: _mock.image.career(index),
-    heroUrl: `/assets/images/plante/plante_post_hero.jpg`,
+  ...base2(index),
+  content2: content2('planteMed'),
+  coverUrl: _mock.image.planteMed(index),
+  heroUrl: `/assets/images/planteMed/planteMed_post_01.jpg`,
 }));
 
 export const _coursePosts = [...Array(12)].map((_, index) => ({
-    ...base(index),
-    content: content('course'),
-    coverUrl: _mock.image.course(index),
-    heroUrl: `/assets/images/course/course_post_hero.jpg`,
+  ...base(index),
+  content: content('course'),
+  coverUrl: _mock.image.course(index),
+  heroUrl: `/assets/images/course/course_post_hero.jpg`,
 }));
