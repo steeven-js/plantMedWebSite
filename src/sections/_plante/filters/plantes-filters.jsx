@@ -27,6 +27,8 @@ export default function PlantesFilters() {
 
   const [filters, setFilters] = useState(defaultValues);
 
+  console.log('filters:', filters)
+
   const handleChangeKeyword = useCallback(
     (newValue) => {
       setFilters({

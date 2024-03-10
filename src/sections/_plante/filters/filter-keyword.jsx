@@ -4,17 +4,19 @@ import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import InputAdornment from '@mui/material/InputAdornment';
 
-import { _jobTitles } from 'src/_mock';
+import useFetchPlants from 'src/hooks/useFetchPlants';
 
 import Iconify from 'src/components/iconify';
 
 // ----------------------------------------------------------------------
 
 export default function FilterKeyword({ filterKeyword, onChangeKeyword, sx }) {
+  const { data } = useFetchPlants();
+
   return (
     <Autocomplete
       sx={{ width: 1 }}
-      options={_jobTitles}
+      options={data.map((item) => item.name)}
       getOptionLabel={(option) => option}
       value={filterKeyword}
       onChange={(event, value) => onChangeKeyword(value)}
