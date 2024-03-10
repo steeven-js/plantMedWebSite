@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { useState, useCallback } from 'react';
 
 import Box from '@mui/material/Box';
@@ -20,14 +21,12 @@ const defaultValues = {
   filterCategories: null,
 };
 
-export default function PlantesFilters() {
+export default function PlantesFilters({ onFiltersChange }) {
   const mdUp = useResponsive('up', 'md');
 
   const mobileOpen = useBoolean();
 
   const [filters, setFilters] = useState(defaultValues);
-
-  console.log('filters:', filters)
 
   const handleChangeKeyword = useCallback(
     (newValue) => {
@@ -35,8 +34,11 @@ export default function PlantesFilters() {
         ...filters,
         filterKeyword: newValue,
       });
+
+      // Call the callback function with the updated filters
+      onFiltersChange({ ...filters, filterKeyword: newValue });
     },
-    [filters]
+    [filters, onFiltersChange]
   );
 
   const handleChangeCategory = useCallback(
@@ -45,8 +47,11 @@ export default function PlantesFilters() {
         ...filters,
         filterCategories: newValue,
       });
+
+      // Call the callback function with the updated filters
+      onFiltersChange({ ...filters, filterCategories: newValue });
     },
-    [filters]
+    [filters, onFiltersChange]
   );
 
   const onReset = useCallback(() => {
@@ -129,3 +134,7 @@ export default function PlantesFilters() {
     </>
   );
 }
+
+PlantesFilters.propTypes = {
+  onFiltersChange: PropTypes.func,
+};

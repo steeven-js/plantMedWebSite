@@ -14,9 +14,9 @@ import PlantesFilters from '../filters/plantes-filters';
 
 export default function PlantesListView() {
   const loading = useBoolean(true);
-  const [filter, setFilter] = useState({ filterPlantes: null, filterCategories: null });
+  const [filter, setFilter] = useState({ filterKeyword: null, filterCategories: null });
 
-  // console.log('filter:', filter);
+  console.log('filter:', filter);
 
   useEffect(() => {
     const fakeLoading = async () => {
@@ -28,8 +28,9 @@ export default function PlantesListView() {
 
   return (
     <Container>
-      <PlantesFilters setFilter={setFilter} />
+      <PlantesFilters onFiltersChange={setFilter} />
       <PlantesList loading={loading.value} filter={filter} />
     </Container>
   );
 }
+
