@@ -59,7 +59,7 @@ export default function PlanteDownloadApp() {
           <Image
             disabledEffect
             alt="mobile app"
-            src="/assets/images/plante/download_app.png"
+            src="/assets/images/planteMed/download_app.png"
             sx={{
               maxWidth: 480,
             }}
