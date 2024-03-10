@@ -16,10 +16,17 @@ export default function NavList({ data, depth, slotProps }) {
 
   const pathname = usePathname();
 
+  // Vérifier si le chemin commence par "/plantmed/plante/"
   const isPlante = pathname.startsWith('/plantmed/plante/');
 
-  // Update the condition to check for both "isPlante" and the specific title condition
-  const active = useActiveLink(data.path, !!data.children) || (isPlante && data.title === 'Plantes');
+  // Vérifier si le chemin commence par "/plantmed/symptome/"
+  const isSymptome = pathname.startsWith('/plantmed/symptome/');
+
+  // Mettre à jour la condition pour vérifier à la fois "isPlante" et une condition spécifique pour le titre
+  const active = useActiveLink(data.path, !!data.children) ||
+    (isPlante && data.title === 'Plantes') ||
+    (isSymptome && data.title === 'Symptomes');
+
 
   // console.log('data.title:', data.title);
 

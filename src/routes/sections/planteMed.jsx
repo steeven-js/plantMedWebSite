@@ -11,6 +11,7 @@ import MainLayout from 'src/layouts/main';
 const PlantesPage = lazy(() => import('src/pages/plantmed/plantes'));
 const PlantePage = lazy(() => import('src/pages/plantmed/plante/[id]')); // Utilisation de [id] pour le paramètre dynamique
 const SymptomesPage = lazy(() => import('src/pages/plantmed/symptomes'));
+const SymptomePage = lazy(() => import('src/pages/plantmed/symptome/[id]')); // Utilisation de [id] pour le paramètre dynamique
 const LandingPage = lazy(() => import('src/pages/plantmed/landing'));
 const CguPage = lazy(() => import('src/pages/plantmed/legal/cgu'));
 const ConfidentialitePage = lazy(() => import('src/pages/plantmed/legal/confidentialite'));
@@ -40,6 +41,7 @@ export const planteMedRoutes = [
           { path: 'plantes', element: <PlantesPage /> },
           { path: 'plante/:id', element: <PlantePage /> }, // Utilisez :id pour spécifier le paramètre d'URL
           { path: 'symptomes', element: <SymptomesPage /> },
+          { path: 'symptome/:id', element: <SymptomePage /> }, // Utilisez :id pour spécifier le paramètre d'URL
           { path: 'legal/cgu', element: <CguPage /> },
           { path: 'legal/confidentialite', element: <ConfidentialitePage /> },
           { path: 'legal/source', element: <SourcePage /> },

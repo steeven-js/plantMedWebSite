@@ -25,7 +25,7 @@ export default function CustomBreadcrumbs({
 
   const pathname = usePathname();
 
-  const isPlante = pathname.startsWith('/plantmed/plante/');
+  const isCustom = pathname.startsWith('/plantmed/plante/') || pathname.startsWith('/plantmed/symptome/');
 
   return (
     <Box sx={{ ...sx }}>
@@ -33,7 +33,7 @@ export default function CustomBreadcrumbs({
         <Box
           sx={{
             padding: 1,
-            ...(isPlante && {
+            ...(isCustom && {
               backgroundColor: 'rgba(0, 0, 0, 0.7)',
             }),
           }}
