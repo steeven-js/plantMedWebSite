@@ -1,5 +1,7 @@
 import * as Yup from 'yup';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 
@@ -19,6 +21,10 @@ import FormProvider, { RHFTextField } from 'src/components/hook-form';
 import { auth } from "../../../firebase";
 
 export default function LoginBackgroundView() {
+  const navigate = useNavigate();
+
+  const [emailError, setEmailError] = useState('');
+  const [passwordError, setPasswordError] = useState('');
 
   const LoginSchema = Yup.object().shape({
     email: Yup.string().required('Email is required').email('Invalid email format'),
@@ -44,6 +50,10 @@ export default function LoginBackgroundView() {
   const onSubmit = handleSubmit(async (data) => {
     try {
 
+      // Clear previous error messages
+      setEmailError('');
+      setPasswordError('');
+
       await signInWithEmailAndPassword(auth, data.email, data.password);
 
       console.log('User successfully connected!');
@@ -51,8 +61,21 @@ export default function LoginBackgroundView() {
       // Reset input fields after successful authentication
       reset();
 
+      navigate("/");
+
     } catch (error) {
-      console.error('Connection error:', error.message);
+      console.error('Erreur de connexion :', error.message);
+
+      // Display error messages based on the type of error
+      if (error.code === 'auth/invalid-email') {
+        setEmailError('Adresse e-mail invalide');
+      } else if (error.code === 'auth/invalid-credential') {
+        setPasswordError('Mot de passe incorrect');
+      } else {
+        // Handle other types of errors
+        // Example: alert('Une erreur s\'est produite lors de la connexion');
+        // auth/too-many-requests]
+      }
     }
   });
 
@@ -100,6 +123,7 @@ export default function LoginBackgroundView() {
           label="Email address"
           value={methods.watch('email')}
         />
+        {emailError && (<Typography variant="body2" sx={{ color: 'error.main' }}>{emailError}</Typography>)}
 
         <RHFTextField
           name="password"
@@ -107,6 +131,7 @@ export default function LoginBackgroundView() {
           type="password"
           value={methods.watch('password')}
         />
+        {passwordError && (<Typography variant="body2" sx={{ color: 'error.main' }}>{passwordError}</Typography>)}
 
         <Link
           component={RouterLink}

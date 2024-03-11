@@ -1,4 +1,6 @@
 import PropTypes from 'prop-types';
+import { useState, useEffect } from 'react';
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
@@ -29,19 +31,29 @@ import { HEADER } from '../config-layout';
 import HeaderShadow from '../common/header-shadow';
 import SettingsButton from '../common/settings-button';
 
-
 // ----------------------------------------------------------------------
 
 export default function Header({ headerOnDark }) {
   const theme = useTheme();
-
   const pathname = usePathname();
-
   const isHome = pathname === '/';
-
   const offset = useOffSetTop();
-
   const mdUp = useResponsive('up', 'md');
+  const [user, setUser] = useState('')
+
+  useEffect(() => {
+    const auth = getAuth();
+    onAuthStateChanged(auth, (authUser) => {
+      if (authUser) {
+        const { uid } = authUser;
+        setUser(uid);
+        console.log('user is signed in');
+      } else {
+        setUser('');
+        console.log('user is signed out');
+      }
+    });
+  }, []);
 
   const renderContent = (
     <>
@@ -102,7 +114,7 @@ export default function Header({ headerOnDark }) {
 
           <IconButton
             component={RouterLink}
-            href='/plantmed/account/personal'
+            href={user ? '/plantmed/account/personal' : '/auth/login-background'}
             size="small"
             color="inherit"
             sx={{ p: 0 }}
@@ -112,18 +124,19 @@ export default function Header({ headerOnDark }) {
 
           <SettingsButton />
         </Stack>
-
-        <Button
-          variant="contained"
-          color="inherit"
-          href='/auth/login-background'
-          rel="noopener"
-          sx={{
-            display: { xs: 'none', md: 'inline-flex' },
-          }}
-        >
-          Se connecter
-        </Button>
+        {!user && (
+          <Button
+            variant="contained"
+            color="inherit"
+            href='/auth/login-background'
+            rel="noopener"
+            sx={{
+              display: { xs: 'none', md: 'inline-flex' },
+            }}
+          >
+            Se connecter
+          </Button>
+        )}
 
         {/* <Button
           variant="contained"
