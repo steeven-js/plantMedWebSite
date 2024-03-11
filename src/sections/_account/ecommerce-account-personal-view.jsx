@@ -1,6 +1,8 @@
 import * as Yup from 'yup';
+import { useEffect } from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm, Controller } from 'react-hook-form';
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
 
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
@@ -25,6 +27,23 @@ const GENDER_OPTIONS = ['Male', 'Female', 'Other'];
 
 export default function EcommerceAccountPersonalView() {
   const passwordShow = useBoolean();
+
+  useEffect(() => {
+    const auth = getAuth();
+
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user !== null) {
+        const { displayName, email, photoURL, emailVerified, uid } = user;
+        console.log('user', user, 'uid', uid, 'displayName', displayName, 'email', email, 'photoURL', photoURL, 'emailVerified', emailVerified);
+
+        // If you need to update the user state, uncomment the following line
+        // setUser(user);
+      }
+    });
+
+    // Cleanup the subscription when the component unmounts
+    return () => unsubscribe();
+  }, []); // No dependencies, as we are using the callback provided by onAuthStateChanged
 
   const EcommerceAccountPersonalSchema = Yup.object().shape({
     firstName: Yup.string().required('First name is required'),
