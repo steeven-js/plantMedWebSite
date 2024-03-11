@@ -1,6 +1,7 @@
 import * as Yup from 'yup';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 
 import Link from '@mui/material/Link';
 import Stack from '@mui/material/Stack';
@@ -18,6 +19,10 @@ import { useBoolean } from 'src/hooks/use-boolean';
 
 import Iconify from 'src/components/iconify';
 import FormProvider, { RHFTextField } from 'src/components/hook-form';
+
+// Firebase imports
+import firebase_app from "../../../firebase";
+
 
 // ----------------------------------------------------------------------
 

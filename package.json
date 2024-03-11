@@ -1,5 +1,5 @@
 {
-  "name": "@zone-kit/vite-js",
+  "name": "@zone-kit/vite",
   "author": "Minimals",
   "version": "2.4.0",
   "description": "Vite Starter & JavaScript",
@@ -22,6 +22,7 @@
     "@emotion/cache": "^11.11.0",
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
+    "@firebase/auth": "^1.6.1",
     "@hookform/resolvers": "^3.3.2",
     "@iconify/react": "^4.1.1",
     "@mui/lab": "^5.0.0-alpha.155",
@@ -30,6 +31,7 @@
     "@mui/x-date-pickers": "^6.18.4",
     "axios": "^1.6.7",
     "date-fns": "^2.30.0",
+    "firebase": "^10.8.1",
     "framer-motion": "^10.16.16",
     "google-map-react": "^2.2.1",
     "lodash.isequal": "^4.5.0",
@@ -71,5 +73,18 @@
     "typescript": "^5.3.3",
     "vite": "^5.0.7",
     "vite-plugin-checker": "^0.6.2"
-  }
+  },
+  "main": "firebase.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/steeven-js/vite-js.git"
+  },
+  "keywords": [
+    "admin"
+  ],
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/steeven-js/vite-js/issues"
+  },
+  "homepage": "https://github.com/steeven-js/vite-js#readme"
 }

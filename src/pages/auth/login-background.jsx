@@ -8,7 +8,7 @@ export default function LoginBackgroundPage() {
   return (
     <>
       <Helmet>
-        <title> Login: Background</title>
+        <title> PlantMed: Login</title>
       </Helmet>
 
       <LoginBackgroundView />

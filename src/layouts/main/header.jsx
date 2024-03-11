@@ -117,6 +117,18 @@ export default function Header({ headerOnDark }) {
         <Button
           variant="contained"
           color="inherit"
+          href='/auth/login-background'
+          rel="noopener"
+          sx={{
+            display: { xs: 'none', md: 'inline-flex' },
+          }}
+        >
+          Se connecter
+        </Button>
+
+        {/* <Button
+          variant="contained"
+          color="inherit"
           href='https://play.google.com/store/apps/details?id=com.monremede&pcampaignid=web_share'
           target="_blank"
           rel="noopener"
@@ -125,7 +137,7 @@ export default function Header({ headerOnDark }) {
           }}
         >
           Téléchargez
-        </Button>
+        </Button> */}
       </Stack>
 
       {!mdUp &&
