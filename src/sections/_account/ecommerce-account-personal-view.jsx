@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm, Controller } from 'react-hook-form';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import { getFirestore, collection, doc, setDoc } from "firebase/firestore";
 
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
@@ -30,24 +31,76 @@ export default function EcommerceAccountPersonalView() {
   const [userEemail, setUserEmail] = useState('')
 
   useEffect(() => {
-    const auth = getAuth();
+    const fetchData = async () => {
+      const auth = getAuth();
+      const db = getFirestore();
 
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if (user !== null) {
-        const { displayName, email, photoURL, emailVerified, uid } = user;
-        // console.log('user', user, 'uid', uid, 'displayName', displayName, 'email', email, 'photoURL', photoURL, 'emailVerified', emailVerified);
+      const unsubscribe = onAuthStateChanged(auth, async (user) => {
+        if (user !== null) {
+          const { displayName, email, photoURL, emailVerified, uid } = user;
+          // console.log('user', user, 'uid', uid, 'displayName', displayName, 'email', email, 'photoURL', photoURL, 'emailVerified', emailVerified);
 
-        // If you need to update the user state, uncomment the following line
-        // setUser(user);
+          // If you need to update the user state, uncomment the following line
+          // setUser(user);
 
-        // console.log('user.email', user.email);
-        setUserEmail(user.email);
-      }
-    });
+          // console.log('user.email', user.email);
+          setUserEmail(user.email);
+        }
 
-    // Cleanup the subscription when the component unmounts
-    return () => unsubscribe();
-  }, []); // No dependencies, as we are using the callback provided by onAuthStateChanged
+        const citiesRef = collection(db, "cities");
+
+        try {
+          await setDoc(doc(citiesRef, "SF"), {
+            name: "San Francisco",
+            state: "CA",
+            country: "USA",
+            capital: false,
+            population: 860000,
+            regions: ["west_coast", "norcal"]
+          });
+          await setDoc(doc(citiesRef, "LA"), {
+            name: "Los Angeles",
+            state: "CA",
+            country: "USA",
+            capital: false,
+            population: 3900000,
+            regions: ["west_coast", "socal"]
+          });
+          await setDoc(doc(citiesRef, "DC"), {
+            name: "Washington, D.C.",
+            state: null,
+            country: "USA",
+            capital: true,
+            population: 680000,
+            regions: ["east_coast"]
+          });
+          await setDoc(doc(citiesRef, "TOK"), {
+            name: "Tokyo",
+            state: null,
+            country: "Japan",
+            capital: true,
+            population: 9000000,
+            regions: ["kanto", "honshu"]
+          });
+          await setDoc(doc(citiesRef, "BJ"), {
+            name: "Beijing",
+            state: null,
+            country: "China",
+            capital: true,
+            population: 21500000,
+            regions: ["jingjinji", "hebei"]
+          });
+        } catch (error) {
+          console.error("Error setting documents:", error);
+        }
+      });
+
+      // Cleanup function
+      return () => unsubscribe();
+    };
+
+    fetchData();
+  }, []);
 
   const EcommerceAccountPersonalSchema = Yup.object().shape({
     firstName: Yup.string().required('First name is required'),
@@ -62,19 +115,19 @@ export default function EcommerceAccountPersonalView() {
   });
 
   const defaultValues = {
-    firstName: 'Jayvion',
-    lastName: 'Simon',
-    emailAddress: 'nannie_abernathy70@yahoo.com',
-    phoneNumber: '365-374-4961',
-    birthday: null,
-    gender: 'Male',
-    streetAddress: '',
-    zipCode: '',
-    city: '',
-    country: 'United States',
-    oldPassword: '',
-    newPassword: '',
-    confirmNewPassword: '',
+    // firstName: 'Jayvion',
+    // lastName: 'Simon',
+    // emailAddress: 'nannie_abernathy70@yahoo.com',
+    // phoneNumber: '365-374-4961',
+    // birthday: null,
+    // gender: 'Male',
+    // streetAddress: '',
+    // zipCode: '',
+    // city: '',
+    // country: 'United States',
+    // oldPassword: '',
+    // newPassword: '',
+    // confirmNewPassword: '',
   };
 
   const methods = useForm({
