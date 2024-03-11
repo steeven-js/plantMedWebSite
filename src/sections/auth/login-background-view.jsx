@@ -1,39 +1,28 @@
 import * as Yup from 'yup';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword } from 'firebase/auth';
 
 import Link from '@mui/material/Link';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import Divider from '@mui/material/Divider';
 import Typography from '@mui/material/Typography';
-import IconButton from '@mui/material/IconButton';
 import LoadingButton from '@mui/lab/LoadingButton';
-import InputAdornment from '@mui/material/InputAdornment';
 
 import { paths } from 'src/routes/paths';
 import { RouterLink } from 'src/routes/components';
 
-import { useBoolean } from 'src/hooks/use-boolean';
-
 import Iconify from 'src/components/iconify';
 import FormProvider, { RHFTextField } from 'src/components/hook-form';
 
-// Firebase imports
-import firebase_app from "../../../firebase";
-
-
-// ----------------------------------------------------------------------
+import { auth } from "../../../firebase";
 
 export default function LoginBackgroundView() {
-  const passwordShow = useBoolean();
 
   const LoginSchema = Yup.object().shape({
-    email: Yup.string().required('Email is required').email('That is not an email'),
-    password: Yup.string()
-      .required('Password is required')
-      .min(6, 'Password should be of minimum 6 characters length'),
+    email: Yup.string().required('Email is required').email('Invalid email format'),
+    password: Yup.string().required('Password is required').min(6, 'Password should be at least 6 characters'),
   });
 
   const defaultValues = {
@@ -54,11 +43,16 @@ export default function LoginBackgroundView() {
 
   const onSubmit = handleSubmit(async (data) => {
     try {
-      await new Promise((resolve) => setTimeout(resolve, 500));
+
+      await signInWithEmailAndPassword(auth, data.email, data.password);
+
+      console.log('User successfully connected!');
+
+      // Reset input fields after successful authentication
       reset();
-      console.log('DATA', data);
+
     } catch (error) {
-      console.error(error);
+      console.error('Connection error:', error.message);
     }
   });
 
@@ -101,21 +95,17 @@ export default function LoginBackgroundView() {
   const renderForm = (
     <FormProvider methods={methods} onSubmit={onSubmit}>
       <Stack spacing={2.5} alignItems="flex-end">
-        <RHFTextField name="email" label="Email address" />
+        <RHFTextField
+          name="email"
+          label="Email address"
+          value={methods.watch('email')}
+        />
 
         <RHFTextField
           name="password"
           label="Password"
-          type={passwordShow.value ? 'text' : 'password'}
-          InputProps={{
-            endAdornment: (
-              <InputAdornment position="end">
-                <IconButton onClick={passwordShow.onToggle} edge="end">
-                  <Iconify icon={passwordShow.value ? 'carbon:view' : 'carbon:view-off'} />
-                </IconButton>
-              </InputAdornment>
-            ),
-          }}
+          type="password"
+          value={methods.watch('password')}
         />
 
         <Link
