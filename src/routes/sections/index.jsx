@@ -9,6 +9,7 @@ import { authRoutes } from './auth';
 import { errorRoutes } from './error';
 import { commonRoutes } from './common';
 import { planteMedRoutes } from './planteMed';
+import { eCommerceRoutes } from './ecommerce';
 import { componentsRoutes } from './components';
 
 // ----------------------------------------------------------------------
@@ -46,6 +47,8 @@ export default function Router() {
         },
 
         ...planteMedRoutes,
+
+        ...eCommerceRoutes,
 
         ...componentsRoutes,
 

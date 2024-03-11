@@ -1,4 +1,6 @@
 import PropTypes from 'prop-types';
+import { signOut } from "firebase/auth";
+import { useNavigate } from 'react-router-dom';
 
 import Link from '@mui/material/Link';
 import Stack from '@mui/material/Stack';
@@ -10,7 +12,7 @@ import ListItemText from '@mui/material/ListItemText';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemButton from '@mui/material/ListItemButton';
 
-import { paths } from 'src/routes/paths';
+// import { paths } from 'src/routes/paths';
 import { useActiveLink } from 'src/routes/hooks';
 import { RouterLink } from 'src/routes/components';
 
@@ -21,33 +23,14 @@ import { _mock } from 'src/_mock';
 import Iconify from 'src/components/iconify';
 import TextMaxLine from 'src/components/text-max-line';
 
+import { auth } from '../../../firebase';
 // ----------------------------------------------------------------------
 
 const navigations = [
   {
     title: 'Personal Info',
-    path: paths.eCommerce.account.personal,
+    path: 'account/personal',
     icon: <Iconify icon="carbon:user" />,
-  },
-  {
-    title: 'Wishlist',
-    path: paths.eCommerce.account.wishlist,
-    icon: <Iconify icon="carbon:favorite" />,
-  },
-  {
-    title: 'Vouchers',
-    path: paths.eCommerce.account.vouchers,
-    icon: <Iconify icon="carbon:cut-out" />,
-  },
-  {
-    title: 'Orders',
-    path: paths.eCommerce.account.orders,
-    icon: <Iconify icon="carbon:document" />,
-  },
-  {
-    title: 'Payment',
-    path: paths.eCommerce.account.payment,
-    icon: <Iconify icon="carbon:purchase" />,
   },
 ];
 
@@ -55,6 +38,18 @@ const navigations = [
 
 export default function Nav({ open, onClose }) {
   const mdUp = useResponsive('up', 'md');
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    signOut(auth).then(() => {
+      // Sign-out successful.
+      navigate("/");
+      console.log("Signed out successfully")
+    }).catch((error) => {
+      // An error happened.
+      console.log("Error: ", error)
+    });
+  }
 
   const renderContent = (
     <Stack
@@ -121,6 +116,7 @@ export default function Nav({ open, onClose }) {
             primaryTypographyProps={{
               typography: 'body2',
             }}
+            onClick={handleLogout}
           />
         </ListItemButton>
       </Stack>

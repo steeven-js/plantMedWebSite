@@ -9,7 +9,6 @@ import Container from '@mui/material/Container';
 import { useTheme } from '@mui/material/styles';
 import IconButton from '@mui/material/IconButton';
 
-import { paths } from 'src/routes/paths';
 import { usePathname } from 'src/routes/hooks';
 import { RouterLink } from 'src/routes/components';
 
@@ -103,7 +102,7 @@ export default function Header({ headerOnDark }) {
 
           <IconButton
             component={RouterLink}
-            href={paths.eCommerce.account.personal}
+            href='/plantmed/account/personal'
             size="small"
             color="inherit"
             sx={{ p: 0 }}
