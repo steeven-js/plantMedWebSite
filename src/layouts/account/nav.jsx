@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
-import { signOut } from "firebase/auth";
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { getAuth, signOut, onAuthStateChanged } from 'firebase/auth';
 
 import Link from '@mui/material/Link';
 import Stack from '@mui/material/Stack';
@@ -39,6 +40,28 @@ const navigations = [
 export default function Nav({ open, onClose }) {
   const mdUp = useResponsive('up', 'md');
   const navigate = useNavigate();
+
+  const [userEemail, setUserEmail] = useState('')
+
+  useEffect(() => {
+    const auth = getAuth();
+
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user !== null) {
+        const { displayName, email, photoURL, emailVerified, uid } = user;
+        // console.log('user', user, 'uid', uid, 'displayName', displayName, 'email', email, 'photoURL', photoURL, 'emailVerified', emailVerified);
+
+        // If you need to update the user state, uncomment the following line
+        // setUser(user);
+
+        console.log('user.email', user.email);
+        setUserEmail(user.email);
+      }
+    });
+
+    // Cleanup the subscription when the component unmounts
+    return () => unsubscribe();
+  }, []); // No dependencies, as we are using the callback provided by onAuthStateChanged
 
   const handleLogout = () => {
     signOut(auth).then(() => {
@@ -85,7 +108,7 @@ export default function Nav({ open, onClose }) {
             Jayvion Simon
           </TextMaxLine>
           <TextMaxLine variant="body2" line={1} sx={{ color: 'text.secondary' }}>
-            nannie_abernathy70@yahoo.com
+            {userEemail}
           </TextMaxLine>
         </Stack>
       </Stack>

@@ -1,5 +1,5 @@
 import * as Yup from 'yup';
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm, Controller } from 'react-hook-form';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
@@ -27,6 +27,7 @@ const GENDER_OPTIONS = ['Male', 'Female', 'Other'];
 
 export default function EcommerceAccountPersonalView() {
   const passwordShow = useBoolean();
+  const [userEemail, setUserEmail] = useState('')
 
   useEffect(() => {
     const auth = getAuth();
@@ -34,10 +35,13 @@ export default function EcommerceAccountPersonalView() {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user !== null) {
         const { displayName, email, photoURL, emailVerified, uid } = user;
-        console.log('user', user, 'uid', uid, 'displayName', displayName, 'email', email, 'photoURL', photoURL, 'emailVerified', emailVerified);
+        // console.log('user', user, 'uid', uid, 'displayName', displayName, 'email', email, 'photoURL', photoURL, 'emailVerified', emailVerified);
 
         // If you need to update the user state, uncomment the following line
         // setUser(user);
+
+        // console.log('user.email', user.email);
+        setUserEmail(user.email);
       }
     });
 
@@ -110,7 +114,7 @@ export default function EcommerceAccountPersonalView() {
 
         <RHFTextField name="lastName" label="Last Name" />
 
-        <RHFTextField name="emailAddress" label="Email Address" />
+        <RHFTextField name="emailAddress" label="Email Address" value={userEemail} />
 
         <RHFTextField name="phoneNumber" label="Phone Number" />
 
