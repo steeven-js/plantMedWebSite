@@ -8,7 +8,7 @@ export default function RegisterBackgroundPage() {
   return (
     <>
       <Helmet>
-        <title> Register: Background</title>
+        <title> PlantMed: Inscription</title>
       </Helmet>
 
       <RegisterBackgroundView />

@@ -9,18 +9,25 @@ import Link from '@mui/material/Link';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import Divider from '@mui/material/Divider';
+import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import LoadingButton from '@mui/lab/LoadingButton';
+import InputAdornment from '@mui/material/InputAdornment';
 
 import { paths } from 'src/routes/paths';
 import { RouterLink } from 'src/routes/components';
+
+import { useBoolean } from 'src/hooks/use-boolean';
 
 import Iconify from 'src/components/iconify';
 import FormProvider, { RHFTextField } from 'src/components/hook-form';
 
 import { auth } from "../../../firebase";
 
+// ----------------------------------------------------------------------
+
 export default function LoginBackgroundView() {
+  const passwordShow = useBoolean();
   const navigate = useNavigate();
 
   const [emailError, setEmailError] = useState('');
@@ -58,7 +65,6 @@ export default function LoginBackgroundView() {
 
       console.log('User successfully connected!');
 
-      // Reset input fields after successful authentication
       reset();
 
       navigate("/");
@@ -72,7 +78,6 @@ export default function LoginBackgroundView() {
       } else if (error.code === 'auth/invalid-credential') {
         setPasswordError('Mot de passe incorrect');
       } else {
-        // Handle other types of errors
         // Example: alert('Une erreur s\'est produite lors de la connexion');
         // auth/too-many-requests]
       }
@@ -128,8 +133,17 @@ export default function LoginBackgroundView() {
         <RHFTextField
           name="password"
           label="Password"
-          type="password"
+          type={passwordShow.value ? 'text' : 'password'}
           value={methods.watch('password')}
+          InputProps={{
+            endAdornment: (
+              <InputAdornment position="end">
+                <IconButton onClick={passwordShow.onToggle} edge="end">
+                  <Iconify icon={passwordShow.value ? 'carbon:view' : 'carbon:view-off'} />
+                </IconButton>
+              </InputAdornment>
+            ),
+          }}
         />
         {passwordError && (<Typography variant="body2" sx={{ color: 'error.main' }}>{passwordError}</Typography>)}
 

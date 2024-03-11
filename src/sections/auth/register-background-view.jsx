@@ -1,6 +1,9 @@
 import * as Yup from 'yup';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
 
 import Link from '@mui/material/Link';
 import Stack from '@mui/material/Stack';
@@ -19,10 +22,17 @@ import { useBoolean } from 'src/hooks/use-boolean';
 import Iconify from 'src/components/iconify';
 import FormProvider, { RHFTextField } from 'src/components/hook-form';
 
+import { auth } from "../../../firebase";
+
 // ----------------------------------------------------------------------
 
 export default function RegisterBackgroundView() {
   const passwordShow = useBoolean();
+  const navigate = useNavigate();
+
+  const confirmPasswordShow = useBoolean();
+  const [emailError, setEmailError] = useState('');
+  const [passwordError, setPasswordError] = useState('');
 
   const RegisterSchema = Yup.object().shape({
     fullName: Yup.string()
@@ -35,7 +45,7 @@ export default function RegisterBackgroundView() {
       .min(6, 'Password should be of minimum 6 characters length'),
     confirmPassword: Yup.string()
       .required('Confirm password is required')
-      .oneOf([Yup.ref('password')], "Password's not match"),
+      .oneOf([Yup.ref('password')], "Passwords don't match"),
   });
 
   const defaultValues = {
@@ -58,11 +68,31 @@ export default function RegisterBackgroundView() {
 
   const onSubmit = handleSubmit(async (data) => {
     try {
-      await new Promise((resolve) => setTimeout(resolve, 500));
+
+      // Clear previous error messages
+      setEmailError('');
+      setPasswordError('');
+
+      await createUserWithEmailAndPassword(auth, data.email, data.password);
+
+      console.log('User created successfully!');
+
       reset();
-      console.log('DATA', data);
+
+      navigate("/");
+
     } catch (error) {
-      console.error(error);
+      console.error('Erreur de connexion :', error.message);
+
+      // Display error messages based on the type of error
+      if (error.code === 'auth/invalid-email') {
+        setEmailError('Adresse e-mail invalide');
+      } else if (error.code === 'auth/invalid-credential') {
+        setPasswordError('Mot de passe incorrect');
+      } else {
+        // Example: alert('Une erreur s\'est produite lors de la connexion');
+        // auth/too-many-requests]
+      }
     }
   });
 
@@ -107,12 +137,18 @@ export default function RegisterBackgroundView() {
       <Stack spacing={2.5}>
         <RHFTextField name="fullName" label="Full Name" />
 
-        <RHFTextField name="email" label="Email address" />
+        <RHFTextField
+          name="email"
+          label="Email address"
+          value={methods.watch('email')}
+        />
+        {emailError && (<Typography variant="body2" sx={{ color: 'error.main' }}>{emailError}</Typography>)}
 
         <RHFTextField
           name="password"
           label="Password"
           type={passwordShow.value ? 'text' : 'password'}
+          value={methods.watch('password')}
           InputProps={{
             endAdornment: (
               <InputAdornment position="end">
@@ -123,21 +159,24 @@ export default function RegisterBackgroundView() {
             ),
           }}
         />
+        {passwordError && (<Typography variant="body2" sx={{ color: 'error.main' }}>{passwordError}</Typography>)}
 
         <RHFTextField
           name="confirmPassword"
           label="Confirm Password"
-          type={passwordShow.value ? 'text' : 'password'}
+          type={confirmPasswordShow.value ? 'text' : 'password'}
+          value={methods.watch('confirmPassword')}
           InputProps={{
             endAdornment: (
               <InputAdornment position="end">
-                <IconButton onClick={passwordShow.onToggle} edge="end">
-                  <Iconify icon={passwordShow.value ? 'carbon:view' : 'carbon:view-off'} />
+                <IconButton onClick={confirmPasswordShow.onToggle} edge="end">
+                  <Iconify icon={confirmPasswordShow.value ? 'carbon:view' : 'carbon:view-off'} />
                 </IconButton>
               </InputAdornment>
             ),
           }}
         />
+        {passwordError && (<Typography variant="body2" sx={{ color: 'error.main' }}>{passwordError}</Typography>)}
 
         <LoadingButton
           fullWidth
