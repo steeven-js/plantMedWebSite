@@ -85,7 +85,7 @@ export default function VerifyView() {
 
       <Link
         component={RouterLink}
-        href={paths.loginCover}
+        href={paths.loginBackground}
         color="inherit"
         variant="subtitle2"
         sx={{
