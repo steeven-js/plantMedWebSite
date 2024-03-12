@@ -24,7 +24,6 @@ import { _mock } from 'src/_mock';
 import Iconify from 'src/components/iconify';
 import TextMaxLine from 'src/components/text-max-line';
 
-import { auth } from '../../../firebase';
 // ----------------------------------------------------------------------
 
 const navigations = [
@@ -41,38 +40,31 @@ export default function Nav({ open, onClose }) {
   const mdUp = useResponsive('up', 'md');
   const navigate = useNavigate();
 
-  const [userEemail, setUserEmail] = useState('')
+  const [userEmail, setUserEmail] = useState(''); // 2. Corrected variable name
 
   useEffect(() => {
     const auth = getAuth();
 
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user !== null) {
-        const { displayName, email, photoURL, emailVerified, uid } = user;
-        // console.log('user', user, 'uid', uid, 'displayName', displayName, 'email', email, 'photoURL', photoURL, 'emailVerified', emailVerified);
-
-        // If you need to update the user state, uncomment the following line
-        // setUser(user);
-
         console.log('user.email', user.email);
         setUserEmail(user.email);
       }
     });
 
-    // Cleanup the subscription when the component unmounts
     return () => unsubscribe();
-  }, []); // No dependencies, as we are using the callback provided by onAuthStateChanged
+  }, []);
 
   const handleLogout = () => {
-    signOut(auth).then(() => {
-      // Sign-out successful.
+    const auth = getAuth(); // Define auth using getAuth()
+    signOut(auth).then(() => { // Use auth here
       navigate("/");
-      console.log("Signed out successfully")
+      console.log("Signed out successfully");
     }).catch((error) => {
-      // An error happened.
-      console.log("Error: ", error)
+      console.log("Error: ", error);
     });
   }
+
 
   const renderContent = (
     <Stack
@@ -108,7 +100,7 @@ export default function Nav({ open, onClose }) {
             Jayvion Simon
           </TextMaxLine>
           <TextMaxLine variant="body2" line={1} sx={{ color: 'text.secondary' }}>
-            {userEemail}
+            {userEmail}
           </TextMaxLine>
         </Stack>
       </Stack>
