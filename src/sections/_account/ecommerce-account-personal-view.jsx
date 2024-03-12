@@ -53,8 +53,8 @@ export default function EcommerceAccountPersonalView() {
   const EcommerceAccountPersonalSchema = Yup.object().shape({
     firstName: Yup.string().required('First name is required'),
     lastName: Yup.string().required('Last name is required'),
-    emailAddress: Yup.string().required('Email address is required'),
     phoneNumber: Yup.string().required('Phone number is required'),
+    emailAddress: Yup.string().notRequired('Email address is required').email('Email must be a valid email address'),
     birthday: Yup.mixed().nullable().required('Birthday is required'),
     gender: Yup.string().required('Gender is required'),
     streetAddress: Yup.string().required('Street address is required'),
@@ -65,8 +65,8 @@ export default function EcommerceAccountPersonalView() {
   const defaultValues = {
     firstName: 'Jayvion',
     lastName: 'Simon',
-    emailAddress: 'nannie_abernathy70@yahoo.com',
     phoneNumber: '365-374-4961',
+    emailAddress: userEmail,
     birthday: null,
     gender: 'Male',
     streetAddress: '',
@@ -115,7 +115,7 @@ export default function EcommerceAccountPersonalView() {
 
         <RHFTextField name="lastName" label="Last Name" />
 
-        <RHFTextField name="emailAddress" label="Email Address" />
+        <RHFTextField name="emailAddress" label="Email Address" value={userEmail} disabled />
 
         <RHFTextField name="phoneNumber" label="Phone Number" />
 
