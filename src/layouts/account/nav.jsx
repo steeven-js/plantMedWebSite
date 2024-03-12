@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getAuth, signOut, onAuthStateChanged } from 'firebase/auth';
+import { signOut, onAuthStateChanged } from 'firebase/auth';
 
 import Link from '@mui/material/Link';
 import Stack from '@mui/material/Stack';
@@ -24,6 +24,7 @@ import { _mock } from 'src/_mock';
 import Iconify from 'src/components/iconify';
 import TextMaxLine from 'src/components/text-max-line';
 
+import { auth } from '../../../firebase';
 // ----------------------------------------------------------------------
 
 const navigations = [
@@ -40,14 +41,14 @@ export default function Nav({ open, onClose }) {
   const mdUp = useResponsive('up', 'md');
   const navigate = useNavigate();
 
-  const [userEmail, setUserEmail] = useState(''); // 2. Corrected variable name
+  const [userEemail, setUserEmail] = useState('')
 
   useEffect(() => {
-    const auth = getAuth();
+    const getAuthInstance = auth;
 
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
+    const unsubscribe = onAuthStateChanged(getAuthInstance, (user) => {
       if (user !== null) {
-        console.log('user.email', user.email);
+        // console.log('user.email', user.email);
         setUserEmail(user.email);
       }
     });
@@ -56,15 +57,16 @@ export default function Nav({ open, onClose }) {
   }, []);
 
   const handleLogout = () => {
-    const auth = getAuth(); // Define auth using getAuth()
-    signOut(auth).then(() => { // Use auth here
+    const getAuthInstance = auth;
+    signOut(getAuthInstance).then(() => {
+      // Sign-out successful.
       navigate("/");
-      console.log("Signed out successfully");
+      console.log("Signed out successfully")
     }).catch((error) => {
-      console.log("Error: ", error);
+      // An error happened.
+      console.log("Error: ", error)
     });
   }
-
 
   const renderContent = (
     <Stack
@@ -100,7 +102,7 @@ export default function Nav({ open, onClose }) {
             Jayvion Simon
           </TextMaxLine>
           <TextMaxLine variant="body2" line={1} sx={{ color: 'text.secondary' }}>
-            {userEmail}
+            {userEemail}
           </TextMaxLine>
         </Stack>
       </Stack>
