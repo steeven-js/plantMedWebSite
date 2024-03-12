@@ -59,7 +59,7 @@ export default function EcommerceAccountPersonalView() {
   const defaultValues = {
     firstName: 'Jayvion',
     lastName: 'Simon',
-    emailAddress: 'nannie_abernathy70@yahoo.com',
+    emailAddress: userEmail,
     phoneNumber: '365-374-4961',
     birthday: null,
     gender: 'Male',
@@ -109,7 +109,7 @@ export default function EcommerceAccountPersonalView() {
 
         <RHFTextField name="lastName" label="Last Name" />
 
-        <RHFTextField name="emailAddress" label="Email Address" />
+        <RHFTextField name="emailAddress" label="Email Address" value={userEmail} />
 
         <RHFTextField name="phoneNumber" label="Phone Number" />
 
