@@ -1,8 +1,8 @@
 import * as Yup from 'yup';
 import { useState, useEffect } from 'react';
-import { doc, setDoc } from "firebase/firestore";
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm, Controller } from 'react-hook-form';
+import { doc, getDoc, setDoc } from "firebase/firestore";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 import Box from '@mui/material/Box';
@@ -36,13 +36,26 @@ export default function EcommerceAccountPersonalView() {
   const auth = getAuth();
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
       if (user) {
         const { uid, email } = user;
         setUserId(uid);
         setUserEmail(email);
-        console.log('uid', userId);
-        console.log('User signed in with email:', userEmail);
+        console.log('User signed in with email:', email);
+
+        try {
+          const userProfileRef = doc(db, "userProfile", uid); // Reference to the document in "userProfile" collection with UID as document ID
+          const userProfileSnapshot = await getDoc(userProfileRef); // Fetch the document snapshot
+          if (userProfileSnapshot.exists()) {
+            const userProfileData = userProfileSnapshot.data(); // Extract the data from the snapshot
+            console.log('User profile:', userProfileData);
+            // Here you can update state or perform any other actions with the user profile data
+          } else {
+            console.log('User profile does not exist');
+          }
+        } catch (error) {
+          console.error('Error fetching user profile:', error);
+        }
       } else {
         setUserEmail('');
         console.log('User signed out');
@@ -51,7 +64,8 @@ export default function EcommerceAccountPersonalView() {
 
     // Cleanup function
     return () => unsubscribe();
-  }, [auth, userId, userEmail]);
+  }, [auth]);
+
 
   const EcommerceAccountPersonalSchema = Yup.object().shape({
     firstName: Yup.string().required('First name is required'),
