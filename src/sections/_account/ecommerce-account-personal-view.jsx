@@ -1,5 +1,6 @@
 import * as Yup from 'yup';
 import { useState, useEffect } from 'react';
+import { doc, setDoc } from "firebase/firestore";
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm, Controller } from 'react-hook-form';
 import { getAuth, onAuthStateChanged } from "firebase/auth";
@@ -19,6 +20,8 @@ import { countries } from 'src/assets/data';
 import Iconify from 'src/components/iconify';
 import FormProvider, { RHFSelect, RHFTextField, RHFAutocomplete } from 'src/components/hook-form';
 
+import { db } from '../../../firebase';
+
 // ----------------------------------------------------------------------
 
 const GENDER_OPTIONS = ['Male', 'Female', 'Other'];
@@ -27,28 +30,28 @@ const GENDER_OPTIONS = ['Male', 'Female', 'Other'];
 
 export default function EcommerceAccountPersonalView() {
   const passwordShow = useBoolean();
+  const [userId, setUserId] = useState('');
   const [userEmail, setUserEmail] = useState('');
-  const [authLoaded, setAuthLoaded] = useState(false);
 
   const auth = getAuth();
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
-        const { email } = user;
+        const { uid, email } = user;
+        setUserId(uid);
         setUserEmail(email);
+        console.log('uid', userId);
         console.log('User signed in with email:', userEmail);
       } else {
         setUserEmail('');
         console.log('User signed out');
       }
-      setAuthLoaded(true);
-      console.log('authLoaded', authLoaded);
     });
 
     // Cleanup function
     return () => unsubscribe();
-  }, [auth, userEmail, authLoaded]);
+  }, [auth, userId, userEmail]);
 
   const EcommerceAccountPersonalSchema = Yup.object().shape({
     firstName: Yup.string().required('First name is required'),
@@ -91,13 +94,26 @@ export default function EcommerceAccountPersonalView() {
 
   const onSubmit = handleSubmit(async (data) => {
     try {
-      await new Promise((resolve) => setTimeout(resolve, 500));
+      const userProfileRef = doc(db, "userProfile", userId); // Reference to the document in "userProfile" collection with userId as document ID
+      await setDoc(userProfileRef, { // Set data on the document reference
+        firstName: data.firstName,
+        lastName: data.lastName,
+        emailAddress: data.emailAddress,
+        phoneNumber: data.phoneNumber,
+        birthday: data.birthday,
+        gender: data.gender,
+        streetAddress: data.streetAddress,
+        city: data.city,
+        zipCode: data.zipCode,
+        country: data.country,
+      });
       reset();
-      console.log('DATA', data);
+      console.log('Form submitted successfully:', data);
     } catch (error) {
-      console.error(error);
+      console.error('Form submission error:', error);
     }
   });
+
 
   return (
     <FormProvider methods={methods} onSubmit={onSubmit}>
