@@ -1,5 +1,5 @@
 import * as Yup from 'yup';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm, Controller } from 'react-hook-form';
 import { getAuth, onAuthStateChanged } from "firebase/auth";
@@ -28,21 +28,27 @@ const GENDER_OPTIONS = ['Male', 'Female', 'Other'];
 export default function EcommerceAccountPersonalView() {
   const passwordShow = useBoolean();
   const [userEmail, setUserEmail] = useState('');
+  const [authLoaded, setAuthLoaded] = useState(false);
 
   const auth = getAuth();
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      // User is signed in, see docs for a list of available properties
-      // https://firebase.google.com/docs/reference/js/auth.user
-      const { uid, email } = user;
-      setUserEmail(email);
-      console.log('email', userEmail, 'uid', uid);
-      // ...
-    } else {
-      // User is signed out
-      console.log('user is signed out');
-    }
-  });
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        const { email } = user;
+        setUserEmail(email);
+        console.log('User signed in with email:', userEmail);
+      } else {
+        setUserEmail('');
+        console.log('User signed out');
+      }
+      setAuthLoaded(true);
+      console.log('authLoaded', authLoaded);
+    });
+
+    // Cleanup function
+    return () => unsubscribe();
+  }, [auth, userEmail, authLoaded]);
 
   const EcommerceAccountPersonalSchema = Yup.object().shape({
     firstName: Yup.string().required('First name is required'),
@@ -59,7 +65,7 @@ export default function EcommerceAccountPersonalView() {
   const defaultValues = {
     firstName: 'Jayvion',
     lastName: 'Simon',
-    emailAddress: userEmail,
+    emailAddress: 'nannie_abernathy70@yahoo.com',
     phoneNumber: '365-374-4961',
     birthday: null,
     gender: 'Male',
@@ -109,7 +115,7 @@ export default function EcommerceAccountPersonalView() {
 
         <RHFTextField name="lastName" label="Last Name" />
 
-        <RHFTextField name="emailAddress" label="Email Address" value={userEmail} />
+        <RHFTextField name="emailAddress" label="Email Address" />
 
         <RHFTextField name="phoneNumber" label="Phone Number" />
 
