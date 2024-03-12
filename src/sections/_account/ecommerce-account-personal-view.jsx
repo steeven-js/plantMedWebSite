@@ -1,6 +1,8 @@
 import * as Yup from 'yup';
+import { useState } from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm, Controller } from 'react-hook-form';
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
@@ -25,6 +27,22 @@ const GENDER_OPTIONS = ['Male', 'Female', 'Other'];
 
 export default function EcommerceAccountPersonalView() {
   const passwordShow = useBoolean();
+  const [userEmail, setUserEmail] = useState('');
+
+  const auth = getAuth();
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      // User is signed in, see docs for a list of available properties
+      // https://firebase.google.com/docs/reference/js/auth.user
+      const { uid, email } = user;
+      setUserEmail(email);
+      console.log('email', userEmail, 'uid', uid);
+      // ...
+    } else {
+      // User is signed out
+      console.log('user is signed out');
+    }
+  });
 
   const EcommerceAccountPersonalSchema = Yup.object().shape({
     firstName: Yup.string().required('First name is required'),
