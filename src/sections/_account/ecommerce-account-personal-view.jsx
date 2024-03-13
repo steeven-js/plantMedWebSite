@@ -83,6 +83,7 @@ export default function EcommerceAccountPersonalView() {
     return () => unsubscribe();
   }, [auth]);
 
+  console.log('userBirthday:', userBirthday);
 
   const EcommerceAccountPersonalSchema = Yup.object().shape({
     firstName: Yup.string().required('First name is required'),
@@ -111,16 +112,6 @@ export default function EcommerceAccountPersonalView() {
     newPassword: '',
     confirmNewPassword: '',
   };
-  // const [userFirstName, setUserFirstName] = useState('');
-  // const [userLastName, setUserLastName] = useState('');
-  // const [userPhoneNumber, setUserPhoneNumber] = useState('');
-  // const [userEmail, setUserEmail] = useState('');
-  // const [userBirthday, setUserBirthday] = useState('');
-  // const [userGender, setUserGender] = useState('');
-  // const [userStreetAddress, setUserStreetAddress] = useState('');
-  // const [userZipCode, setUserZipCode] = useState('');
-  // const [userCity, setUserCity] = useState('');
-  // const [userCountry, setUserCountry] = useState('');
 
   const methods = useForm({
     resolver: yupResolver(EcommerceAccountPersonalSchema),
