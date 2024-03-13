@@ -46,19 +46,19 @@ const preset01 = {
 
 const preset02 = {
   primary: {
-    lighter: '#D0FCE0',
-    light: '#72F2B9',
-    main: '#1AD5A6',
-    dark: '#0D9991',
-    darker: '#045966',
-    contrastText: grey[800],
+    lighter: '#FEE9D1',
+    light: '#FDAB76',
+    main: '#FA541C',
+    dark: '#B3200E',
+    darker: '#770508',
+    contrastText: '#FFFFFF',
   },
   secondary: {
-    lighter: '#D6E5FD',
-    light: '#85A9F3',
-    main: '#3562D7',
-    dark: '#1A369A',
-    darker: '#0A1967',
+    lighter: '#E6DBFE',
+    light: '#B195FE',
+    main: '#754FFE',
+    dark: '#4027B6',
+    darker: '#1C0F79',
     contrastText: '#FFFFFF',
   },
 };
@@ -84,12 +84,12 @@ const preset03 = {
 
 const preset04 = {
   primary: {
-    lighter: '#C8FAD6',
-    light: '#5BE49B',
-    main: '#00A76F',
-    dark: '#007867',
-    darker: '#004B50',
-    contrastText: '#FFFFFF',
+  lighter: '#FEE9D1',
+  light: '#FDAB76',
+  main: '#FA541C',
+  dark: '#B3200E',
+  darker: '#770508',
+  contrastText: '#FFFFFF',
   },
   secondary: {
     lighter: '#FEEFD5',
