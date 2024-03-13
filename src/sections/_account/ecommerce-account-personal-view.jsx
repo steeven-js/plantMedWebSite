@@ -31,7 +31,16 @@ const GENDER_OPTIONS = ['Male', 'Female', 'Other'];
 export default function EcommerceAccountPersonalView() {
   const passwordShow = useBoolean();
   const [userId, setUserId] = useState('');
+  const [userFirstName, setUserFirstName] = useState('');
+  const [userPhoneNumber, setUserPhoneNumber] = useState('');
+  const [userLastName, setUserLastName] = useState('');
   const [userEmail, setUserEmail] = useState('');
+  const [userBirthday, setUserBirthday] = useState('');
+  const [userGender, setUserGender] = useState('');
+  const [userStreetAddress, setUserStreetAddress] = useState('');
+  const [userZipCode, setUserZipCode] = useState('');
+  const [userCity, setUserCity] = useState('');
+  const [userCountry, setUserCountry] = useState('');
 
   const auth = getAuth();
 
@@ -49,7 +58,15 @@ export default function EcommerceAccountPersonalView() {
           if (userProfileSnapshot.exists()) {
             const userProfileData = userProfileSnapshot.data(); // Extract the data from the snapshot
             console.log('User profile:', userProfileData);
-            // Here you can update state or perform any other actions with the user profile data
+            setUserFirstName(userProfileData.firstName)
+            setUserLastName(userProfileData.lastName)
+            setUserPhoneNumber(userProfileData.phoneNumber)
+            setUserBirthday(userProfileData.birthday)
+            setUserGender(userProfileData.gender)
+            setUserStreetAddress(userProfileData.streetAddress)
+            setUserZipCode(userProfileData.zipCode)
+            setUserCity(userProfileData.city)
+            setUserCountry(userProfileData.country)
           } else {
             console.log('User profile does not exist');
           }
@@ -79,25 +96,35 @@ export default function EcommerceAccountPersonalView() {
     zipCode: Yup.string().required('Zip code is required'),
   });
 
-  const defaultValues = {
-    firstName: 'Jayvion',
-    lastName: 'Simon',
-    phoneNumber: '365-374-4961',
+  const values = {
+    firstName: userFirstName,
+    lastName: userLastName,
+    phoneNumber: userPhoneNumber,
     emailAddress: userEmail,
     birthday: null,
-    gender: 'Male',
-    streetAddress: '',
-    zipCode: '',
-    city: '',
-    country: 'United States',
+    gender: userGender,
+    streetAddress: userStreetAddress,
+    zipCode: userZipCode,
+    city: userCity,
+    country: userCountry,
     oldPassword: '',
     newPassword: '',
     confirmNewPassword: '',
   };
+  // const [userFirstName, setUserFirstName] = useState('');
+  // const [userLastName, setUserLastName] = useState('');
+  // const [userPhoneNumber, setUserPhoneNumber] = useState('');
+  // const [userEmail, setUserEmail] = useState('');
+  // const [userBirthday, setUserBirthday] = useState('');
+  // const [userGender, setUserGender] = useState('');
+  // const [userStreetAddress, setUserStreetAddress] = useState('');
+  // const [userZipCode, setUserZipCode] = useState('');
+  // const [userCity, setUserCity] = useState('');
+  // const [userCountry, setUserCountry] = useState('');
 
   const methods = useForm({
     resolver: yupResolver(EcommerceAccountPersonalSchema),
-    defaultValues,
+    values,
   });
 
   const {
@@ -108,19 +135,19 @@ export default function EcommerceAccountPersonalView() {
 
   const onSubmit = handleSubmit(async (data) => {
     try {
-      const userProfileRef = doc(db, "userProfile", userId); // Reference to the document in "userProfile" collection with userId as document ID
-      await setDoc(userProfileRef, { // Set data on the document reference
-        firstName: data.firstName,
-        lastName: data.lastName,
-        emailAddress: data.emailAddress,
-        phoneNumber: data.phoneNumber,
-        birthday: data.birthday,
-        gender: data.gender,
-        streetAddress: data.streetAddress,
-        city: data.city,
-        zipCode: data.zipCode,
-        country: data.country,
-      });
+      // const userProfileRef = doc(db, "userProfile", userId);
+      // await setDoc(userProfileRef, {
+      //   firstName: data.firstName,
+      //   lastName: data.lastName,
+      //   emailAddress: data.emailAddress,
+      //   phoneNumber: data.phoneNumber,
+      //   birthday: data.birthday,
+      //   gender: data.gender,
+      //   streetAddress: data.streetAddress,
+      //   city: data.city,
+      //   zipCode: data.zipCode,
+      //   country: data.country,
+      // });
       reset();
       console.log('Form submitted successfully:', data);
     } catch (error) {
@@ -162,6 +189,7 @@ export default function EcommerceAccountPersonalView() {
               }}
               {...field}
               value={field.value}
+              format="dd/MM/yyyy"
             />
           )}
         />
