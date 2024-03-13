@@ -1,9 +1,8 @@
 import * as Yup from 'yup';
-import { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
+import { doc, setDoc } from "firebase/firestore";
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm, Controller } from 'react-hook-form';
-import { doc, getDoc, setDoc } from "firebase/firestore";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
@@ -18,7 +17,6 @@ import { useBoolean } from 'src/hooks/use-boolean';
 import { countries } from 'src/assets/data';
 
 import Iconify from 'src/components/iconify';
-import { SplashScreen } from 'src/components/loading-screen';
 import FormProvider, { RHFSelect, RHFTextField, RHFAutocomplete } from 'src/components/hook-form';
 
 import { db } from '../../../firebase';
@@ -29,65 +27,13 @@ const GENDER_OPTIONS = ['Male', 'Female', 'Other'];
 
 // ----------------------------------------------------------------------
 
-export default function EcommerceAccountPersonalView() {
-  const [isLoading, setIsLoading] = useState(true);
+export default function EcommerceAccountPersonalView({ userId, userEmail, userData }) {
   const passwordShow = useBoolean();
-  const [userId, setUserId] = useState('');
-  const [userFirstName, setUserFirstName] = useState('');
-  const [userPhoneNumber, setUserPhoneNumber] = useState('');
-  const [userLastName, setUserLastName] = useState('');
-  const [userEmail, setUserEmail] = useState('');
-  const [userBirthday, setUserBirthday] = useState('');
-  const [userGender, setUserGender] = useState('');
-  const [userStreetAddress, setUserStreetAddress] = useState('');
-  const [userZipCode, setUserZipCode] = useState('');
-  const [userCity, setUserCity] = useState('');
-  const [userCountry, setUserCountry] = useState('');
 
-  const auth = getAuth();
-
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, async (user) => {
-      if (user) {
-        const { uid, email } = user;
-        setUserId(uid);
-        setUserEmail(email);
-
-        try {
-          const userProfileRef = doc(db, "userProfile", uid); // Reference to the document in "userProfile" collection with UID as document ID
-          const userProfileSnapshot = await getDoc(userProfileRef); // Fetch the document snapshot
-          if (userProfileSnapshot.exists()) {
-            const userProfileData = userProfileSnapshot.data(); // Extract the data from the snapshot
-            setUserFirstName(userProfileData.firstName)
-            setUserLastName(userProfileData.lastName)
-            setUserPhoneNumber(userProfileData.phoneNumber)
-            setUserBirthday(userProfileData.birthday)
-            setUserGender(userProfileData.gender)
-            setUserStreetAddress(userProfileData.streetAddress)
-            setUserZipCode(userProfileData.zipCode)
-            setUserCity(userProfileData.city)
-            setUserCountry(userProfileData.country)
-          } else {
-            console.log('User profile does not exist');
-          }
-        } catch (error) {
-          console.error('Error fetching user profile:', error);
-        } finally {
-          setIsLoading(false); // Set isLoading to false after fetching data, regardless of success or failure
-        }
-      } else {
-        setUserEmail('');
-        console.log('User signed out');
-        setIsLoading(false); // Set isLoading to false if user is signed out
-      }
-    });
-
-    // Cleanup function
-    return () => unsubscribe();
-  }, [auth]);
+  // console.log('userId, userEmail, onUserDataLoaded:', userId, userEmail, userData);
 
   // Convert the Firebase _Timestamp to a Date object
-  const userBirthdayDate = new Date(userBirthday.seconds * 1000 + userBirthday.nanoseconds / 1000000);
+  const userBirthdayDate = new Date(userData.birthday.seconds * 1000 + userData.birthday.nanoseconds / 1000000);
 
   // console.log('userBirthday:', userBirthdayDate);
 
@@ -99,21 +45,21 @@ export default function EcommerceAccountPersonalView() {
     birthday: Yup.mixed().nullable().required('Birthday is required'),
     gender: Yup.string().required('Gender is required'),
     streetAddress: Yup.string().required('Street address is required'),
-    city: Yup.string().required('City is required'),
     zipCode: Yup.string().required('Zip code is required'),
+    city: Yup.string().required('City is required'),
   });
 
   const values = {
-    firstName: userFirstName,
-    lastName: userLastName,
-    phoneNumber: userPhoneNumber,
+    firstName: userData.firstName,
+    lastName: userData.lastName,
+    phoneNumber: userData.phoneNumber,
     emailAddress: userEmail,
     birthday: userBirthdayDate,
-    gender: userGender,
-    streetAddress: userStreetAddress,
-    zipCode: userZipCode,
-    city: userCity,
-    country: userCountry,
+    gender: userData.gender,
+    streetAddress: userData.streetAddress,
+    zipCode: userData.zipCode,
+    city: userData.city,
+    country: userData.country,
     oldPassword: '',
     newPassword: '',
     confirmNewPassword: '',
@@ -151,10 +97,6 @@ export default function EcommerceAccountPersonalView() {
       console.error('Form submission error:', error);
     }
   });
-
-  if (isLoading) {
-    return <SplashScreen />
-  }
 
   return (
     <FormProvider methods={methods} onSubmit={onSubmit}>
@@ -280,3 +222,9 @@ export default function EcommerceAccountPersonalView() {
     </FormProvider>
   );
 }
+
+EcommerceAccountPersonalView.propTypes = {
+  userId: PropTypes.string,
+  userEmail: PropTypes.string,
+  userData: PropTypes.object,
+};
