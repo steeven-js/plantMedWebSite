@@ -149,7 +149,6 @@ export default function EcommerceAccountPersonalView() {
     }
   });
 
-
   return (
     <FormProvider methods={methods} onSubmit={onSubmit}>
       <Typography variant="h5" sx={{ mb: 3 }}>
