@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
-import { useState, useEffect } from 'react';
+import { signOut } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
-import { signOut, onAuthStateChanged } from 'firebase/auth';
 
 import Link from '@mui/material/Link';
 import Stack from '@mui/material/Stack';
@@ -29,7 +28,7 @@ import { auth } from '../../../firebase';
 
 const navigations = [
   {
-    title: 'Personal Info',
+    title: 'Info Personnelles',
     path: 'account/personal',
     icon: <Iconify icon="carbon:user" />,
   },
@@ -37,24 +36,9 @@ const navigations = [
 
 // ----------------------------------------------------------------------
 
-export default function Nav({ open, onClose }) {
+export default function Nav({ open, onClose, userData, userEmail }) {
   const mdUp = useResponsive('up', 'md');
   const navigate = useNavigate();
-
-  const [userEemail, setUserEmail] = useState('')
-
-  useEffect(() => {
-    const getAuthInstance = auth;
-
-    const unsubscribe = onAuthStateChanged(getAuthInstance, (user) => {
-      if (user !== null) {
-        // console.log('user.email', user.email);
-        setUserEmail(user.email);
-      }
-    });
-
-    return () => unsubscribe();
-  }, []);
 
   const handleLogout = () => {
     const getAuthInstance = auth;
@@ -93,16 +77,16 @@ export default function Nav({ open, onClose }) {
             }}
           >
             <Iconify icon="carbon:edit" sx={{ mr: 1 }} />
-            Change photo
+            Changer la photo
           </Stack>
         </Stack>
 
         <Stack spacing={0.5}>
           <TextMaxLine variant="subtitle1" line={1}>
-            Jayvion Simon
+            {userData.firstName} {userData.lastName}
           </TextMaxLine>
           <TextMaxLine variant="body2" line={1} sx={{ color: 'text.secondary' }}>
-            {userEemail}
+            {userEmail}
           </TextMaxLine>
         </Stack>
       </Stack>
@@ -129,7 +113,7 @@ export default function Nav({ open, onClose }) {
             <Iconify icon="carbon:logout" />
           </ListItemIcon>
           <ListItemText
-            primary="Logout"
+            primary="Déconnexion"
             primaryTypographyProps={{
               typography: 'body2',
             }}
@@ -164,6 +148,8 @@ export default function Nav({ open, onClose }) {
 Nav.propTypes = {
   onClose: PropTypes.func,
   open: PropTypes.bool,
+  userData: PropTypes.object,
+  userEmail: PropTypes.string,
 };
 
 // ----------------------------------------------------------------------
