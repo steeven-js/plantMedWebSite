@@ -1,8 +1,7 @@
-import { useState } from 'react';
-import { getStorage, ref as storageRef, uploadBytes } from 'firebase/storage';
 import PropTypes from 'prop-types';
 import { signOut } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
+import { ref, getStorage, uploadBytes } from "firebase/storage";
 
 import Link from '@mui/material/Link';
 import Stack from '@mui/material/Stack';
@@ -39,36 +38,29 @@ const navigations = [
 // ----------------------------------------------------------------------
 
 
-export default function Nav({ open, onClose, userData, userEmail }) {
+export default function Nav({ open, onClose, userId, userData, userEmail }) {
   const navigate = useNavigate();
   const mdUp = useResponsive('up', 'md');
 
-  const storage = getStorage(); // Initialiser Firestore Storage
-
-  // Générer une suite de caractères aléatoires pour le nom de l'avatar
-  const randomString = (length) => {
-    const chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    let result = '';
-    for (let i = length; i > 0; --i) {
-      result += chars[Math.floor(Math.random() * chars.length)];
-    }
-    return result;
-  };
-
   const handleImageUpload = async (event) => {
     const selectedImage = event.target.files[0];
-    const fileName = selectedImage.name;
-    const fileExtension = fileName.split('.').pop(); // Extraire l'extension du fichier
-    const chars = randomString(50); // Génère une chaîne aléatoire de longueur 10
-    const userStorageRef = storageRef(storage, `avatars/${chars}.${fileExtension}`); // Utilisez le bon chemin pour stocker les avatars avec l'extension
-    console.log('userStorageRef :', userStorageRef);
+
     try {
-      await uploadBytes(userStorageRef, selectedImage);
-      console.log('Image envoyée avec succès à Firestore Storage.');
+      const storage = getStorage();
+      const fileExtension = selectedImage.name.split('.').pop();
+      const avatarRef = ref(storage, `avatars/${userId}_avatar.${fileExtension}`);
+
+      // Upload the image to Firebase Storage
+      await uploadBytes(avatarRef, selectedImage);
+
+      console.log("Avatar uploaded successfully!");
+
+      // TODO: Update the user's profile with the new avatar URL
     } catch (error) {
-      console.error('Erreur lors de l\'envoi de l\'image à Firestore Storage:', error);
+      console.error("Error uploading avatar:", error);
     }
   };
+
 
   const handleLogout = () => {
     signOut(auth).then(() => {
@@ -178,6 +170,7 @@ Nav.propTypes = {
   open: PropTypes.bool,
   userData: PropTypes.object,
   userEmail: PropTypes.string,
+  userId: PropTypes.string,
 };
 
 // ----------------------------------------------------------------------
