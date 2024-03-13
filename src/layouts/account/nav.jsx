@@ -6,9 +6,10 @@ import { ref, getStorage, uploadBytes } from "firebase/storage";
 import Link from '@mui/material/Link';
 import Stack from '@mui/material/Stack';
 import Drawer from '@mui/material/Drawer';
+import Button from '@mui/material/Button';
 import Avatar from '@mui/material/Avatar';
 import Divider from '@mui/material/Divider';
-import { alpha } from '@mui/material/styles';
+import { alpha, styled } from '@mui/material/styles';
 import ListItemText from '@mui/material/ListItemText';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemButton from '@mui/material/ListItemButton';
@@ -41,6 +42,18 @@ const navigations = [
 export default function Nav({ open, onClose, userId, userData, userEmail }) {
   const navigate = useNavigate();
   const mdUp = useResponsive('up', 'md');
+
+  const VisuallyHiddenInput = styled('input')({
+    clip: 'rect(0 0 0 0)',
+    clipPath: 'inset(50%)',
+    height: 1,
+    overflow: 'hidden',
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    whiteSpace: 'nowrap',
+    width: 1,
+  });
 
   const handleImageUpload = async (event) => {
     const selectedImage = event.target.files[0];
@@ -86,19 +99,16 @@ export default function Nav({ open, onClose, userId, userData, userEmail }) {
       <Stack spacing={2} sx={{ p: 3, pb: 2 }}>
         <Stack spacing={2} direction="row" alignItems="center">
           <Avatar src={_mock.image.avatar(0)} sx={{ width: 64, height: 64 }} />
-          <Stack
-            direction="row"
-            alignItems="center"
-            sx={{
-              typography: 'caption',
-              cursor: 'pointer',
-              '&:hover': { opacity: 0.72 },
-            }}
+          <Button
+            component="label"
+            role={undefined}
+            variant="contained"
+            tabIndex={-1}
+          // startIcon={<CloudUploadIcon />}
           >
-            <Iconify icon="carbon:edit" sx={{ mr: 1 }} />
-            Changer la photo
-            <input type="file" accept="image/*" onChange={handleImageUpload} />
-          </Stack>
+            Upload file
+            <VisuallyHiddenInput type="file" />
+          </Button>
         </Stack>
 
         <Stack spacing={0.5}>

@@ -36,8 +36,6 @@ export default function AccountLayout({ children }) {
         const { uid, email, photoURL } = user;
         setUserId(uid);
         setUserEmail(email);
-        setUserPhotoURL(photoURL);
-        console.log('photoURL :', photoURL);
 
         // Download user's avatar if available
         if (photoURL) {
