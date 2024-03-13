@@ -1,3 +1,5 @@
+import { useState } from 'react';
+import { getStorage, ref as storageRef, uploadBytes } from 'firebase/storage';
 import PropTypes from 'prop-types';
 import { signOut } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
@@ -36,19 +38,44 @@ const navigations = [
 
 // ----------------------------------------------------------------------
 
+
 export default function Nav({ open, onClose, userData, userEmail }) {
-  const mdUp = useResponsive('up', 'md');
   const navigate = useNavigate();
+  const mdUp = useResponsive('up', 'md');
+
+  const storage = getStorage(); // Initialiser Firestore Storage
+
+  // Générer une suite de caractères aléatoires pour le nom de l'avatar
+  const randomString = (length) => {
+    const chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    let result = '';
+    for (let i = length; i > 0; --i) {
+      result += chars[Math.floor(Math.random() * chars.length)];
+    }
+    return result;
+  };
+
+  const handleImageUpload = async (event) => {
+    const selectedImage = event.target.files[0];
+    const fileName = selectedImage.name;
+    const fileExtension = fileName.split('.').pop(); // Extraire l'extension du fichier
+    const chars = randomString(50); // Génère une chaîne aléatoire de longueur 10
+    const userStorageRef = storageRef(storage, `avatars/${chars}.${fileExtension}`); // Utilisez le bon chemin pour stocker les avatars avec l'extension
+    console.log('userStorageRef :', userStorageRef);
+    try {
+      await uploadBytes(userStorageRef, selectedImage);
+      console.log('Image envoyée avec succès à Firestore Storage.');
+    } catch (error) {
+      console.error('Erreur lors de l\'envoi de l\'image à Firestore Storage:', error);
+    }
+  };
 
   const handleLogout = () => {
-    const getAuthInstance = auth;
-    signOut(getAuthInstance).then(() => {
-      // Sign-out successful.
+    signOut(auth).then(() => {
       navigate("/");
-      console.log("Signed out successfully")
+      console.log("Déconnexion réussie");
     }).catch((error) => {
-      // An error happened.
-      console.log("Error: ", error)
+      console.error("Erreur de déconnexion:", error);
     });
   }
 
@@ -78,6 +105,7 @@ export default function Nav({ open, onClose, userData, userEmail }) {
           >
             <Iconify icon="carbon:edit" sx={{ mr: 1 }} />
             Changer la photo
+            <input type="file" accept="image/*" onChange={handleImageUpload} />
           </Stack>
         </Stack>
 
