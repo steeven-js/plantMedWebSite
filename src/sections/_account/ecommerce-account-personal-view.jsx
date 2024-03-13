@@ -23,17 +23,19 @@ const GENDER_OPTIONS = ['Male', 'Female', 'Other'];
 
 export default function EcommerceAccountPersonalView({ userId, userEmail, userData }) {
 
-  // Convert the Firebase _Timestamp to a Date object
-  const userBirthdayDate = new Date(userData.birthday.seconds * 1000 + userData.birthday.nanoseconds / 1000000);
+  // Convertir le _Timestamp Firebase en objet Date
+  let userBirthdayDate = null; // Déclarer la variable en dehors du bloc if
 
-  // console.log('userBirthday:', userBirthdayDate);
+  if (userData.birthday) {
+    userBirthdayDate = new Date(userData.birthday.seconds * 1000 + userData.birthday.nanoseconds / 1000000);
+  }
 
   const EcommerceAccountPersonalSchema = Yup.object().shape({
     firstName: Yup.string().required('First name is required'),
     lastName: Yup.string().required('Last name is required'),
     phoneNumber: Yup.string().required('Phone number is required'),
     emailAddress: Yup.string().notRequired('Email address is required').email('Email must be a valid email address'),
-    birthday: Yup.mixed().nullable().required('Birthday is required'),
+    birthday: Yup.mixed().nullable().notRequired('Birthday is required'),
     gender: Yup.string().required('Gender is required'),
     streetAddress: Yup.string().required('Street address is required'),
     zipCode: Yup.string().required('Zip code is required'),
@@ -41,16 +43,16 @@ export default function EcommerceAccountPersonalView({ userId, userEmail, userDa
   });
 
   const values = {
-    firstName: userData.firstName,
-    lastName: userData.lastName,
-    phoneNumber: userData.phoneNumber,
-    emailAddress: userEmail,
-    birthday: userBirthdayDate,
-    gender: userData.gender,
-    streetAddress: userData.streetAddress,
-    zipCode: userData.zipCode,
-    city: userData.city,
-    country: userData.country,
+    firstName: userData.firstName || '',
+    lastName: userData.lastName || '',
+    phoneNumber: userData.phoneNumber || '',
+    emailAddress: userEmail || '',
+    birthday: userBirthdayDate || null,
+    gender: userData.gender || 'Male',
+    streetAddress: userData.streetAddress || '',
+    zipCode: userData.zipCode || '',
+    city: userData.city || '',
+    country: userData.country || '',
   };
 
   const methods = useForm({
