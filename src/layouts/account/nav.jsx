@@ -1,7 +1,8 @@
 import PropTypes from 'prop-types';
 import { signOut } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
-import { ref, getStorage, uploadBytes } from "firebase/storage";
+import { doc, updateDoc } from "firebase/firestore";
+import { ref, getStorage, uploadBytes, getDownloadURL } from "firebase/storage";
 
 import Link from '@mui/material/Link';
 import Stack from '@mui/material/Stack';
@@ -25,7 +26,7 @@ import { _mock } from 'src/_mock';
 import Iconify from 'src/components/iconify';
 import TextMaxLine from 'src/components/text-max-line';
 
-import { auth } from '../../../firebase';
+import { db, auth } from '../../../firebase';
 // ----------------------------------------------------------------------
 
 const navigations = [
@@ -37,7 +38,6 @@ const navigations = [
 ];
 
 // ----------------------------------------------------------------------
-
 
 export default function Nav({ open, onClose, userId, userData, userEmail }) {
   const navigate = useNavigate();
@@ -68,12 +68,18 @@ export default function Nav({ open, onClose, userId, userData, userEmail }) {
 
       console.log("Avatar uploaded successfully!");
 
-      // TODO: Update the user's profile with the new avatar URL
+      // Obtenez l'URL de l'image téléchargée
+      const imageUrl = await getDownloadURL(avatarRef);
+
+      // Mettez à jour le profil utilisateur avec l'URL de l'image
+      const userDocRef = doc(db, 'userProfile', userId);
+      await updateDoc(userDocRef, { avatarUrl: imageUrl });
+
+      console.log("Profile updated with avatar URL:", imageUrl);
     } catch (error) {
       console.error("Error uploading avatar:", error);
     }
   };
-
 
   const handleLogout = () => {
     signOut(auth).then(() => {
