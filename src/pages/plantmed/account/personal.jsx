@@ -1,6 +1,6 @@
 import { Helmet } from 'react-helmet-async';
 import { useState, useEffect } from 'react';
-import { doc, getDoc } from "firebase/firestore";
+import { doc, onSnapshot } from "firebase/firestore"; // Importer onSnapshot
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 import { SplashScreen } from 'src/components/loading-screen';
@@ -28,33 +28,37 @@ export default function EcommerceAccountPersonalPage() {
         setUserEmail(email);
 
         try {
-          const userProfileRef = doc(db, "userProfile", uid); // Reference to the document in "userProfile" collection with UID as document ID
-          const userProfileSnapshot = await getDoc(userProfileRef); // Fetch the document snapshot
-          if (userProfileSnapshot.exists()) {
-            const userProfileData = userProfileSnapshot.data(); // Extract the data from the snapshot
-            setUserData(userProfileData);
-          } else {
-            console.log('User profile does not exist');
-          }
+          const userProfileRef = doc(db, "userProfile", uid);
+          const unsubscribeSnapshot = onSnapshot(userProfileRef, (userProfileSnapshot) => {
+            if (userProfileSnapshot.exists()) {
+              const userProfileData = userProfileSnapshot.data();
+              setUserData(userProfileData);
+            } else {
+              console.log('Le profil utilisateur n\'existe pas');
+            }
+            setIsLoading(false);
+          });
+          return () => unsubscribeSnapshot();
         } catch (error) {
-          console.error('Error fetching user profile:', error);
-        } finally {
+          console.error('Erreur lors de la récupération du profil utilisateur :', error);
           setIsLoading(false);
         }
       } else {
         setUserEmail('');
-        console.log('User signed out');
+        setIsLoading(false);
+        console.log('Utilisateur déconnecté');
       }
+      return null; // Ajouter un retour de valeur nul à la fin de la fonction
     });
 
-    // Cleanup function
+    // Fonction de nettoyage
     return () => unsubscribe();
   }, [auth]);
 
   return (
     <>
       <Helmet>
-        <title>E-commerce: Account Personal</title>
+        <title>E-commerce: Compte Personnel</title>
       </Helmet>
 
       {isLoading ? <SplashScreen /> : <EcommerceAccountPersonalView userId={userId} userEmail={userEmail} userData={userData} />}

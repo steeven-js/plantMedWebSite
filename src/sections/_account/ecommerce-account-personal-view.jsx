@@ -5,18 +5,12 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm, Controller } from 'react-hook-form';
 
 import Box from '@mui/material/Box';
-import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
-import IconButton from '@mui/material/IconButton';
 import LoadingButton from '@mui/lab/LoadingButton';
-import InputAdornment from '@mui/material/InputAdornment';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-
-import { useBoolean } from 'src/hooks/use-boolean';
 
 import { countries } from 'src/assets/data';
 
-import Iconify from 'src/components/iconify';
 import FormProvider, { RHFSelect, RHFTextField, RHFAutocomplete } from 'src/components/hook-form';
 
 import { db } from '../../../firebase';
@@ -28,9 +22,6 @@ const GENDER_OPTIONS = ['Male', 'Female', 'Other'];
 // ----------------------------------------------------------------------
 
 export default function EcommerceAccountPersonalView({ userId, userEmail, userData }) {
-  const passwordShow = useBoolean();
-
-  // console.log('userId, userEmail, onUserDataLoaded:', userId, userEmail, userData);
 
   // Convert the Firebase _Timestamp to a Date object
   const userBirthdayDate = new Date(userData.birthday.seconds * 1000 + userData.birthday.nanoseconds / 1000000);
@@ -60,9 +51,6 @@ export default function EcommerceAccountPersonalView({ userId, userEmail, userDa
     zipCode: userData.zipCode,
     city: userData.city,
     country: userData.country,
-    oldPassword: '',
-    newPassword: '',
-    confirmNewPassword: '',
   };
 
   const methods = useForm({
@@ -160,62 +148,14 @@ export default function EcommerceAccountPersonalView({ userId, userEmail, userDa
           getOptionLabel={(option) => option}
         />
       </Box>
-      <Stack spacing={3} sx={{ my: 5 }}>
-        <Typography variant="h5"> Change Password </Typography>
 
-        <Stack spacing={2.5}>
-          <RHFTextField
-            name="oldPassword"
-            label="Old Password"
-            type={passwordShow.value ? 'text' : 'password'}
-            InputProps={{
-              endAdornment: (
-                <InputAdornment position="end">
-                  <IconButton onClick={passwordShow.onToggle} edge="end">
-                    <Iconify icon={passwordShow.value ? 'carbon:view' : 'carbon:view-off'} />
-                  </IconButton>
-                </InputAdornment>
-              ),
-            }}
-          />
-
-          <RHFTextField
-            name="newPassword"
-            label="New Password"
-            type={passwordShow.value ? 'text' : 'password'}
-            InputProps={{
-              endAdornment: (
-                <InputAdornment position="end">
-                  <IconButton onClick={passwordShow.onToggle} edge="end">
-                    <Iconify icon={passwordShow.value ? 'carbon:view' : 'carbon:view-off'} />
-                  </IconButton>
-                </InputAdornment>
-              ),
-            }}
-          />
-
-          <RHFTextField
-            name="confirmNewPassword"
-            label="Confirm New Password"
-            type={passwordShow.value ? 'text' : 'password'}
-            InputProps={{
-              endAdornment: (
-                <InputAdornment position="end">
-                  <IconButton onClick={passwordShow.onToggle} edge="end">
-                    <Iconify icon={passwordShow.value ? 'carbon:view' : 'carbon:view-off'} />
-                  </IconButton>
-                </InputAdornment>
-              ),
-            }}
-          />
-        </Stack>
-      </Stack>
       <LoadingButton
         color="inherit"
         size="large"
         type="submit"
         variant="contained"
         loading={isSubmitting}
+        sx={{ mt: 2 }}
       >
         Save Changes
       </LoadingButton>
