@@ -7,7 +7,6 @@ import Button from '@mui/material/Button';
 import Drawer from '@mui/material/Drawer';
 import IconButton from '@mui/material/IconButton';
 
-import { paths } from 'src/routes/paths';
 import { usePathname } from 'src/routes/hooks';
 
 import { useBoolean } from 'src/hooks/use-boolean';
@@ -62,11 +61,11 @@ export default function NavMobile({ data }) {
               fullWidth
               variant="contained"
               color="inherit"
-              href={paths.zoneStore}
+              href='/auth/login-background'
               target="_blank"
               rel="noopener"
             >
-              Buy Now
+              Se connecter
             </Button>
           </Stack>
         </Scrollbar>

@@ -161,6 +161,7 @@ export default function Header({ headerOnDark }) {
               path: '/',
             },
             { title: 'Plantes', path: '/plantmed/plantes/' },
+            { title: 'Symptomes', path: '/plantmed/symptomes/' },
           ]}
         />
       }
