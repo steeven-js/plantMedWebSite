@@ -83,7 +83,10 @@ export default function EcommerceAccountPersonalView() {
     return () => unsubscribe();
   }, [auth]);
 
-  console.log('userBirthday:', userBirthday);
+  // Convert the Firebase _Timestamp to a Date object
+  const userBirthdayDate = new Date(userBirthday.seconds * 1000 + userBirthday.nanoseconds / 1000000);
+
+  console.log('userBirthday:', userBirthdayDate);
 
   const EcommerceAccountPersonalSchema = Yup.object().shape({
     firstName: Yup.string().required('First name is required'),
@@ -102,7 +105,7 @@ export default function EcommerceAccountPersonalView() {
     lastName: userLastName,
     phoneNumber: userPhoneNumber,
     emailAddress: userEmail,
-    birthday: null,
+    birthday: userBirthdayDate,
     gender: userGender,
     streetAddress: userStreetAddress,
     zipCode: userZipCode,
@@ -126,19 +129,19 @@ export default function EcommerceAccountPersonalView() {
 
   const onSubmit = handleSubmit(async (data) => {
     try {
-      // const userProfileRef = doc(db, "userProfile", userId);
-      // await setDoc(userProfileRef, {
-      //   firstName: data.firstName,
-      //   lastName: data.lastName,
-      //   emailAddress: data.emailAddress,
-      //   phoneNumber: data.phoneNumber,
-      //   birthday: data.birthday,
-      //   gender: data.gender,
-      //   streetAddress: data.streetAddress,
-      //   city: data.city,
-      //   zipCode: data.zipCode,
-      //   country: data.country,
-      // });
+      const userProfileRef = doc(db, "userProfile", userId);
+      await setDoc(userProfileRef, {
+        firstName: data.firstName,
+        lastName: data.lastName,
+        emailAddress: data.emailAddress,
+        phoneNumber: data.phoneNumber,
+        birthday: data.birthday,
+        gender: data.gender,
+        streetAddress: data.streetAddress,
+        city: data.city,
+        zipCode: data.zipCode,
+        country: data.country,
+      });
       reset();
       console.log('Form submitted successfully:', data);
     } catch (error) {
