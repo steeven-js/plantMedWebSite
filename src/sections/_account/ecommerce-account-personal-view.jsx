@@ -57,7 +57,6 @@ export default function EcommerceAccountPersonalView() {
           const userProfileSnapshot = await getDoc(userProfileRef); // Fetch the document snapshot
           if (userProfileSnapshot.exists()) {
             const userProfileData = userProfileSnapshot.data(); // Extract the data from the snapshot
-            console.log('User profile:', userProfileData);
             setUserFirstName(userProfileData.firstName)
             setUserLastName(userProfileData.lastName)
             setUserPhoneNumber(userProfileData.phoneNumber)
@@ -86,7 +85,7 @@ export default function EcommerceAccountPersonalView() {
   // Convert the Firebase _Timestamp to a Date object
   const userBirthdayDate = new Date(userBirthday.seconds * 1000 + userBirthday.nanoseconds / 1000000);
 
-  console.log('userBirthday:', userBirthdayDate);
+  // console.log('userBirthday:', userBirthdayDate);
 
   const EcommerceAccountPersonalSchema = Yup.object().shape({
     firstName: Yup.string().required('First name is required'),
