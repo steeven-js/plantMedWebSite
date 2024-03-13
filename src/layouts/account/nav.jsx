@@ -104,6 +104,7 @@ export default function Nav({ open, onClose, userId, userData, userEmail }) {
             role={undefined}
             variant="contained"
             tabIndex={-1}
+            onChange={handleImageUpload}
           // startIcon={<CloudUploadIcon />}
           >
             Upload file
