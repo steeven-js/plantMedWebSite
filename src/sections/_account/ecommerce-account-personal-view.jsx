@@ -18,6 +18,7 @@ import { useBoolean } from 'src/hooks/use-boolean';
 import { countries } from 'src/assets/data';
 
 import Iconify from 'src/components/iconify';
+import { SplashScreen } from 'src/components/loading-screen';
 import FormProvider, { RHFSelect, RHFTextField, RHFAutocomplete } from 'src/components/hook-form';
 
 import { db } from '../../../firebase';
@@ -29,6 +30,7 @@ const GENDER_OPTIONS = ['Male', 'Female', 'Other'];
 // ----------------------------------------------------------------------
 
 export default function EcommerceAccountPersonalView() {
+  const [isLoading, setIsLoading] = useState(true);
   const passwordShow = useBoolean();
   const [userId, setUserId] = useState('');
   const [userFirstName, setUserFirstName] = useState('');
@@ -50,7 +52,6 @@ export default function EcommerceAccountPersonalView() {
         const { uid, email } = user;
         setUserId(uid);
         setUserEmail(email);
-        console.log('User signed in with email:', email);
 
         try {
           const userProfileRef = doc(db, "userProfile", uid); // Reference to the document in "userProfile" collection with UID as document ID
@@ -71,10 +72,13 @@ export default function EcommerceAccountPersonalView() {
           }
         } catch (error) {
           console.error('Error fetching user profile:', error);
+        } finally {
+          setIsLoading(false); // Set isLoading to false after fetching data, regardless of success or failure
         }
       } else {
         setUserEmail('');
         console.log('User signed out');
+        setIsLoading(false); // Set isLoading to false if user is signed out
       }
     });
 
@@ -147,6 +151,10 @@ export default function EcommerceAccountPersonalView() {
       console.error('Form submission error:', error);
     }
   });
+
+  if (isLoading) {
+    return <SplashScreen />
+  }
 
   return (
     <FormProvider methods={methods} onSubmit={onSubmit}>
