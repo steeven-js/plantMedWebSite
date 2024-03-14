@@ -1,7 +1,8 @@
 import PropTypes from 'prop-types';
 import { signOut } from 'firebase/auth';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { doc, updateDoc } from "firebase/firestore";
+import { doc, updateDoc, onSnapshot } from "firebase/firestore";
 import { ref, getStorage, uploadBytes, getDownloadURL } from "firebase/storage";
 
 import Link from '@mui/material/Link';
@@ -14,6 +15,7 @@ import { alpha, styled } from '@mui/material/styles';
 import ListItemText from '@mui/material/ListItemText';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemButton from '@mui/material/ListItemButton';
+import CircularProgress from '@mui/material/CircularProgress';
 
 // import { paths } from 'src/routes/paths';
 import { useActiveLink } from 'src/routes/hooks';
@@ -42,6 +44,8 @@ const navigations = [
 export default function Nav({ open, onClose, userId, userData, userEmail }) {
   const navigate = useNavigate();
   const mdUp = useResponsive('up', 'md');
+  const [userImageUrl, setUserImageUrl] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   const VisuallyHiddenInput = styled('input')({
     clip: 'rect(0 0 0 0)',
@@ -59,6 +63,7 @@ export default function Nav({ open, onClose, userId, userData, userEmail }) {
     const selectedImage = event.target.files[0];
 
     try {
+      setIsLoading(true);
       const storage = getStorage();
       const fileExtension = selectedImage.name.split('.').pop();
       const avatarRef = ref(storage, `avatars/${userId}_avatar.${fileExtension}`);
@@ -75,7 +80,9 @@ export default function Nav({ open, onClose, userId, userData, userEmail }) {
       const userDocRef = doc(db, 'userProfile', userId);
       await updateDoc(userDocRef, { avatarUrl: imageUrl });
 
-      console.log("Profile updated with avatar URL:", imageUrl);
+      // console.log("Profile updated with avatar URL:", imageUrl);
+      setUserImageUrl(imageUrl);
+      setIsLoading(false);
     } catch (error) {
       console.error("Error uploading avatar:", error);
     }
@@ -83,12 +90,30 @@ export default function Nav({ open, onClose, userId, userData, userEmail }) {
 
   const handleLogout = () => {
     signOut(auth).then(() => {
+      setUserImageUrl(null);
       navigate("/");
       console.log("Déconnexion réussie");
     }).catch((error) => {
       console.error("Erreur de déconnexion:", error);
     });
   }
+
+  useEffect(() => {
+    setIsLoading(true);
+    const userProfileRef = doc(db, 'userProfile', userId);
+    const unsubscribe = onSnapshot(userProfileRef, (snapshot) => {
+      if (snapshot.exists()) {
+        const userProfileData = snapshot.data();
+        // console.log('userId:', userId, 'userProfileData:', userProfileData);
+        setUserImageUrl(userProfileData.avatarUrl);
+      } else {
+        console.log('Le document userProfile avec l\'UID', userId, 'n\'existe pas.');
+      }
+      setIsLoading(false);
+    });
+
+    return () => unsubscribe();
+  }, [userId]);
 
   const renderContent = (
     <Stack
@@ -104,16 +129,19 @@ export default function Nav({ open, onClose, userId, userData, userEmail }) {
     >
       <Stack spacing={2} sx={{ p: 3, pb: 2 }}>
         <Stack spacing={2} direction="row" alignItems="center">
-          <Avatar src={_mock.image.avatar(0)} sx={{ width: 64, height: 64 }} />
+          {isLoading ? (
+            <CircularProgress />
+          ) : (
+            <Avatar src={userImageUrl || _mock.image.avatar(0)} sx={{ width: 64, height: 64 }} />
+          )}
           <Button
             component="label"
             role={undefined}
             variant="contained"
             tabIndex={-1}
             onChange={handleImageUpload}
-          // startIcon={<CloudUploadIcon />}
           >
-            Upload file
+            Changer
             <VisuallyHiddenInput type="file" />
           </Button>
         </Stack>
