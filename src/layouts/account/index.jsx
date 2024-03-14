@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
 import { useState, useEffect } from 'react';
 import { doc, onSnapshot } from "firebase/firestore";
-import { ref, getDownloadURL } from "firebase/storage";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 import Box from '@mui/material/Box';
@@ -17,7 +16,7 @@ import Iconify from 'src/components/iconify';
 import { SplashScreen } from 'src/components/loading-screen';
 
 import Nav from './nav';
-import { db, storage } from '../../../firebase';
+import { db } from '../../../firebase';
 
 export default function AccountLayout({ children }) {
   const mdUp = useResponsive('up', 'md');
@@ -26,28 +25,15 @@ export default function AccountLayout({ children }) {
   const [userId, setUserId] = useState('');
   const [userData, setUserData] = useState({});
   const [userEmail, setUserEmail] = useState('');
-  const [userPhotoURL, setUserPhotoURL] = useState('');
   const auth = getAuth();
 
   useEffect(() => {
     setIsLoading(true);
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
       if (user) {
-        const { uid, email, photoURL } = user;
+        const { uid, email } = user;
         setUserId(uid);
         setUserEmail(email);
-
-        // Download user's avatar if available
-        if (photoURL) {
-          const storageRef = ref(storage, photoURL);
-          getDownloadURL(storageRef)
-            .then((downloadURL) => {
-              setUserPhotoURL(downloadURL);
-            })
-            .catch((error) => {
-              console.error('Error downloading user avatar:', error);
-            });
-        }
 
         try {
           const userProfileRef = doc(db, "userProfile", uid);
@@ -67,7 +53,6 @@ export default function AccountLayout({ children }) {
         }
       } else {
         setUserEmail('');
-        setIsLoading(false);
         console.log('Utilisateur déconnecté');
       }
       return null; // Ajouter un retour de valeur nul à la fin de la fonction
@@ -76,6 +61,8 @@ export default function AccountLayout({ children }) {
     // Fonction de nettoyage
     return () => unsubscribe();
   }, [auth]);
+
+  // console.log('userId:', userId, 'userData:', userData, 'userEmail:', userEmail, 'isLoading:', isLoading)
 
   return (
     <>
@@ -119,7 +106,7 @@ export default function AccountLayout({ children }) {
             },
           }}
         >
-          {isLoading ? <SplashScreen /> : <Nav open={menuOpen.value} onClose={menuOpen.onFalse} userId={userId} userData={userData} userEmail={userEmail} userPhotoURL={userPhotoURL} />}
+          {isLoading ? <SplashScreen /> : <Nav open={menuOpen.value} onClose={menuOpen.onFalse} userId={userId} userData={userData} userEmail={userEmail} />}
 
           <Box
             sx={{

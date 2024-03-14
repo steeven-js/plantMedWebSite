@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import { signOut } from 'firebase/auth';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { doc, updateDoc, onSnapshot } from "firebase/firestore";
+import { doc, setDoc, onSnapshot } from "firebase/firestore";
 import { ref, getStorage, uploadBytes, getDownloadURL } from "firebase/storage";
 
 import Link from '@mui/material/Link';
@@ -76,15 +76,16 @@ export default function Nav({ open, onClose, userId, userData, userEmail }) {
       // Obtenez l'URL de l'image téléchargée
       const imageUrl = await getDownloadURL(avatarRef);
 
-      // Mettez à jour le profil utilisateur avec l'URL de l'image
-      const userDocRef = doc(db, 'userProfile', userId);
-      await updateDoc(userDocRef, { avatarUrl: imageUrl });
+      // Créer ou mettre à jour le document de l'utilisateur dans la collection userAvatar avec l'URL de l'image
+      const userDocRef = doc(db, 'userAvatar', userId);
+      await setDoc(userDocRef, { avatarUrl: imageUrl }, { merge: true });
 
       // console.log("Profile updated with avatar URL:", imageUrl);
       setUserImageUrl(imageUrl);
       setIsLoading(false);
     } catch (error) {
       console.error("Error uploading avatar:", error);
+      setUserImageUrl(null);
     }
   };
 
@@ -100,20 +101,22 @@ export default function Nav({ open, onClose, userId, userData, userEmail }) {
 
   useEffect(() => {
     setIsLoading(true);
-    const userProfileRef = doc(db, 'userProfile', userId);
-    const unsubscribe = onSnapshot(userProfileRef, (snapshot) => {
+    const userAvatarRef = doc(db, 'userAvatar', userId);
+    const unsubscribe = onSnapshot(userAvatarRef, (snapshot) => {
       if (snapshot.exists()) {
-        const userProfileData = snapshot.data();
-        // console.log('userId:', userId, 'userProfileData:', userProfileData);
-        setUserImageUrl(userProfileData.avatarUrl);
+        const userAvatarData = snapshot.data();
+        // console.log('userId:', userId, 'userAvatarData:', userAvatarData);
+        setUserImageUrl(userAvatarData.avatarUrl);
       } else {
-        console.log('Le document userProfile avec l\'UID', userId, 'n\'existe pas.');
+        console.log('Le document userAvatar avec l\'UID', userId, 'n\'existe pas.');
       }
       setIsLoading(false);
     });
 
     return () => unsubscribe();
   }, [userId]);
+
+  console.log('userImageUrl:', userImageUrl)
 
   const renderContent = (
     <Stack
