@@ -5,6 +5,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm, Controller } from 'react-hook-form';
 
 import Box from '@mui/material/Box';
+import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import LoadingButton from '@mui/lab/LoadingButton';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
@@ -89,79 +90,106 @@ export default function EcommerceAccountPersonalView({ userId, userEmail, userDa
   });
 
   return (
-    <FormProvider methods={methods} onSubmit={onSubmit}>
-      <Typography variant="h5" sx={{ mb: 3 }}>
-        Mon profil
-      </Typography>
+    <>
+      <FormProvider methods={methods} onSubmit={onSubmit}>
+        <Typography variant="h5" sx={{ mb: 3 }}>
+          Mon profil
+        </Typography>
 
-      <Box
-        rowGap={2.5}
-        columnGap={2}
-        display="grid"
-        gridTemplateColumns={{ xs: 'repeat(1, 1fr)', md: 'repeat(2, 1fr)' }}
-      >
-        <RHFTextField name="firstName" label="Prénom" />
+        <Box
+          rowGap={2.5}
+          columnGap={2}
+          display="grid"
+          gridTemplateColumns={{ xs: 'repeat(1, 1fr)', md: 'repeat(2, 1fr)' }}
+        >
+          <RHFTextField name="firstName" label="Prénom" />
 
-        <RHFTextField name="lastName" label="Nom" />
+          <RHFTextField name="lastName" label="Nom" />
 
-        <RHFTextField name="emailAddress" label="Adresse Email" value={userEmail} disabled />
+          <RHFTextField name="emailAddress" label="Adresse Email" value={userEmail} disabled />
 
-        <RHFTextField name="phoneNumber" label="Numéro de téléphone" />
+          <RHFTextField name="phoneNumber" label="Numéro de téléphone" />
 
-        <Controller
-          name="birthday"
-          render={({ field, fieldState: { error } }) => (
-            <DatePicker
-              label="Date de naissance"
-              slotProps={{
-                textField: {
-                  helperText: error?.message,
-                  error: !!error?.message,
-                },
-              }}
-              {...field}
-              value={field.value}
-              format="dd/MM/yyyy"
-            />
-          )}
-        />
+          <Controller
+            name="birthday"
+            render={({ field, fieldState: { error } }) => (
+              <DatePicker
+                label="Date de naissance"
+                slotProps={{
+                  textField: {
+                    helperText: error?.message,
+                    error: !!error?.message,
+                  },
+                }}
+                {...field}
+                value={field.value}
+                format="dd/MM/yyyy"
+              />
+            )}
+          />
 
-        <RHFSelect native name="gender" label="Genre">
-          {GENDER_OPTIONS.map((option) => (
-            <option key={option} value={option}>
-              {option}
-            </option>
-          ))}
-        </RHFSelect>
+          <RHFSelect native name="gender" label="Genre">
+            {GENDER_OPTIONS.map((option) => (
+              <option key={option} value={option}>
+                {option}
+              </option>
+            ))}
+          </RHFSelect>
 
-        <RHFTextField name="streetAddress" label="Adresse" />
+          <RHFTextField name="streetAddress" label="Adresse" />
 
-        <RHFTextField name="zipCode" label="Code Postal" />
+          <RHFTextField name="zipCode" label="Code Postal" />
 
-        <RHFTextField name="city" label="Ville" />
+          <RHFTextField name="city" label="Ville" />
 
-        <RHFAutocomplete
-          name="country"
-          type="country"
-          label="Pays"
-          placeholder="Choisissez votre pays"
-          fullWidth
-          options={countries.map((option) => option.label)}
-          getOptionLabel={(option) => option}
-        />
-      </Box>
+          <RHFAutocomplete
+            name="country"
+            type="country"
+            label="Pays"
+            placeholder="Choisissez votre pays"
+            fullWidth
+            options={countries.map((option) => option.label)}
+            getOptionLabel={(option) => option}
+          />
+        </Box>
 
-      <LoadingButton
-        color="inherit"
-        size="large"
-        type="submit"
-        variant="contained"
-        loading={isSubmitting}
-        sx={{ mt: 2 }}
-      >
-        Sauvegarder
-      </LoadingButton>
-    </FormProvider>
+        <LoadingButton
+          color="inherit"
+          size="large"
+          type="submit"
+          variant="contained"
+          loading={isSubmitting}
+          sx={{ mt: 2 }}
+        >
+          Sauvegarder
+        </LoadingButton>
+
+      </FormProvider>
+
+      <Stack spacing={3} sx={{ my: 5 }}>
+        <Typography variant="h5"> Supprimer mon compte </Typography>
+
+        <Stack spacing={2.5}>
+
+          <LoadingButton
+            color="inherit"
+            size="large"
+            type="submit"
+            variant="contained"
+            // loading={isSubmitting}
+            sx={{
+              width: '125px',
+              backgroundColor: '#f44336',
+              color: 'white',
+            }}
+          >
+            Supprimer
+          </LoadingButton>
+
+        </Stack>
+      </Stack>
+    </>
+
   );
 }
 
