@@ -5,6 +5,8 @@ import Typography from '@mui/material/Typography';
 import { alpha, styled } from '@mui/material/styles';
 import Button, { buttonClasses } from '@mui/material/Button';
 
+import { commonData } from 'src/data/index';
+
 import Image from 'src/components/image';
 import Iconify from 'src/components/iconify';
 
@@ -73,7 +75,7 @@ export default function PlanteDownloadApp() {
 // ----------------------------------------------------------------------
 
 function AppStoreButton({ ...other }) {
-  const googlePlayLink = 'https://play.google.com/store/apps/details?id=com.monremede&pcampaignid=web_share';
+  const googlePlayLink = commonData[0].urlAppAdroid;
 
   return (
     <Stack direction="row" flexWrap="wrap" spacing={2} {...other}>
