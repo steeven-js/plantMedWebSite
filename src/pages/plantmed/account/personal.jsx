@@ -17,6 +17,7 @@ export default function EcommerceAccountPersonalPage() {
   const [userData, setUserData] = useState({});
   const [userEmail, setUserEmail] = useState('');
 
+
   const auth = getAuth();
 
   useEffect(() => {

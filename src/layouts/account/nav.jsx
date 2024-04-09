@@ -1,9 +1,8 @@
 import PropTypes from 'prop-types';
-import { signOut } from 'firebase/auth';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { doc, setDoc, onSnapshot } from "firebase/firestore";
-import { ref, getStorage, uploadBytes, getDownloadURL } from "firebase/storage";
+import { signOut, updateProfile, onAuthStateChanged } from 'firebase/auth';
+import { ref, getStorage, uploadBytes, deleteObject, getDownloadURL } from "firebase/storage";
 
 import Link from '@mui/material/Link';
 import Stack from '@mui/material/Stack';
@@ -17,7 +16,6 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemButton from '@mui/material/ListItemButton';
 import CircularProgress from '@mui/material/CircularProgress';
 
-// import { paths } from 'src/routes/paths';
 import { useActiveLink } from 'src/routes/hooks';
 import { RouterLink } from 'src/routes/components';
 
@@ -28,8 +26,7 @@ import { _mock } from 'src/_mock';
 import Iconify from 'src/components/iconify';
 import TextMaxLine from 'src/components/text-max-line';
 
-import { db, auth } from '../../../firebase';
-// ----------------------------------------------------------------------
+import { auth } from '../../../firebase';
 
 const navigations = [
   {
@@ -39,13 +36,11 @@ const navigations = [
   },
 ];
 
-// ----------------------------------------------------------------------
-
 export default function Nav({ open, onClose, userId, userData, userEmail }) {
   const navigate = useNavigate();
   const mdUp = useResponsive('up', 'md');
-  const [userImageUrl, setUserImageUrl] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
+  const [userPhotoURL, setUserPhotoURL] = useState('');
 
   const VisuallyHiddenInput = styled('input')({
     clip: 'rect(0 0 0 0)',
@@ -65,58 +60,69 @@ export default function Nav({ open, onClose, userId, userData, userEmail }) {
     try {
       setIsLoading(true);
       const storage = getStorage();
-      const fileExtension = selectedImage.name.split('.').pop();
-      const avatarRef = ref(storage, `avatars/${userId}_avatar.${fileExtension}`);
+      const avatarRefPath = `avatars/${userId}_avatar`;
 
-      // Upload the image to Firebase Storage
-      await uploadBytes(avatarRef, selectedImage);
+      // Vérifier si le chemin existe déjà dans le stockage
+      try {
+        const existingAvatarRef = ref(storage, avatarRefPath);
 
-      console.log("Avatar uploaded successfully!");
+        // Supprimer l'avatar existant
+        await deleteObject(existingAvatarRef);
+        console.log('Ancien avatar supprimé avec succès.');
+      } catch (deleteError) {
+        console.error('Erreur lors de la suppression de l\'ancien avatar:', deleteError);
+      }
 
-      // Obtenez l'URL de l'image téléchargée
-      const imageUrl = await getDownloadURL(avatarRef);
+      // Télécharger le nouvel avatar
+      const newAvatarRef = ref(storage, avatarRefPath);
+      await uploadBytes(newAvatarRef, selectedImage);
 
-      // Créer ou mettre à jour le document de l'utilisateur dans la collection userAvatar avec l'URL de l'image
-      const userDocRef = doc(db, 'userAvatar', userId);
-      await setDoc(userDocRef, { avatarUrl: imageUrl }, { merge: true });
+      // Obtenez l'URL de l'avatar mis à jour
+      const updatedDownloadURL = await getDownloadURL(newAvatarRef);
 
-      // console.log("Profile updated with avatar URL:", imageUrl);
-      setUserImageUrl(imageUrl);
+      // Mettre à jour le profil de l'utilisateur avec la nouvelle URL de photo
+      const user = auth.currentUser;
+      await updateProfile(user, { photoURL: updatedDownloadURL });
+
+      // Mettre à jour l'URL de la photo de l'utilisateur dans le composant
+      setUserPhotoURL(updatedDownloadURL);
+
+      console.log('imageUrl:', updatedDownloadURL);
+      console.log('user photoURL:', user.photoURL);
+
+      console.log("Avatar mis à jour avec succès !");
+
       setIsLoading(false);
     } catch (error) {
       console.error("Error uploading avatar:", error);
-      setUserImageUrl(null);
+      setIsLoading(false);
     }
   };
 
+  useEffect(() => {
+    setIsLoading(true);
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        const { photoURL } = user;
+        setUserPhotoURL(photoURL);
+        setIsLoading(false);
+      } else {
+        setUserPhotoURL('');
+        setIsLoading(false);
+      }
+    });
+
+    return () => unsubscribe();
+  }, [userPhotoURL]);
+
   const handleLogout = () => {
     signOut(auth).then(() => {
-      setUserImageUrl(null);
       navigate("/");
       console.log("Déconnexion réussie");
     }).catch((error) => {
       console.error("Erreur de déconnexion:", error);
     });
   }
-
-  useEffect(() => {
-    setIsLoading(true);
-    const userAvatarRef = doc(db, 'userAvatar', userId);
-    const unsubscribe = onSnapshot(userAvatarRef, (snapshot) => {
-      if (snapshot.exists()) {
-        const userAvatarData = snapshot.data();
-        // console.log('userId:', userId, 'userAvatarData:', userAvatarData);
-        setUserImageUrl(userAvatarData.avatarUrl);
-      } else {
-        console.log('Le document userAvatar avec l\'UID', userId, 'n\'existe pas.');
-      }
-      setIsLoading(false);
-    });
-
-    return () => unsubscribe();
-  }, [userId]);
-
-  console.log('userImageUrl:', userImageUrl)
 
   const renderContent = (
     <Stack
@@ -135,7 +141,7 @@ export default function Nav({ open, onClose, userId, userData, userEmail }) {
           {isLoading ? (
             <CircularProgress />
           ) : (
-            <Avatar src={userImageUrl || _mock.image.avatar(0)} sx={{ width: 64, height: 64 }} />
+            <Avatar src={userPhotoURL || _mock.image.avatar(0)} sx={{ width: 64, height: 64 }} />
           )}
           <Button
             component="label"
@@ -220,8 +226,6 @@ Nav.propTypes = {
   userEmail: PropTypes.string,
   userId: PropTypes.string,
 };
-
-// ----------------------------------------------------------------------
 
 function NavItem({ item }) {
   const active = useActiveLink(item.path);
