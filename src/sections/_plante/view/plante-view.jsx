@@ -2,19 +2,15 @@ import { useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 import Stack from '@mui/material/Stack';
-import Button from '@mui/material/Button';
 import Divider from '@mui/material/Divider';
-import { alpha } from '@mui/material/styles';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Unstable_Grid2';
-import Typography from '@mui/material/Typography';
 
 import { useBoolean } from 'src/hooks/use-boolean';
 import { useResponsive } from 'src/hooks/use-responsive';
 
-import { _jobs, _socials } from 'src/_mock';
+import { _jobs } from 'src/_mock';
 
-import Iconify from 'src/components/iconify';
 import { SplashScreen } from 'src/components/loading-screen';
 
 import PlanteDetailsHero from '../details/plante-details-hero';
@@ -25,7 +21,7 @@ import PlanteDetailsSummary from '../details/plante-details-summary';
 
 const _mockJob = _jobs[0];
 
-export default function PlanteView({ id, data }) {
+export default function PlanteView({ data }) {
   const mdUp = useResponsive('up', 'md');
   const loading = useBoolean(true);
 
@@ -69,7 +65,7 @@ export default function PlanteView({ id, data }) {
 
                 <Divider sx={{ my: 5 }} />
 
-                <Stack direction="row" flexWrap="wrap" sx={{ mt: 5 }}>
+                {/* <Stack direction="row" flexWrap="wrap" sx={{ mt: 5 }}>
                   <Typography variant="subtitle2" sx={{ mt: 0.75, mr: 1.5 }}>
                     Partager:
                   </Typography>
@@ -96,7 +92,7 @@ export default function PlanteView({ id, data }) {
                       </Button>
                     ))}
                   </Stack>
-                </Stack>
+                </Stack> */}
               </Grid>
 
               <Grid xs={12} md={5} lg={4}>
@@ -118,7 +114,6 @@ export default function PlanteView({ id, data }) {
 }
 
 PlanteView.propTypes = {
-  id: PropTypes.string,
   data: PropTypes.oneOfType([
     PropTypes.object,
     PropTypes.array

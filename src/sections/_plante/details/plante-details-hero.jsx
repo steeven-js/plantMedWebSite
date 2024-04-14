@@ -1,33 +1,19 @@
 import PropTypes from 'prop-types';
-import { useState, useCallback } from 'react';
 
 import Box from '@mui/material/Box';
-// import Link from '@mui/material/Link';
 import Stack from '@mui/material/Stack';
-// import Button from '@mui/material/Button';
-import Checkbox from '@mui/material/Checkbox';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import { alpha, useTheme } from '@mui/material/styles';
 
-// import { paths } from 'src/routes/paths';
-
-// import { fDate } from 'src/utils/format-time';
-
 import { bgGradient } from 'src/theme/css';
 
-import Iconify from 'src/components/iconify';
 import CustomBreadcrumbs from 'src/components/custom-breadcrumbs';
-// import { color } from '@mui/system';
 
 // ----------------------------------------------------------------------
 
 export default function PlanteDetailsHero({ job, data }) {
   const theme = useTheme();
-  const [favorite, setFavorite] = useState(job.favorited);
-  const handleChangeFavorite = useCallback((event) => {
-    setFavorite(event.target.checked);
-  }, []);
 
   // Extracting imgUrl from the media array
   const imgUrl = data.media[0]?.original_url || '/default-image-url.jpg';
@@ -67,23 +53,6 @@ export default function PlanteDetailsHero({ job, data }) {
             <Typography variant="h2" component="h1">
               {data.name}
             </Typography>
-
-            {/* <Stack spacing={3} direction={{ xs: 'column', md: 'row' }} sx={{ opacity: 0.48 }}>
-              <Stack direction="row" alignItems="center" sx={{ typography: 'body2' }}>
-                <Iconify icon="carbon:baggage-claim" sx={{ mr: 1 }} />
-                <Link color="inherit" underline="always">
-                  {job.category}
-                </Link>
-              </Stack>
-
-              <Stack direction="row" alignItems="center" sx={{ typography: 'body2' }}>
-                <Iconify icon="carbon:view" sx={{ mr: 1 }} /> {`${job.totalViews} views`}
-              </Stack>
-
-              <Stack direction="row" alignItems="center" sx={{ typography: 'body2' }}>
-                <Iconify icon="carbon:location" sx={{ mr: 1 }} /> {job.location}
-              </Stack>
-            </Stack> */}
           </Stack>
 
           <Stack
@@ -92,20 +61,8 @@ export default function PlanteDetailsHero({ job, data }) {
             alignItems="flex-start"
             sx={{ width: 1, maxWidth: 340 }}
           >
-            {/* <Stack spacing={2} alignItems="center" sx={{ width: 1 }}>
-              <Button fullWidth variant="contained" size="large" color="primary">
-                Apply Now
-              </Button>
 
-              <Typography variant="body2" sx={{ color: 'common.white' }}>
-                {`Expiration date: `}
-                <Box component="span" sx={{ color: 'primary.main' }}>
-                  {fDate(job.deadline)}
-                </Box>
-              </Typography>
-            </Stack> */}
-
-            <Box sx={{ pt: 0.75 }}>
+            {/* <Box sx={{ pt: 0.75 }}>
               <Checkbox
                 color="error"
                 checked={favorite}
@@ -113,7 +70,7 @@ export default function PlanteDetailsHero({ job, data }) {
                 icon={<Iconify icon="carbon:favorite-filled" width={50} sx={{ color: 'common.white' }} />}
                 checkedIcon={<Iconify icon="carbon:favorite-filled" width={50} />}
               />
-            </Box>
+            </Box> */}
           </Stack>
         </Stack>
       </Container>
