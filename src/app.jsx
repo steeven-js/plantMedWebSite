@@ -13,8 +13,6 @@ import ProgressBar from 'src/components/progress-bar';
 import { MotionLazy } from 'src/components/animate/motion-lazy';
 import { SettingsDrawer, SettingsProvider } from 'src/components/settings';
 
-import { BubbleChat } from 'flowise-embed-react';
-
 // ----------------------------------------------------------------------
 
 export default function App() {
@@ -33,7 +31,6 @@ export default function App() {
           <MotionLazy>
             <ProgressBar />
             <SettingsDrawer />
-            <BubbleChat chatflowid="85bfa79b-21af-4eff-8122-fcc88fdd28b6" apiHost="http://localhost:3000" />
             <Router />
           </MotionLazy>
         </ThemeProvider>
