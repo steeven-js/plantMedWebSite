@@ -73,7 +73,7 @@ export default function Header({ headerOnDark }) {
             position: 'absolute',
           }}
         >
-          v1.0.8
+          v1.0.0
         </Label>
       </Box>
 
@@ -99,8 +99,8 @@ export default function Header({ headerOnDark }) {
                 icon: <Iconify icon="solar:home-2-bold-duotone" />,
                 path: '/',
               },
-              { title: 'Plantes', path: '/plantmed/plantes/' },
               { title: 'Symptomes', path: '/plantmed/symptomes/' },
+              { title: 'Plantes', path: '/plantmed/plantes/' },
             ]}
           />
         </Stack>

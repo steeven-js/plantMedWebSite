@@ -71,7 +71,7 @@ export default function CguView() {
             </Typography>
 
             <Stack direction="row" justifyContent="space-between" spacing={1.5} sx={{ my: 5 }}>
-              <Avatar src={author.avatarUrl} sx={{ width: 48, height: 48 }} />
+              <Avatar src="/assets/images/avatar/avatar_9.jpg" sx={{ width: 48, height: 48 }} />
 
               <Stack spacing={0.5} flexGrow={1}>
                 <Typography variant="subtitle2">Jacques Steeven</Typography>

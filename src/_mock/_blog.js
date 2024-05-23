@@ -79,7 +79,8 @@ const base = (index) => ({
   author: {
     name: 'Jacques Steeven',
     role: 'CEO',
-    avatarUrl: _mock.image.avatar(index),
+    // avatarUrl: _mock.image.avatar(index),
+    avatarUrl: '/assets/images/avatar/avatar_9.jpg',
     quotes: 'Membre depuis le 08 novembre 2023',
     about:
       'Concepteur développeur d\'application depuis 2022, je suis passionné par le développement d\'applications mobiles et web. Je suis également le créateur de PlantMed.',
