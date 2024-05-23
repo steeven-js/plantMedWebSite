@@ -1,10 +1,7 @@
-import Link from '@mui/material/Link';
 import Stack from '@mui/material/Stack';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import { useTheme } from '@mui/material/styles';
-
-import { RouterLink } from 'src/routes/components';
 
 import { useOffSetTop } from 'src/hooks/use-off-set-top';
 
@@ -55,16 +52,6 @@ export default function HeaderSimple() {
           justifyContent="flex-end"
         >
           <SettingsButton />
-
-          <Link
-            // href={paths.support}
-            href="#"
-            component={RouterLink}
-            color="inherit"
-            sx={{ typography: 'subtitle2' }}
-          >
-            Besoin d&apos;aide?
-          </Link>
         </Stack>
       </Toolbar>
 

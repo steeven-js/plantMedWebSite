@@ -25,7 +25,7 @@ export default function PlanteItem({ data = {} }) {
           <Stack direction="row" alignItems="center" spacing={2.5}>
             {/* Inclure l'image */}
             {media && media.length > 0 && (
-              <Image src={media[0].original_url} alt={name} height={100} width={100} />
+              <Image src={media[0].original_url} alt={name} height={150} width={150} />
             )}
             {/* Ajouter d'autres composants si nécessaire */}
           </Stack>
