@@ -173,11 +173,11 @@ export default function RegisterBackgroundView() {
 
         <Typography variant="caption" align="center" sx={{ color: 'text.secondary', mt: 3 }}>
           {`J'accepte les `}
-          <Link color="text.primary" href="#" underline="always">
+          <Link color="text.primary" href="/plantmed/legal/cgu" underline="always">
             Conditions générales d&apos;utilisation
           </Link>
           {` et la `}
-          <Link color="text.primary" href="#" underline="always">
+          <Link color="text.primary" href="/legal/confidentialite" underline="always">
             Politique de confidentialité.
           </Link>
         </Typography>
