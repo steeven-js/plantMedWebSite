@@ -4,7 +4,6 @@ import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import { useTheme } from '@mui/material/styles';
 
-import { paths } from 'src/routes/paths';
 import { RouterLink } from 'src/routes/components';
 
 import { useOffSetTop } from 'src/hooks/use-off-set-top';
@@ -58,12 +57,13 @@ export default function HeaderSimple() {
           <SettingsButton />
 
           <Link
-            href={paths.support}
+            // href={paths.support}
+            href="#"
             component={RouterLink}
             color="inherit"
             sx={{ typography: 'subtitle2' }}
           >
-            Need help?
+            Besoin d&apos;aide?
           </Link>
         </Stack>
       </Toolbar>
