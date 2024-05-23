@@ -7,8 +7,6 @@ import { createUserWithEmailAndPassword } from 'firebase/auth';
 
 import Link from '@mui/material/Link';
 import Stack from '@mui/material/Stack';
-import Button from '@mui/material/Button';
-import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import LoadingButton from '@mui/lab/LoadingButton';
@@ -36,16 +34,16 @@ export default function RegisterBackgroundView() {
 
   const RegisterSchema = Yup.object().shape({
     fullName: Yup.string()
-      .required('Full name is required')
-      .min(6, 'Mininum 6 characters')
-      .max(15, 'Maximum 15 characters'),
-    email: Yup.string().required('Email is required').email('That is not an email'),
+      .required('Le nom complet est requis')
+      .min(6, 'Minimum 6 caractères')
+      .max(15, 'Maximum 15 caractères'),
+    email: Yup.string().required('L\'email est requis').email('Ce n\'est pas un email valide'),
     password: Yup.string()
-      .required('Password is required')
-      .min(6, 'Password should be of minimum 6 characters length'),
+      .required('Le mot de passe est requis')
+      .min(6, 'Le mot de passe doit contenir au moins 6 caractères'),
     confirmPassword: Yup.string()
-      .required('Confirm password is required')
-      .oneOf([Yup.ref('password')], "Passwords don't match"),
+      .required('La confirmation du mot de passe est requise')
+      .oneOf([Yup.ref('password')], 'Les mots de passe ne correspondent pas'),
   });
 
   const defaultValues = {
@@ -99,54 +97,38 @@ export default function RegisterBackgroundView() {
   const renderHead = (
     <div>
       <Typography variant="h3" paragraph>
-        Get Started
+        Commencez
       </Typography>
 
       <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-        {`Already have an account? `}
+        {`Vous avez déjà un compte ? `}
         <Link
           component={RouterLink}
           href={paths.loginBackground}
           variant="subtitle2"
           color="primary"
         >
-          Login
+          Connexion
         </Link>
       </Typography>
     </div>
   );
 
-  const renderSocials = (
-    <Stack direction="row" spacing={2}>
-      <Button fullWidth size="large" color="inherit" variant="outlined">
-        <Iconify icon="logos:google-icon" width={24} />
-      </Button>
-
-      <Button fullWidth size="large" color="inherit" variant="outlined">
-        <Iconify icon="carbon:logo-facebook" width={24} sx={{ color: '#1877F2' }} />
-      </Button>
-
-      <Button color="inherit" fullWidth variant="outlined" size="large">
-        <Iconify icon="carbon:logo-github" width={24} sx={{ color: 'text.primary' }} />
-      </Button>
-    </Stack>
-  );
-
   const renderForm = (
     <FormProvider methods={methods} onSubmit={onSubmit}>
       <Stack spacing={2.5}>
-        <RHFTextField name="fullName" label="Full Name" />
+        <RHFTextField name="fullName" label="Nom complet" />
 
         <RHFTextField
           name="email"
-          label="Email address"
+          label="Adresse e-mail"
           value={methods.watch('email')}
         />
         {emailError && (<Typography variant="body2" sx={{ color: 'error.main' }}>{emailError}</Typography>)}
 
         <RHFTextField
           name="password"
-          label="Password"
+          label="Mot de passe"
           type={passwordShow.value ? 'text' : 'password'}
           value={methods.watch('password')}
           InputProps={{
@@ -163,7 +145,7 @@ export default function RegisterBackgroundView() {
 
         <RHFTextField
           name="confirmPassword"
-          label="Confirm Password"
+          label="Confirmer le mot de passe"
           type={confirmPasswordShow.value ? 'text' : 'password'}
           value={methods.watch('confirmPassword')}
           InputProps={{
@@ -186,17 +168,17 @@ export default function RegisterBackgroundView() {
           variant="contained"
           loading={isSubmitting}
         >
-          Register
+          S&apos;inscrire
         </LoadingButton>
 
         <Typography variant="caption" align="center" sx={{ color: 'text.secondary', mt: 3 }}>
-          {`I agree to `}
+          {`J'accepte les `}
           <Link color="text.primary" href="#" underline="always">
-            Terms of Service
+            Conditions générales d&apos;utilisation
           </Link>
-          {` and `}
+          {` et la `}
           <Link color="text.primary" href="#" underline="always">
-            Privacy Policy.
+            Politique de confidentialité.
           </Link>
         </Typography>
       </Stack>
@@ -208,14 +190,6 @@ export default function RegisterBackgroundView() {
       {renderHead}
 
       {renderForm}
-
-      <Divider>
-        <Typography variant="body2" sx={{ color: 'text.disabled' }}>
-          or continue with
-        </Typography>
-      </Divider>
-
-      {renderSocials}
     </>
   );
 }

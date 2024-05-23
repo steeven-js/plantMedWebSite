@@ -7,8 +7,6 @@ import { signInWithEmailAndPassword } from 'firebase/auth';
 
 import Link from '@mui/material/Link';
 import Stack from '@mui/material/Stack';
-import Button from '@mui/material/Button';
-import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import LoadingButton from '@mui/lab/LoadingButton';
@@ -34,8 +32,8 @@ export default function LoginBackgroundView() {
   const [passwordError, setPasswordError] = useState('');
 
   const LoginSchema = Yup.object().shape({
-    email: Yup.string().required('Email is required').email('Invalid email format'),
-    password: Yup.string().required('Password is required').min(6, 'Password should be at least 6 characters'),
+    email: Yup.string().required('L\'email est requis').email('Format d\'email invalide'),
+    password: Yup.string().required('Le mot de passe est requis').min(6, 'Le mot de passe doit contenir au moins 6 caractères'),
   });
 
   const defaultValues = {
@@ -87,37 +85,21 @@ export default function LoginBackgroundView() {
   const renderHead = (
     <div>
       <Typography variant="h3" paragraph>
-        Login
+        Connexion
       </Typography>
 
       <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-        {`Don’t have an account? `}
+        {`Vous n'avez pas de compte ? `}
         <Link
           component={RouterLink}
           href={paths.registerBackground}
           variant="subtitle2"
           color="primary"
         >
-          Get started
+          Inscrivez-vous
         </Link>
       </Typography>
     </div>
-  );
-
-  const renderSocials = (
-    <Stack direction="row" spacing={2}>
-      <Button fullWidth size="large" color="inherit" variant="outlined">
-        <Iconify icon="logos:google-icon" width={24} />
-      </Button>
-
-      <Button fullWidth size="large" color="inherit" variant="outlined">
-        <Iconify icon="carbon:logo-facebook" width={24} sx={{ color: '#1877F2' }} />
-      </Button>
-
-      <Button color="inherit" fullWidth variant="outlined" size="large">
-        <Iconify icon="carbon:logo-github" width={24} sx={{ color: 'text.primary' }} />
-      </Button>
-    </Stack>
   );
 
   const renderForm = (
@@ -125,14 +107,14 @@ export default function LoginBackgroundView() {
       <Stack spacing={2.5} alignItems="flex-end">
         <RHFTextField
           name="email"
-          label="Email address"
+          label="Adresse e-mail"
           value={methods.watch('email')}
         />
         {emailError && (<Typography variant="body2" sx={{ color: 'error.main' }}>{emailError}</Typography>)}
 
         <RHFTextField
           name="password"
-          label="Password"
+          label="Mot de passe"
           type={passwordShow.value ? 'text' : 'password'}
           value={methods.watch('password')}
           InputProps={{
@@ -154,7 +136,7 @@ export default function LoginBackgroundView() {
           underline="always"
           color="text.secondary"
         >
-          Forgot password?
+          Mot de passe oublié ?
         </Link>
 
         <LoadingButton
@@ -165,7 +147,7 @@ export default function LoginBackgroundView() {
           variant="contained"
           loading={isSubmitting}
         >
-          Login
+          Connexion
         </LoadingButton>
       </Stack>
     </FormProvider>
@@ -176,14 +158,6 @@ export default function LoginBackgroundView() {
       {renderHead}
 
       {renderForm}
-
-      <Divider>
-        <Typography variant="body2" sx={{ color: 'text.disabled' }}>
-          or continue with
-        </Typography>
-      </Divider>
-
-      {renderSocials}
     </>
   );
 }
