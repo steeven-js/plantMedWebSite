@@ -28,7 +28,7 @@ export default function CareerJobListSimilar({ data }) {
   const viewAllBtn = (
     <Button
       component={RouterLink}
-      href={paths.career.jobs}
+      href={paths.plantmed.plantes}
       color="inherit"
       endIcon={<Iconify icon="carbon:chevron-right" />}
     >

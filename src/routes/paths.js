@@ -1,6 +1,19 @@
 // ----------------------------------------------------------------------
 
 export const paths = {
+  // Plantmed
+  plantmed: {
+    root: '/plantmed',
+    plantes: '/plantmed/plantes',
+    plante: `/plantmed/plante`,
+    symptomes: '/plantmed/symptomes',
+    symptome: `/plantmed/symptome`,
+    posts: '/plantmed/posts',
+    post: `/plantmed/post`,
+    about: '/plantmed/about',
+    contact: '/plantmed/contact',
+  },
+
   // Marketing
   marketing: {
     root: '/marketing',

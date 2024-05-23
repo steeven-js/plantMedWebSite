@@ -8,7 +8,6 @@ import Collapse from '@mui/material/Collapse';
 // import TextField from '@mui/material/TextField';
 import Grid from '@mui/material/Unstable_Grid2';
 import Container from '@mui/material/Container';
-import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import { alpha, styled } from '@mui/material/styles';
 // import InputAdornment from '@mui/material/InputAdornment';
@@ -20,7 +19,6 @@ import { RouterLink } from 'src/routes/components';
 import { useBoolean } from 'src/hooks/use-boolean';
 // import { useResponsive } from 'src/hooks/use-responsive';
 
-import { _socials } from 'src/_mock';
 
 import Logo from 'src/components/logo';
 import Iconify from 'src/components/iconify';
@@ -116,41 +114,6 @@ export default function Footer() {
                 </Link>
               </Stack>
 
-              {/* <Stack spacing={2}>
-                <Stack spacing={1}>
-                  <Typography variant="h6">Let’s stay in touch</Typography>
-                  <Typography variant="caption" sx={{ color: 'text.secondary' }}>
-                    Ubscribe to our newsletter to receive latest articles to your inbox weekly.
-                  </Typography>
-                </Stack>
-
-                <TextField
-                  fullWidth
-                  hiddenLabel
-                  placeholder="Email address"
-                  InputProps={{
-                    endAdornment: (
-                      <InputAdornment position="end">
-                        <Button variant="contained" color="inherit" size="large" sx={{ mr: -1.25 }}>
-                          Subscribe
-                        </Button>
-                      </InputAdornment>
-                    ),
-                  }}
-                />
-              </Stack> */}
-
-              <Stack spacing={2}>
-                <Typography variant="h6">Social</Typography>
-                <Stack direction="row" alignItems="center">
-                  {_socials.map((social) => (
-                    <IconButton key={social.value} color="primary">
-                      <Iconify icon={social.icon} />
-                    </IconButton>
-                  ))}
-                </Stack>
-              </Stack>
-
               <Stack spacing={2}>
                 <Typography variant="h6">Apps</Typography>
                 <AppStoreButton />
@@ -158,21 +121,6 @@ export default function Footer() {
             </Stack>
           </Grid>
 
-          {/* <Grid xs={12} md={6}>
-            {mdUp ? (
-              <Masonry columns={4} spacing={2} defaultColumns={4} defaultSpacing={2}>
-                {renderLists.map((list) => (
-                  <ListDesktop key={list.subheader} list={list} />
-                ))}
-              </Masonry>
-            ) : (
-              <Stack spacing={1.5}>
-                {renderLists.map((list) => (
-                  <ListMobile key={list.subheader} list={list} />
-                ))}
-              </Stack>
-            )}
-          </Grid> */}
         </Grid>
       </Container>
 
