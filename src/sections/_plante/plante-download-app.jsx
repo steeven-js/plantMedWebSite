@@ -63,7 +63,7 @@ export default function PlanteDownloadApp() {
             alt="mobile app"
             src="/assets/images/planteMed/download_app.png"
             sx={{
-              maxWidth: 480,
+              width: '50%',
             }}
           />
         </Stack>
