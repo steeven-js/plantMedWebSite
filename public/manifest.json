@@ -1,6 +1,6 @@
 {
-  "name": "Zone UI",
-  "short_name": "Zone UI",
+  "name": "PlantMed",
+  "short_name": "PlantMed",
   "display": "standalone",
   "start_url": "/",
   "theme_color": "#000000",
