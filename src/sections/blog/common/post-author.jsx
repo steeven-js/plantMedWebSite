@@ -12,7 +12,7 @@ import Iconify from 'src/components/iconify';
 // ----------------------------------------------------------------------
 
 export default function PostAuthor({ author }) {
-  const { name, role, about, quotes, avatarUrl } = author;
+  const { name, role, about, quotes } = author;
 
   return (
     <Stack
@@ -22,7 +22,7 @@ export default function PostAuthor({ author }) {
         py: { xs: 5, md: 10 },
       }}
     >
-      <Avatar src={avatarUrl} sx={{ width: 96, height: 96 }} />
+      <Avatar src="/assets/images/avatar/avatar_9.jpg" sx={{ width: 96, height: 96 }} />
 
       <Stack spacing={2}>
         <Stack

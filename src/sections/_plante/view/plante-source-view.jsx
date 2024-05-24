@@ -3,8 +3,6 @@ import { useState, useCallback } from 'react';
 import Stack from '@mui/material/Stack';
 import Avatar from '@mui/material/Avatar';
 import Divider from '@mui/material/Divider';
-import Popover from '@mui/material/Popover';
-import MenuItem from '@mui/material/MenuItem';
 // import Checkbox from '@mui/material/Checkbox';
 import Grid from '@mui/material/Unstable_Grid2';
 import Container from '@mui/material/Container';
@@ -15,17 +13,17 @@ import IconButton from '@mui/material/IconButton';
 
 // import { fDate } from 'src/utils/format-time';
 
-import { _socials, _plantePosts2 } from 'src/_mock';
+import { _plantePosts2 } from 'src/_mock';
+// import PostTags from '../../blog/common/post-tags';
+import { sourcesData } from 'src/data/SourcesData';
 
 import Iconify from 'src/components/iconify';
 // import Markdown from 'src/components/markdown';
 import CustomBreadcrumbs from 'src/components/custom-breadcrumbs';
 
-// import PostTags from '../../blog/common/post-tags';
 // import CareerNewsletter from '../plante-newsletter';
 import PostAuthor from '../../blog/common/post-author';
 // import PostTimeBlock from '../../blog/common/post-time-block';
-import PostSocialsShare from '../../blog/common/post-socials-share';
 // import PlanteLatestPosts from '../../blog/plante/plante-latest-posts';
 
 // ----------------------------------------------------------------------
@@ -41,14 +39,6 @@ export default function SourceView() {
   const handleOpen = useCallback((event) => {
     setOpen(event.currentTarget);
   }, []);
-
-  const handleClose = useCallback(() => {
-    setOpen(null);
-  }, []);
-
-  // const handleChangeFavorite = useCallback((event) => {
-  //   setFavorite(event.target.checked);
-  // }, []);
 
   return (
     <>
@@ -92,37 +82,17 @@ export default function SourceView() {
                 <IconButton onClick={handleOpen} color={open ? 'primary' : 'default'}>
                   <Iconify icon="carbon:share" />
                 </IconButton>
-
-                {/* <Checkbox
-                  color="error"
-                  checked={favorite}
-                  onChange={handleChangeFavorite}
-                  icon={<Iconify icon="carbon:favorite" />}
-                  checkedIcon={<Iconify icon="carbon:favorite-filled" />}
-                /> */}
               </Stack>
             </Stack>
 
-            {/* <Typography variant="h5" sx={{ mb: 5 }}>
-              {description}
-            </Typography> */}
-
-            {/* <Markdown content={content2} firstLetter /> */}
-
-            <div>
-              <Typography variant="h6" sx={{ m: 2 }}>Logo</Typography>
-              <Typography variant="inherit" sx={{ m: 2 }}>Source du logo</Typography>
-
-              <Typography variant="h6" sx={{ m: 2 }}>Therapeutic use screen icons</Typography>
-              <Typography variant="inherit" sx={{ m: 2 }}>Source icons</Typography>
-
-              <Typography variant="h6" sx={{ m: 2 }}>Medical Plants images</Typography>
-              <Typography variant="inherit" sx={{ m: 2 }}>Source images</Typography>
-            </div>
-
-            {/* <PostTags tags={tags} /> */}
-
-            <PostSocialsShare />
+            {sourcesData.map((category, index) => (
+              <div key={index}>
+                <Typography variant="h6" sx={{ m: 2 }}>{category.title}</Typography>
+                {category.sources.map((source, idx) => (
+                  <Typography key={idx} variant="inherit" sx={{ m: 2 }}>{source}</Typography>
+                ))}
+              </div>
+            ))}
 
             <Divider sx={{ mt: 8 }} />
 
@@ -132,30 +102,6 @@ export default function SourceView() {
       </Container >
 
       <Divider />
-
-      {/* <PlanteLatestPosts posts={_plantePosts.slice(0, 5)} /> */}
-
-      {/* <CareerNewsletter /> */}
-
-      <Popover
-        open={!!open}
-        onClose={handleClose}
-        anchorEl={open}
-        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
-        transformOrigin={{ vertical: 'top', horizontal: 'center' }}
-        slotProps={{
-          paper: {
-            sx: { width: 220 },
-          },
-        }}
-      >
-        {_socials.map((social) => (
-          <MenuItem key={social.value} onClick={handleClose}>
-            <Iconify icon={social.icon} width={24} sx={{ mr: 1, color: social.color }} />
-            Share via {social.label}
-          </MenuItem>
-        ))}
-      </Popover>
     </>
   );
 }
