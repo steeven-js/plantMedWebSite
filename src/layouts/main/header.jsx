@@ -4,7 +4,6 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
-import Button from '@mui/material/Button';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Container from '@mui/material/Container';
@@ -99,8 +98,8 @@ export default function Header({ headerOnDark }) {
                 icon: <Iconify icon="solar:home-2-bold-duotone" />,
                 path: '/',
               },
-              { title: 'Symptomes', path: '/plantmed/symptomes/' },
               { title: 'Plantes', path: '/plantmed/plantes/' },
+              { title: 'Symptomes', path: '/plantmed/symptomes/' },
             ]}
           />
         </Stack>
@@ -124,32 +123,6 @@ export default function Header({ headerOnDark }) {
 
           <SettingsButton />
         </Stack>
-        {!user && (
-          <Button
-            variant="contained"
-            color="inherit"
-            href='/auth/login-background'
-            rel="noopener"
-            sx={{
-              display: { xs: 'none', md: 'inline-flex' },
-            }}
-          >
-            Se connecter
-          </Button>
-        )}
-
-        {/* <Button
-          variant="contained"
-          color="inherit"
-          href='https://play.google.com/store/apps/details?id=com.monremede&pcampaignid=web_share'
-          target="_blank"
-          rel="noopener"
-          sx={{
-            display: { xs: 'none', md: 'inline-flex' },
-          }}
-        >
-          Téléchargez
-        </Button> */}
       </Stack>
 
       {!mdUp &&
