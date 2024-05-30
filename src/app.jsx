@@ -12,7 +12,7 @@ import { LocalizationProvider } from 'src/locales';
 import ProgressBar from 'src/components/progress-bar';
 import { MotionLazy } from 'src/components/animate/motion-lazy';
 import { SettingsDrawer, SettingsProvider } from 'src/components/settings';
-import { BubbleChat } from 'flowise-embed-react';
+// import { BubbleChat } from 'flowise-embed-react';
 
 // ----------------------------------------------------------------------
 
@@ -32,7 +32,7 @@ export default function App() {
           <MotionLazy>
             <ProgressBar />
             <SettingsDrawer />
-            <BubbleChat chatflowid="f7784140-fc21-4df4-aa77-a949b53dd3e7" apiHost="https://flowiseai-railway-production-ca2e.up.railway.app" />
+            {/* <BubbleChat chatflowid="f7784140-fc21-4df4-aa77-a949b53dd3e7" apiHost="https://flowiseai-railway-production-ca2e.up.railway.app" /> */}
             <Router />
           </MotionLazy>
         </ThemeProvider>
