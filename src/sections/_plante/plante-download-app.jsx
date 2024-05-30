@@ -75,14 +75,17 @@ export default function PlanteDownloadApp() {
 // ----------------------------------------------------------------------
 
 function AppStoreButton({ ...other }) {
-  const googlePlayLink = commonData[0].urlAppAdroid;
-
   return (
     <Stack direction="row" flexWrap="wrap" spacing={2} {...other}>
-      <StyledButton startIcon={<Iconify icon="ri:apple-fill" width={28} />}>
+      <StyledButton
+        startIcon={<Iconify icon="ri:apple-fill" width={28} />}
+        href={commonData[1].urlAppIOS}
+        target="_blank" // Open the link in a new tab/window
+        rel="noopener noreferrer" // Add security attributes for external links
+      >
         <Stack alignItems="flex-start">
           <Typography variant="caption" sx={{ opacity: 0.72 }}>
-            Bientôt
+            Disponible
           </Typography>
 
           <Typography variant="h6" sx={{ mt: -0.5 }}>
@@ -93,7 +96,7 @@ function AppStoreButton({ ...other }) {
 
       <StyledButton
         startIcon={<Iconify icon="logos:google-play-icon" width={28} />}
-        href={googlePlayLink}
+        href={commonData[0].urlAppAdroid}
         target="_blank" // Open the link in a new tab/window
         rel="noopener noreferrer" // Add security attributes for external links
       >

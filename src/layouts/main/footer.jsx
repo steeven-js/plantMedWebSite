@@ -20,6 +20,8 @@ import { useBoolean } from 'src/hooks/use-boolean';
 // import { useResponsive } from 'src/hooks/use-responsive';
 
 
+import { commonData } from 'src/data';
+
 import Logo from 'src/components/logo';
 import Iconify from 'src/components/iconify';
 
@@ -272,14 +274,18 @@ ListMobile.propTypes = {
 // ----------------------------------------------------------------------
 
 function AppStoreButton({ ...other }) {
-  const googlePlayLink = 'https://play.google.com/store/apps/details?id=com.monremede&pcampaignid=web_share';
 
   return (
     <Stack direction="row" flexWrap="wrap" spacing={2} {...other}>
-      <StyledAppStoreButton startIcon={<Iconify icon="ri:apple-fill" width={28} />}>
+      <StyledAppStoreButton
+        startIcon={<Iconify icon="ri:apple-fill" width={28} />}
+        href={commonData[1].urlAppIOS}
+        target="_blank" // Open the link in a new tab/window
+        rel="noopener noreferrer" // Add security attributes for external links
+      >
         <Stack alignItems="flex-start">
           <Typography variant="caption" sx={{ opacity: 0.72 }}>
-            Download on the
+            Disponible
           </Typography>
 
           <Typography variant="h6" sx={{ mt: -0.5 }}>
@@ -290,13 +296,13 @@ function AppStoreButton({ ...other }) {
 
       <StyledAppStoreButton
         startIcon={<Iconify icon="logos:google-play-icon" width={28} />}
-        href={googlePlayLink}
+        href={commonData[0].urlAppAdroid}
         target="_blank" // Open the link in a new tab/window
         rel="noopener noreferrer" // Add security attributes for external links
       >
         <Stack alignItems="flex-start">
           <Typography variant="caption" sx={{ opacity: 0.72 }}>
-            Download from
+            Disponible
           </Typography>
 
           <Typography variant="h6" sx={{ mt: -0.5 }}>
